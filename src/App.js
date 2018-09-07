@@ -142,15 +142,15 @@ class App extends React.Component<PropsT, StateT> {
     this.student = getVirtualStudent(this.studentName);
 
     this.studentImgId = Math.floor(Math.random() * numStudentImg);
-    this.studentLearningImg = `/images/virtual_student/${
+    this.studentLearningImg = `/images/student/student_${
       this.genderStudent
-    }/learning/student_${this.genderStudent}_${this.studentImgId}.png`;
-    this.studentBackpackImg = `/images/virtual_student/${
+    }_learning_${this.studentImgId}.png`;
+    this.studentBackpackImg = `/images/student/student_${
       this.genderStudent
-    }/backpack/student_${this.genderStudent}_backpack_${this.studentImgId}.png`;
-    this.studentAvatar = `/images/virtual_student/avatar/${
+    }_backpack_${this.studentImgId}.png`;
+    this.studentAvatar = `/images/student/student_${
       this.genderStudent
-    }/student_${this.genderStudent}_${this.studentImgId}.png`;
+    }_avatar_${this.studentImgId}.png`;
   };
 
   startNewGame = () => {

@@ -40,7 +40,7 @@ const VirtualStudent = ({ classes, bubbleText, studentImg }) => (
   <div className={classes.root}>
     <div className={classes.bubble}>
       <img
-        src="images/virtual_student/bubble.png"
+        src="images/student/bubble.png"
         alt="bubble"
         className={classes.bubbleImage}
       />

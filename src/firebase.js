@@ -1,12 +1,12 @@
 import firebase from "firebase";
 
 const config = {
-  apiKey: "AIzaSyB1f5tIt71T9A_bUEKEGZ9qEb1kzJeuzG4",
-  authDomain: "tama-7e5ac.firebaseapp.com",
-  databaseURL: "https://tama-7e5ac.firebaseio.com",
-  projectId: "tama-7e5ac",
-  storageBucket: "tama-7e5ac.appspot.com",
-  messagingSenderId: "387942021137"
+  apiKey: "AIzaSyDmtfbhzrZmrLkjueX-0doDGiGm6jXsJFo",
+  authDomain: "chili-tama.firebaseapp.com",
+  databaseURL: "https://chili-tama.firebaseio.com",
+  projectId: "chili-tama",
+  storageBucket: "chili-tama.appspot.com",
+  messagingSenderId: "1028659775824"
 };
 const fire = firebase.initializeApp(config);
 export default fire;
