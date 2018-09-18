@@ -18,6 +18,8 @@ import TrainWithLesson from "./Activity/TrainWithLesson";
 import TestView from "./Activity/TestView";
 import Home from "./Home";
 import GameStart from "./GameStart";
+import Mammiferes from "./Mammiferes";
+import Adverbs from "./Adverbs";
 import getVirtualStudent from "./VirtualStudent/utils";
 import AppDrawer from "./AppDrawer";
 import SessionHistory from "./SessionHistory";
@@ -281,12 +283,36 @@ class App extends React.Component<PropsT, StateT> {
               this.recordNewSession(userId);
             }
           }}
+          onClickStartMamiferes={() => {
+            this.setState({
+              hasBeenWelcomed: true,
+              view: "mammiferes"
+            });
+            if (isRegistered && userId) {
+              this.recordNewSession(userId);
+            }
+          }}
+          onClickStartAdverbs={() => {
+            this.setState({
+              hasBeenWelcomed: true,
+              view: "adverbs"
+            });
+            if (isRegistered && userId) {
+              this.recordNewSession(userId);
+            }
+          }}
           studentName={this.studentName}
           studentImg={this.studentBackpackImg}
           genderTeacherMale={this.genderTeacherMale}
         />
       );
-    } else if (view === "leaderboard") {
+    } else if( view === "adverbs"){
+      displayed = <Adverbs />;
+
+    } else if (view === "mammiferes"){
+      displayed = <Mammiferes/>;
+
+    }else if (view === "leaderboard") {
       displayed = <Leaderboard />;
     } else if (view === "stats") {
       displayed = <Stats />;
@@ -342,7 +368,7 @@ class App extends React.Component<PropsT, StateT> {
             genderTeacherMale={this.genderTeacherMale}
           />
         );
-      } else if (this.state.hasChosenActivityType) {
+      }else if (this.state.hasChosenActivityType) {
         if (hasChosenActivity === "example") {
           displayed = (
             <TrainWithExample
