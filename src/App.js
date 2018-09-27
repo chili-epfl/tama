@@ -18,6 +18,8 @@ import TrainWithLesson from "./Activity/TrainWithLesson";
 import TestView from "./Activity/TestView";
 import Home from "./Home";
 import GameStart from "./GameStart";
+import Mammiferes from "./Mammiferes";
+import Adverbs from "./Adverbs";
 import getVirtualStudent from "./VirtualStudent/utils";
 import AppDrawer from "./AppDrawer";
 import SessionHistory from "./SessionHistory";
@@ -142,15 +144,15 @@ class App extends React.Component<PropsT, StateT> {
     this.student = getVirtualStudent(this.studentName);
 
     this.studentImgId = Math.floor(Math.random() * numStudentImg);
-    this.studentLearningImg = `images/student/student_${
+    this.studentLearningImg = `/images/student/student_${
       this.genderStudent
     }_learning_${this.studentImgId}.png`;
-    this.studentBackpackImg = `images/student/student_${
+    this.studentBackpackImg = `/images/student/student_${
       this.genderStudent
     }_backpack_${this.studentImgId}.png`;
-    this.studentAvatar = `images/student/student_${this.genderStudent}_avatar_${
-      this.studentImgId
-    }.png`;
+    this.studentAvatar = `/images/student/student_${
+      this.genderStudent
+    }_avatar_${this.studentImgId}.png`;
   };
 
   startNewGame = () => {
@@ -181,6 +183,15 @@ class App extends React.Component<PropsT, StateT> {
       this.setState({ scoreDisplayed: this.state.score.toString() });
     }, 2000);
   };
+  gameStartButtons = (view , isRegistered, userId) =>{
+    this.setState({
+      hasBeenWelcomed: true,
+      view: view
+    });
+    if (isRegistered && userId) {
+      this.recordNewSession(userId);
+    }
+  }
 
   runTest = () => {
     const questions = [...parallelogramData]
@@ -273,20 +284,26 @@ class App extends React.Component<PropsT, StateT> {
       displayed = (
         <GameStart
           onClickStart={() => {
-            this.setState({
-              hasBeenWelcomed: true,
-              view: "training"
-            });
-            if (isRegistered && userId) {
-              this.recordNewSession(userId);
-            }
+            this.gameStartButtons("parallelograms", isRegistered, userId)
+          }}
+          onClickStartMamiferes={() => {
+            this.gameStartButtons("mammals", isRegistered, userId)
+          }}
+          onClickStartAdverbs={() => {
+            this.gameStartButtons("adverbs", isRegistered, userId)
           }}
           studentName={this.studentName}
           studentImg={this.studentBackpackImg}
           genderTeacherMale={this.genderTeacherMale}
         />
       );
-    } else if (view === "leaderboard") {
+    } else if( view === "adverbs"){
+      displayed = <Adverbs />;
+
+    } else if (view === "mammals"){
+      displayed = <Mammiferes/>;
+
+    }else if (view === "leaderboard") {
       displayed = <Leaderboard />;
     } else if (view === "stats") {
       displayed = <Stats />;
@@ -300,7 +317,7 @@ class App extends React.Component<PropsT, StateT> {
           studentAvatar={this.studentAvatar}
         />
       );
-    } else if (view === "training") {
+    } else if (view === "parallelograms") {
       if (!this.state.hasChosenActivityType) {
         displayed = (
           <ChooseActivity
@@ -342,7 +359,7 @@ class App extends React.Component<PropsT, StateT> {
             genderTeacherMale={this.genderTeacherMale}
           />
         );
-      } else if (this.state.hasChosenActivityType) {
+      }else if (this.state.hasChosenActivityType) {
         if (hasChosenActivity === "example") {
           displayed = (
             <TrainWithExample
