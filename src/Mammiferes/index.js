@@ -19,11 +19,11 @@ type PropsT = {
   classes: Object,
 };
 
-const Mammiferes = ({
+const Mammals = ({
   classes,
 }: PropsT) => (
   <div className={classes.root}>
     <h1 className={classes.mainContent}>This feature is not implemented yet !!</h1>
   </div>
 );
-export default withStyles(styles)(Mammiferes);
+export default withStyles(styles)(Mammals);

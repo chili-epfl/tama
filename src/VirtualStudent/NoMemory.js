@@ -35,6 +35,12 @@ class NoMemory implements VirtualStudent {
       defaultMessage="Is it a parallelogram?"
     />
   );
+  questionExampleMammal =(
+    <FormattedMessage
+      id="dumbStudent.questionExampleMammal"
+      defaultMessage = "Is it a mammal ?"
+    />
+  );
   thinkingAboutExercice = (
     <FormattedMessage
       id="quickLearnerStudent.thinkingAboutExercise"
