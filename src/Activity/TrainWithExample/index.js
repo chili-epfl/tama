@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import ChooseExample from "./ChooseExample";
 import ShowExample from "./ShowExample";
 import parallelogramData from "../ParallelogramData";
+import mammalsData from "../MammalsData";
 
 class TrainWithExample extends React.Component {
   constructor(props) {
@@ -21,7 +22,10 @@ class TrainWithExample extends React.Component {
 
   recordExampleActivity = userAnswer => {
     this.newActivityRef.child("activity_type").set("example");
-    const image = parallelogramData[this.state.index].src;
+    let image = parallelogramData[this.state.index].src;
+    if (this.props.activityChosen === "mammals"){
+      image = mammalsData[this.state.index].src;
+    }
     this.newActivityRef.child("item").set(image);
     this.newActivityRef.child("knowledge").set(this.props.student.getState());
     this.newActivityRef.child("user_answer").set(userAnswer);
@@ -34,19 +38,24 @@ class TrainWithExample extends React.Component {
         <ChooseExample
           onSelectExample={this.handleSelectExample}
           onNavigationBackToMenu={this.props.getBackToMenu}
+          activityChosen= {this.props.activityChosen}
         />
       );
     }
-    const parallelogram = parallelogramData[this.state.index];
+    let data = parallelogramData[this.state.index];
+    if (this.props.activityChosen === "mammals"){
+      data = mammalsData[this.state.index];
+    }
     return (
       <ShowExample
-        parallelogram={parallelogram}
+        data={data}
         getBackToMenu={this.props.getBackToMenu}
         updateScore={this.props.updateScore}
         student={this.props.student}
         recordExampleActivity={this.recordExampleActivity}
         genderTeacherMale={this.props.genderTeacherMale}
         studentImg={this.props.studentImg}
+        activityChosen = {this.props.activityChosen}
       />
     );
   }
@@ -58,7 +67,8 @@ TrainWithExample.propTypes = {
   student: PropTypes.object.isRequired,
   sessionRef: PropTypes.object.isRequired,
   genderTeacherMale: PropTypes.bool.isRequired,
-  studentImg: PropTypes.string.isRequired
+  studentImg: PropTypes.string.isRequired,
+  activityChosen: PropTypes.string.isRequired
 };
 
 export default TrainWithExample;

@@ -27,23 +27,23 @@ class ShowExample extends React.Component {
   }
 
   handleClick = userAnswer => {
-    const { student, parallelogram, recordExampleActivity } = this.props;
+    const { student, data, recordExampleActivity } = this.props;
 
     recordExampleActivity(userAnswer);
     this.props.updateScore();
     this.setState({ thinking: true });
-    student.learn(userAnswer, parallelogram.shapeFeatures);
+    student.learn(userAnswer, data.shapeFeatures);
     setTimeout(() => {
       this.props.getBackToMenu();
     }, 2000);
   };
 
   render() {
-    const { classes, student, parallelogram } = this.props;
+    const { classes, student, data } = this.props;
     const { thinking } = this.state;
     const bubbleText = thinking
       ? student.thinkingAboutExample
-      : student.questionExample;
+      : this.props.activityChosen === "mammals" ? student.questionExampleMammal : student.questionExample;
     return (
       <React.Fragment>
         <Grid container className={classes.root}>
@@ -69,8 +69,8 @@ class ShowExample extends React.Component {
             >
               <img
                 className={classes.imagePara}
-                src={parallelogram.src}
-                alt="parallelogram"
+                src={data.src}
+                alt="data"
                 width="300"
                 height="300"
                 border="1px solid"
@@ -111,13 +111,14 @@ class ShowExample extends React.Component {
 
 ShowExample.propTypes = {
   classes: PropTypes.object.isRequired,
-  parallelogram: PropTypes.object.isRequired,
+  data: PropTypes.object.isRequired,
   getBackToMenu: PropTypes.func.isRequired,
   updateScore: PropTypes.func.isRequired,
   student: PropTypes.object.isRequired,
   recordExampleActivity: PropTypes.func.isRequired,
   genderTeacherMale: PropTypes.bool.isRequired,
-  studentImg: PropTypes.string.isRequired
+  studentImg: PropTypes.string.isRequired,
+  activityChosen: PropTypes.string.isRequired
 };
 
 export default withStyles(styles)(ShowExample);

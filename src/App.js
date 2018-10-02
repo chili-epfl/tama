@@ -13,7 +13,6 @@ import firebase from "./firebase";
 import RegistrationForm from "./RegistrationForm";
 import ChooseActivity from "./Activity/ChooseActivity";
 import TrainWithExample from "./Activity/TrainWithExample";
-import TrainWithExampleMammal from "./ActivityMammal/TrainWithExampleMammal";
 import TrainWithExercises from "./Activity/TrainWithExercises";
 import TrainWithLesson from "./Activity/TrainWithLesson";
 import TestView from "./Activity/TestView";
@@ -119,7 +118,8 @@ class App extends React.Component<PropsT, StateT> {
       test: {},
       alreadyShownRules: false,
       openSnackbar: false,
-      displayResultTest: false
+      displayResultTest: false,
+      activityChosen: "",
     };
     this.initializeConstructorVars();
     addLocaleData([...localeEn, ...localeFr]);
@@ -183,10 +183,11 @@ class App extends React.Component<PropsT, StateT> {
       this.setState({ scoreDisplayed: this.state.score.toString() });
     }, 2000);
   };
-  gameStartButtons = (view , isRegistered, userId) =>{
+  gameStartButtons = (view , activityChosen, isRegistered, userId) =>{
     this.setState({
       hasBeenWelcomed: true,
-      view: view
+      view,
+      activityChosen
     });
     if (isRegistered && userId) {
       this.recordNewSession(userId);
@@ -284,10 +285,10 @@ class App extends React.Component<PropsT, StateT> {
       displayed = (
         <GameStart
           onClickStart={() => {
-            this.gameStartButtons("parallelograms", isRegistered, userId)
+            this.gameStartButtons("chooseActivity", "parallelograms", isRegistered, userId)
           }}
           onClickStartMamiferes={() => {
-            this.gameStartButtons("mammals", isRegistered, userId)
+            this.gameStartButtons("chooseActivity", "mammals",isRegistered, userId)
           }}
           onClickStartAdverbs={() => {
             this.gameStartButtons("adverbs", isRegistered, userId)
@@ -298,113 +299,7 @@ class App extends React.Component<PropsT, StateT> {
         />
       );
     } else if( view === "adverbs"){
-      displayed = <Adverbs />;
-
-    } else if (view === "mammals"){
-      if (!this.state.hasChosenActivityType) {
-        displayed = (
-          <ChooseActivity
-            sessionRef={this.sessionRef}
-            onClickExample={() => {
-              if (this.state.score + scoreCost.example >= 0) {
-                this.setState({
-                  hasChosenActivityType: true,
-                  hasChosenActivity: "exampleMammal"
-                });
-              } else {
-                this.setState({ openSnackbar: true });
-              }
-            }}
-            onClickExercise={() => {
-              if (this.state.score + scoreCost.exercise >= 0) {
-                this.setState({
-                  hasChosenActivityType: true,
-                  hasChosenActivity: "exercise"
-                });
-              } else {
-                this.setState({ openSnackbar: true });
-              }
-            }}
-            onClickLesson={() => {
-              if (this.state.score + scoreCost.lesson >= 0) {
-                this.setState({
-                  hasChosenActivityType: true,
-                  hasChosenActivity: "lesson"
-                });
-              } else {
-                this.setState({ openSnackbar: true });
-              }
-            }}
-            onConfirmTestDialog={this.runTest}
-            alreadyShownRules={this.state.alreadyShownRules}
-            hasShownRules={() => this.setState({ alreadyShownRules: true })}
-            studentImg={this.studentLearningImg}
-            genderTeacherMale={this.genderTeacherMale}
-          />
-        );
-      }else if (this.state.hasChosenActivityType) {
-        if (hasChosenActivity === "exampleMammal") {
-          displayed = (
-            <TrainWithExampleMammal
-              getBackToMenu={() =>
-                this.setState({ hasChosenActivityType: false })
-              }
-              updateScore={() => this.updateScore(scoreCost.example)}
-              student={this.student}
-              sessionRef={this.sessionRef}
-              genderTeacherMale={this.genderTeacherMale}
-              studentImg={this.studentLearningImg}
-            />
-          );
-        } else if (hasChosenActivity === "exercise") {
-          displayed = (
-            <TrainWithExercises
-              getBackToMenu={() =>
-                this.setState({ hasChosenActivityType: false })
-              }
-              updateScore={() => this.updateScore(scoreCost.exercise)}
-              student={this.student}
-              sessionRef={this.sessionRef}
-              genderTeacherMale={this.genderTeacherMale}
-              studentImg={this.studentLearningImg}
-            />
-          );
-        } else if (hasChosenActivity === "lesson") {
-          displayed = (
-            <TrainWithLesson
-              getBackToMenu={() =>
-                this.setState({ hasChosenActivityType: false })
-              }
-              updateScore={() => this.updateScore(scoreCost.lesson)}
-              student={this.student}
-              sessionRef={this.sessionRef}
-              studentImg={this.studentLearningImg}
-            />
-          );
-        } else if (hasChosenActivity === "test") {
-          displayed = (
-            <TestView
-              startNewGame={this.startNewGame}
-              student={this.student}
-              finalScore={this.finalScore}
-              activityScore={this.activityScore}
-              test={this.state.test}
-              studentName={this.studentName}
-              updateScore={() =>
-                this.setState({
-                  score: this.finalScore,
-                  scoreDisplayed: String(this.finalScore)
-                })
-              }
-              displayResultTest={this.state.displayResultTest}
-              hasSeenQuestionsTest={() =>
-                this.setState({ displayResultTest: true })
-              }
-              studentImg={this.studentLearningImg}
-            />
-          );
-        }
-      }
+      displayed = <Adverbs />; 
     }else if (view === "leaderboard") {
       displayed = <Leaderboard />;
     } else if (view === "stats") {
@@ -419,7 +314,7 @@ class App extends React.Component<PropsT, StateT> {
           studentAvatar={this.studentAvatar}
         />
       );
-    } else if (view === "parallelograms") {
+    } else if (view === "chooseActivity") {
       if (!this.state.hasChosenActivityType) {
         displayed = (
           <ChooseActivity
@@ -473,6 +368,7 @@ class App extends React.Component<PropsT, StateT> {
               sessionRef={this.sessionRef}
               genderTeacherMale={this.genderTeacherMale}
               studentImg={this.studentLearningImg}
+              activityChosen = {this.state.activityChosen}
             />
           );
         } else if (hasChosenActivity === "exercise") {
