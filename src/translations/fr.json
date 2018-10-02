@@ -1,5 +1,5 @@
 {
-  "app.example": "Exemple",
+  "app.example": "Exemples",
   "app.exercise": "Exercice",
   "app.lesson": "Leçon",
   "appDrawer.score": "Votre score :",
@@ -26,11 +26,16 @@
   "dumbStudent.hasFalseAnswerExercise": "Mince !",
   "dumbStudent.hasRightAnswerExercise": "Super !",
   "dumbStudent.questionExample": "Est-ce un parallélogramme ?",
+  "dumbStudent.questionExampleMammal": "Est-ce un mammifère ?",
+
   "dumbStudent.thinkingAboutExam": "...",
   "dumbStudent.thinkingAboutExample": "...",
   "dumbStudent.thinkingAboutExercise": "...",
   "gameStart.teacherThinking": "...",
-  "gameStart.startTeaching": "Enseigner {studentName}",
+  "gameStart.startTeachinParalelograms": "Enseigner les Parallélogrammes à {studentName}",
+  "gameStart.startTeachingMammals": "Enseigner les Mammifères à {studentName}",
+  "gameStart.startTeachingAdverbs": "Enseigner les Adverbes à {studentName}",
+
   "gameStart.studentName": "Bonjour ! Je m'appelle {studentName} !",
   "gameStart.teacherBubble":
     "Bonjour {studentName} ! Je suis {username}, ton professeur !",

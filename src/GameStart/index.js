@@ -31,12 +31,17 @@ const styles = () => ({
     width: "auto",
     height: "15%",
     margin: "20px"
-  }
+  },
+  buttonDisplay:{
+    flexBasis: "0%"
+  },
 });
 
 type PropsT = {
   classes: Object,
   onClickStart: void => void,
+  onClickStartMamiferes: void => void,
+  onClickStartAdverbs: void => void,
   studentName: string,
   studentImg: string,
   genderTeacherMale: boolean
@@ -45,6 +50,8 @@ type PropsT = {
 const GameStart = ({
   classes,
   onClickStart,
+  onClickStartMamiferes,
+  onClickStartAdverbs,
   studentName,
   studentImg,
   genderTeacherMale
@@ -71,6 +78,36 @@ const GameStart = ({
           />
         </Grid>
       </Grid>
+      <Grid item container direction="column" wrap="nowrap" xs={4} spacing={8}>
+        <Grid item xs = {4}/>  
+        <Grid item xs={12} zeroMinWidth className={classes.buttonDisplay}>
+          <Button fullWidth={true} variant="contained" color="primary" onClick={onClickStart}>
+            <FormattedMessage
+                id="gameStart.startTeachinParalelograms"
+                defaultMessage="Start teaching Parallelograms to {studentName}"
+                values={{ studentName: studentName.replace(/ .*/, "") }}
+            />
+          </Button>        
+        </Grid>
+        <Grid item xs={12} className={classes.buttonDisplay} >
+            <Button fullWidth={true} variant="contained" color="primary" onClick={onClickStartMamiferes}>
+              <FormattedMessage
+                id="gameStart.startTeachingMammals"
+                defaultMessage="Start teaching Mammiferes to {studentName}"
+                values={{ studentName: studentName.replace(/ .*/, "") }}
+              />
+            </Button>
+        </Grid>
+        <Grid item xs={12} className={classes.buttonDisplay}>
+            <Button fullWidth={true} variant="contained" color="primary" onClick={onClickStartAdverbs}>
+              <FormattedMessage
+                id="gameStart.startTeachingAdverbs"
+                defaultMessage="Start teaching adverbs to {studentName}"
+                values={{ studentName: studentName.replace(/ .*/, "") }}
+              />
+            </Button>
+        </Grid>
+      </Grid>
       <Grid item xs={12} sm={4}>
         <Grid
           container
@@ -93,15 +130,6 @@ const GameStart = ({
           />
         </Grid>
       </Grid>
-    </Grid>
-    <Grid container justify="center">
-      <Button variant="contained" color="primary" onClick={onClickStart}>
-        <FormattedMessage
-          id="gameStart.startTeaching"
-          defaultMessage="Start teaching {studentName}"
-          values={{ studentName: studentName.replace(/ .*/, "") }}
-        />
-      </Button>
     </Grid>
   </div>
 );

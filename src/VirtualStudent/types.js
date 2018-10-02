@@ -7,6 +7,7 @@ export interface VirtualStudent {
   state: any;
   feedbackLessonAlreadyKnow: Object;
   questionExample: Object;
+  questionExampleMammal: Object;
   thinkingAboutExercice: Object;
   hasRightAnswerExercise: Object;
   hasFalseAnswerExercise: Object;

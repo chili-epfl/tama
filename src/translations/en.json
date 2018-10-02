@@ -25,10 +25,14 @@
   "dumbStudent.hasFalseAnswerExercise": "Ohh!",
   "dumbStudent.hasRightAnswerExercise": "Super!",
   "dumbStudent.questionExample": "Is it a parallelogram?",
+  "dumbStudent.questionExampleMammal": "Is it a mammal?",
+
   "dumbStudent.thinkingAboutExam": "...",
   "dumbStudent.thinkingAboutExample": "...",
   "dumbStudent.thinkingAboutExercise": "...",
-  "gameStart.startTeaching": "Start teaching {studentName}",
+  "gameStart.startTeachinParalelograms": "Start teaching Parallelograms to {studentName}",
+  "gameStart.startTeachingMammals": "Start teaching Mammals to {studentName}",
+  "gameStart.startTeachingAdverbs": "Start teaching Adverbs to {studentName}",
   "gameStart.studentName": "Hello! My name is {studentName}!",
   "gameStart.teacherBubble":
     "Hello {studentName}! I'm {username}, your teacher!",
