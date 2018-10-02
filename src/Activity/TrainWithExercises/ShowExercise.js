@@ -30,15 +30,18 @@ class ShowExercise extends React.Component {
       studentAnswer: false
     };
   }
-
+  handleSudentAnswer = ()=>{
+    if (this.props.activityChosen === "mammals"){
+      return this.props.student.answerMammal(this.props.data.shapeFeatures);
+    }
+      return this.props.student.answerParallelogram(this.props.data.shapeFeatures);
+  }
   componentDidMount() {
     this.props.updateScore();
     this.timeout = setTimeout(() => {
       this.setState({
         thinking: false,
-        studentAnswer: this.props.student.answerParallelogram(
-          this.props.parallelogram.shapeFeatures
-        )
+        studentAnswer: this.handleSudentAnswer()
       });
     }, 2000);
   }
@@ -48,7 +51,7 @@ class ShowExercise extends React.Component {
     this.setState({ learning: true, userAnswer });
     this.props.student.learn(
       this.state.studentAnswer ? userAnswer : !userAnswer,
-      this.props.parallelogram.shapeFeatures
+      this.props.data.shapeFeatures
     );
     setTimeout(() => {
       this.props.getBackToMenu();
@@ -76,8 +79,16 @@ class ShowExercise extends React.Component {
       }
     } else if (this.state.studentAnswer) {
       bubbleText = this.props.student.givePositiveAnswer;
+      if (this.props.activityChosen === "mammals"){
+        bubbleText = this.props.student.givePositiveAnswerMammal;
+        console.log(bubbleText)
+      }
     } else {
       bubbleText = this.props.student.giveNegativeAnswer;
+      if (this.props.activityChosen === "mammals"){
+        bubbleText = this.props.student.giveNegativeAnswerMammal;
+        console.log(bubbleText)
+      }
     }
 
     return (
@@ -105,8 +116,8 @@ class ShowExercise extends React.Component {
             >
               <img
                 className={classes.imagePara}
-                src={this.props.parallelogram.src}
-                alt="parallelogram"
+                src={this.props.data.src}
+                alt="data"
                 width="300"
                 height="300"
                 border="1px solid"
@@ -156,12 +167,13 @@ class ShowExercise extends React.Component {
 ShowExercise.propTypes = {
   classes: PropTypes.object.isRequired,
   getBackToMenu: PropTypes.func.isRequired,
-  parallelogram: PropTypes.object.isRequired,
+  data: PropTypes.object.isRequired,
   updateScore: PropTypes.func.isRequired,
   student: PropTypes.object.isRequired,
   recordExerciseActivity: PropTypes.func.isRequired,
   genderTeacherMale: PropTypes.bool.isRequired,
-  studentImg: PropTypes.string.isRequired
+  studentImg: PropTypes.string.isRequired,
+  activityChosen: PropTypes.string.isRequired
 };
 
 export default withStyles(styles)(ShowExercise);

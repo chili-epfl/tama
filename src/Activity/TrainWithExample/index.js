@@ -21,10 +21,14 @@ class TrainWithExample extends React.Component {
   };
 
   recordExampleActivity = userAnswer => {
+    console.log(this.props.sessionRef);
     this.newActivityRef.child("activity_type").set("example");
     let image = parallelogramData[this.state.index].src;
     if (this.props.activityChosen === "mammals"){
       image = mammalsData[this.state.index].src;
+      this.newActivityRef.child("topic").set("mammals")
+    }else{
+      this.newActivityRef.child("topic").set("parallelograms");
     }
     this.newActivityRef.child("item").set(image);
     this.newActivityRef.child("knowledge").set(this.props.student.getState());

@@ -22,6 +22,8 @@
   "dumbStudent.feedbackLessonDidntKnow": "Oh I didn't know that!",
   "dumbStudent.giveNegativeAnswer": "I don't think this is a parallelogram",
   "dumbStudent.givePositiveAnswer": "Mmm I think this is a parallelogram",
+  "dumbStudent.giveNegativeAnswerMammal": "I don't think this is a mammal",
+  "dumbStudent.givePositiveAnswerMammal": "Mmm I think this is a mammal",
   "dumbStudent.hasFalseAnswerExercise": "Ohh!",
   "dumbStudent.hasRightAnswerExercise": "Super!",
   "dumbStudent.questionExample": "Is it a parallelogram?",

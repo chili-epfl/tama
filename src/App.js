@@ -382,6 +382,7 @@ class App extends React.Component<PropsT, StateT> {
               sessionRef={this.sessionRef}
               genderTeacherMale={this.genderTeacherMale}
               studentImg={this.studentLearningImg}
+              activityChosen = {this.state.activityChosen}
             />
           );
         } else if (hasChosenActivity === "lesson") {
@@ -394,6 +395,7 @@ class App extends React.Component<PropsT, StateT> {
               student={this.student}
               sessionRef={this.sessionRef}
               studentImg={this.studentLearningImg}
+              activityChosen = {this.state.activityChosen}
             />
           );
         } else if (hasChosenActivity === "test") {
@@ -416,6 +418,7 @@ class App extends React.Component<PropsT, StateT> {
                 this.setState({ displayResultTest: true })
               }
               studentImg={this.studentLearningImg}
+              activityChosen = {this.state.activityChosen}
             />
           );
         }

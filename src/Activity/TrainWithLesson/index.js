@@ -60,7 +60,8 @@ TrainWithLesson.propTypes = {
   student: PropTypes.object.isRequired,
   sessionRef: PropTypes.object.isRequired,
   intl: PropTypes.object.isRequired,
-  studentImg: PropTypes.string.isRequired
+  studentImg: PropTypes.string.isRequired,
+  activityChosen: PropTypes.string.isRequired
 };
 
 export default injectIntl(TrainWithLesson);
