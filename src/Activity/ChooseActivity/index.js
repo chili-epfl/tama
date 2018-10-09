@@ -6,25 +6,32 @@ import { FormattedMessage } from "react-intl";
 import { withStyles } from "@material-ui/core/styles";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
 
 import TestConfirmationDialog from "./TestConfirmationDialog";
 import SessionTimeline from "./SessionTimeline";
 import RulesDialog from "../../SidePanel/RulesDialog";
-import VirtualStudent from "../../VirtualStudent";
-import TeacherChoosingActivity from "../../Teacher/TeacherChoosingActivity";
+import WithBlackboard from "../../WithBlackboard";
 
 const styles = theme => ({
   root: {
-    height: "100%"
+    height: "100%",
+    display: "flex",
+    flexDirection: "column"
   },
   sessionTimeline: {
-    height: "15%",
+    height: "12%",
     display: "flex",
     alignItems: "center"
   },
   mainContent: {
-    height: "85%"
+    flex: 1
+  },
+  activityChoicesContainer: {
+    width: "100%",
+    height: "100%",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
   },
   activityChoice: {
     height: "100%",
@@ -33,10 +40,9 @@ const styles = theme => ({
     flexDirection: "column"
   },
   button: {
-    position: "relative",
-    margin: "1%",
-    height: "10%",
-    width: "100%",
+    margin: "8px",
+    height: "20%",
+    width: "90%",
     "&:hover, &$focusVisible": {
       "& $imageBackdrop": {
         opacity: 0.15
@@ -97,7 +103,7 @@ const styles = theme => ({
   }
 });
 
-const images = [
+const activities = [
   {
     url: "images/example_1536x512.png",
     title: (
@@ -177,7 +183,7 @@ const ActivityButton = ({
     focusVisibleClassName={classes.focusVisible}
     onClick={() => {
       setState({
-        teacherBubble: "images/teacher/bubble-answer2.png",
+        teacherBubbleImage: "images/teacher/bubble-answer2.png",
         hasChosen: true
       });
       setTimeout(() => handleButtonClick(index), 1000);
@@ -235,7 +241,7 @@ type StateT = {
   openTestDialog: boolean,
   openRulesDialog: boolean,
   teacherText: any,
-  teacherBubble: string,
+  teacherBubbleImage: string,
   hasChosen: boolean
 };
 
@@ -248,7 +254,7 @@ class ChooseActivity extends React.Component<PropsT, StateT> {
       teacherText: (
         <FormattedMessage id="gameStart.teacherThinking" defaultMessage="..." />
       ),
-      teacherBubble: "images/teacher/bubble-thinking.png",
+      teacherBubbleImage: "images/teacher/bubble-thinking.png",
       hasChosen: false
     };
     const { sessionRef, alreadyShownRules, hasShownRules } = this.props;
@@ -272,38 +278,27 @@ class ChooseActivity extends React.Component<PropsT, StateT> {
 
   render() {
     const { classes, sessionRef, genderTeacherMale, studentImg } = this.props;
-    const { teacherText, teacherBubble, hasChosen } = this.state;
+    const { teacherText, teacherBubbleImage, hasChosen } = this.state;
+    console.log(this.state);
     return (
       <div className={classes.root}>
         <div className={classes.sessionTimeline}>
           <SessionTimeline sessionRef={sessionRef} />
         </div>
-        <Grid
-          container
-          justify="space-around"
-          alignItems="flex-end"
-          className={classes.mainContent}
+        <WithBlackboard
+          studentBubble={
+            <FormattedMessage
+              id="chooseActivity.studentQuestion"
+              defaultMessage="What do we do now?"
+            />
+          }
+          studentImg={studentImg}
+          genderTeacherMale={genderTeacherMale}
+          teacherBubble={teacherText}
+          teacherBubbleImage={teacherBubbleImage}
         >
-          <Grid item xs={6} sm={4}>
-            <VirtualStudent
-              bubbleText={
-                <FormattedMessage
-                  id="chooseActivity.studentQuestion"
-                  defaultMessage="What do we do now?"
-                />
-              }
-              studentImg={studentImg}
-            />
-          </Grid>
-          <Grid item xs={6} sm={4}>
-            <TeacherChoosingActivity
-              bubbleText={teacherText}
-              genderTeacherMale={genderTeacherMale}
-              teacherBubble={teacherBubble}
-            />
-          </Grid>
-          <Grid item xs={12} sm={4} className={classes.activityChoice}>
-            {images.map((image, index) => (
+          <div className={classes.activityChoicesContainer}>
+            {activities.map((image, index) => (
               <ActivityButton
                 key={image.url}
                 image={image}
@@ -314,8 +309,8 @@ class ChooseActivity extends React.Component<PropsT, StateT> {
                 setState={x => this.setState(x)}
               />
             ))}
-          </Grid>
-        </Grid>
+          </div>
+        </WithBlackboard>
         <TestConfirmationDialog
           onConfirmTestDialog={this.props.onConfirmTestDialog}
           openTestDialog={this.state.openTestDialog}

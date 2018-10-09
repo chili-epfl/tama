@@ -1,61 +1,177 @@
 // @flow
 
-// @flow
-import React from "react";
+import * as React from "react";
 
-import { FormattedMessage } from "react-intl";
-import Button from "@material-ui/core/Button";
-import Grid from "@material-ui/core/Grid";
 import { withStyles } from "@material-ui/core/styles";
-
-import VirtualStudent from "../VirtualStudent";
-import TeacherWelcome from "../Teacher/TeacherWelcome";
 
 const styles = () => ({
   root: {
-    display: "flex",
-    flexDirection: "column",
     width: "100%",
     height: "100%",
+    display: "flex",
+    flexDirection: "row",
     alignItems: "center"
   },
-  mainContent: {
-    height: "70%"
+  studentContainer: {
+    height: "100%",
+    flex: "0 0 35%",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-end",
+    zIndex: 1
   },
-  group: {
-    height: "100%"
-  },
-  studentName: {
+  studentBubbleText: {
+    position: "absolute",
+    top: "42%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
     textAlign: "center",
-    alignSelf: "center"
+    width: "90%"
   },
-  logo: {
-    width: "auto",
-    height: "15%",
-    margin: "20px"
+  studentBubble: {
+    position: "relative",
+    left: "40%",
+    width: "55%"
   },
-  buttonDisplay: {
-    flexBasis: "0%"
+  studentBubbleImage: {
+    width: "100%",
+    height: "auto"
+  },
+  studentImage: {
+    marginLeft: "20%",
+    width: "35%",
+    height: "auto"
+  },
+  blackboardContainer: {
+    height: "75%",
+    flex: "0 0 30%"
+  },
+  teacherContainer: {
+    height: "100%",
+    flex: "0 0 35%",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-end",
+    zIndex: 1
+  },
+  teacherBubbleText: {
+    position: "absolute",
+    top: "45%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    textAlign: "center",
+    width: "90%"
+  },
+  teacherBubble: {
+    position: "relative",
+    left: "10%",
+    width: "55%"
+  },
+  teacherBubbleImage: {
+    width: "100%",
+    height: "auto"
+  },
+  teacherImage: {
+    marginLeft: "20%",
+    width: "80%",
+    height: "auto"
+  },
+  blackboardImage: {
+    width: "100%",
+    height: "auto"
+  },
+  blackboardContainer2: {
+    width: "150%",
+    transform: "translate(-16.7%)"
+  },
+  blackboardChildrenContainer: {
+    position: "absolute",
+    top: "8%",
+    left: "8%",
+    width: "84%",
+    height: "84%",
+    margin: "auto"
   }
 });
 
+const Student = withStyles(styles)(({ classes, bubbleText, studentImg }) => (
+  <div className={classes.studentContainer}>
+    <div className={classes.studentBubble}>
+      <img
+        src="images/student/bubble.png"
+        alt="bubble"
+        className={classes.studentBubbleImage}
+      />
+      <div className={classes.studentBubbleText}>{bubbleText}</div>
+    </div>
+    <img
+      src={studentImg}
+      className={classes.studentImage}
+      alt="virtual_student"
+    />
+  </div>
+));
+
+const Teacher = withStyles(styles)(
+  ({ classes, bubbleText, genderTeacherMale, bubbleImage }) => {
+    const teacherImage = genderTeacherMale
+      ? "images/teacher/teacher_male.png"
+      : "images/teacher/teacher_female.png";
+    return (
+      <div className={classes.teacherContainer}>
+        <div className={classes.teacherBubble}>
+          <img
+            src={bubbleImage || "images/teacher/bubble-answer.png"}
+            alt="bubble"
+            className={classes.teacherBubbleImage}
+          />
+          <div className={classes.teacherBubbleText}>{bubbleText}</div>
+        </div>
+        <img
+          src={teacherImage}
+          alt="teacher"
+          className={classes.teacherImage}
+        />
+      </div>
+    );
+  }
+);
+
 type PropsT = {
   classes: Object,
-  onClickStart: void => void,
-  onClickStartMamiferes: void => void,
-  onClickStartAdverbs: void => void,
-  studentName: string,
+  studentBubble: any,
+  teacherBubble: any,
+  children: any,
+  teacherBubbleImage: string,
   studentImg: string,
   genderTeacherMale: boolean
 };
 
-const WithBlackboard = ({ classes, studentBuble, children }: PropsT) => (
+const WithBlackboard = ({
+  classes,
+  studentBubble,
+  teacherBubble,
+  studentImg,
+  teacherBubbleImage,
+  genderTeacherMale,
+  children
+}: PropsT) => (
   <div className={classes.root}>
-    <VirtualStudent bubbleText={studentBuble} studentImg={studentImg} />
-    {children}
-    <TeacherWelcome
+    <Student bubbleText={studentBubble} studentImg={studentImg} />
+    <div className={classes.blackboardContainer}>
+      <div className={classes.blackboardContainer2}>
+        <img
+          src="images/blackboard.png"
+          alt="blackboard"
+          className={classes.blackboardImage}
+        />
+        <div className={classes.blackboardChildrenContainer}>{children}</div>
+      </div>
+    </div>
+    <Teacher
       bubbleText={teacherBubble}
       genderTeacherMale={genderTeacherMale}
+      bubbleImage={teacherBubbleImage}
     />
   </div>
 );
