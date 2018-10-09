@@ -147,7 +147,6 @@ type PropsT = {
   test: Object,
   classes: Object,
   studentImg: string,
-  activityChosen: string,
 };
 
 type StateT = {
@@ -180,7 +179,7 @@ class TestStudent extends React.Component<PropsT, StateT> {
   }
 
   render() {
-    const { classes, test, studentImg, activityScore, activityChosen } = this.props;
+    const { classes, test, studentImg, activityScore } = this.props;
     const { index } = this.state;
     const qs = test.questions.map(({ src, valid }, i) => ({
       src,

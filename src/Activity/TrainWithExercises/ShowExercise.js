@@ -30,12 +30,8 @@ class ShowExercise extends React.Component {
       studentAnswer: false
     };
   }
-  handleSudentAnswer = ()=>{
-    if (this.props.activityChosen === "mammals"){
-      return this.props.student.answerMammal(this.props.data.shapeFeatures);
-    }
-      return this.props.student.answerParallelogram(this.props.data.shapeFeatures);
-  }
+  handleSudentAnswer = () => this.props.student.answer();
+
   componentDidMount() {
     this.props.updateScore();
     this.timeout = setTimeout(() => {
@@ -67,7 +63,7 @@ class ShowExercise extends React.Component {
 
   render() {
     const { classes } = this.props;
-
+    console.log('props data' + this.props.data);
     let bubbleText;
     if (this.state.thinking === true) {
       bubbleText = this.props.student.thinkingAboutExercice;
@@ -81,13 +77,11 @@ class ShowExercise extends React.Component {
       bubbleText = this.props.student.givePositiveAnswer;
       if (this.props.activityChosen === "mammals"){
         bubbleText = this.props.student.givePositiveAnswerMammal;
-        console.log(bubbleText)
       }
     } else {
       bubbleText = this.props.student.giveNegativeAnswer;
       if (this.props.activityChosen === "mammals"){
         bubbleText = this.props.student.giveNegativeAnswerMammal;
-        console.log(bubbleText)
       }
     }
 

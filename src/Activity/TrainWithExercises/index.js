@@ -22,13 +22,11 @@ class TrainWithExercise extends React.Component {
   };
 
   recordExerciseActivity = (userAnswer, studentAnswer) => {
-    let image = parallelogramData[this.state.index].src;
-    if (this.props.activityChosen === "mammals"){
-      image = mammalsData[this.state.index].src;
-      this.newActivityRef.child("topic").set("mammals")
-    }else{
-      this.newActivityRef.child("topic").set("parallelograms");
-    }
+    const image = {
+      mammals: mammalsData[this.state.index].src,
+      parallelogram: parallelogramData[this.state.index].src 
+    }[this.props.activityChosen]
+      this.newActivityRef.child("topic").set(this.props.activityChosen);
     this.newActivityRef.child("item").set(image);
     this.newActivityRef.child("activity_type").set("exercise");
     
@@ -48,10 +46,11 @@ class TrainWithExercise extends React.Component {
         />
       );
     }
-    let data = parallelogramData[this.state.index];
-    if (this.props.activityChosen === "mammals"){
-      data = mammalsData[this.state.index];
-    }
+    const data = {
+      mammals: mammalsData[this.state.index],
+      parallelogram: parallelogramData[this.state.index] 
+    }[this.props.activityChosen]
+    console.log('data ' + data.mammals);
     return (
       <ShowExercise
         data={data}

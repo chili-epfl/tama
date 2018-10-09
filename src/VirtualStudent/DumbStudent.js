@@ -90,10 +90,7 @@ class DumbStudent implements VirtualStudent {
     this.name = name;
   }
 
-  answerParallelogram() {
-    return Math.random() > 0.5;
-  }
-  answerMammal(){
+  answer(){
     return Math.random() > 0.5;
   }
 
