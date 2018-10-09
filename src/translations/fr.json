@@ -23,6 +23,9 @@
   "dumbStudent.giveNegativeAnswer":
     "Je ne crois pas que ce soit un parallélogramme",
   "dumbStudent.givePositiveAnswer": "Mmm je pense que c'est un parallélogramme",
+  "dumbStudent.giveNegativeAnswerMammal":
+  "Je ne crois pas que ce soit un mammifère",
+"dumbStudent.givePositiveAnswerMammal": "Mmm je pense que c'est un mammifère",
   "dumbStudent.hasFalseAnswerExercise": "Mince !",
   "dumbStudent.hasRightAnswerExercise": "Super !",
   "dumbStudent.questionExample": "Est-ce un parallélogramme ?",

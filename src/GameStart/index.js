@@ -81,7 +81,7 @@ const GameStart = ({
       <Grid item container direction="column" wrap="nowrap" xs={4} spacing={8}>
         <Grid item xs = {4}/>  
         <Grid item xs={12} zeroMinWidth className={classes.buttonDisplay}>
-          <Button fullWidth={true} variant="contained" color="primary" onClick={onClickStart}>
+          <Button fullWidth variant="contained" color="primary" onClick={onClickStart}>
             <FormattedMessage
                 id="gameStart.startTeachinParalelograms"
                 defaultMessage="Start teaching Parallelograms to {studentName}"
@@ -90,7 +90,7 @@ const GameStart = ({
           </Button>        
         </Grid>
         <Grid item xs={12} className={classes.buttonDisplay} >
-            <Button fullWidth={true} variant="contained" color="primary" onClick={onClickStartMamiferes}>
+            <Button fullWidth variant="contained" color="primary" onClick={onClickStartMamiferes}>
               <FormattedMessage
                 id="gameStart.startTeachingMammals"
                 defaultMessage="Start teaching Mammiferes to {studentName}"
@@ -99,7 +99,7 @@ const GameStart = ({
             </Button>
         </Grid>
         <Grid item xs={12} className={classes.buttonDisplay}>
-            <Button fullWidth={true} variant="contained" color="primary" onClick={onClickStartAdverbs}>
+            <Button fullWidth variant="contained" color="primary" onClick={onClickStartAdverbs}>
               <FormattedMessage
                 id="gameStart.startTeachingAdverbs"
                 defaultMessage="Start teaching adverbs to {studentName}"

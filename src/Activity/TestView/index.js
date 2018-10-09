@@ -146,7 +146,7 @@ type PropsT = {
   activityScore: number,
   test: Object,
   classes: Object,
-  studentImg: string
+  studentImg: string,
 };
 
 type StateT = {

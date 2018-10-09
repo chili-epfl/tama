@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import ChooseExercise from "./ChooseExercise";
 import ShowExercise from "./ShowExercise";
 import parallelogramData from "../ParallelogramData";
+import mammalsData from "../MammalsData";
 
 class TrainWithExercise extends React.Component {
   constructor(props) {
@@ -21,9 +22,13 @@ class TrainWithExercise extends React.Component {
   };
 
   recordExerciseActivity = (userAnswer, studentAnswer) => {
-    const image = parallelogramData[this.state.index].src;
+    const image = {
+      mammals: mammalsData[this.state.index].src,
+      parallelograms: parallelogramData[this.state.index].src 
+    }[this.props.activityChosen]
     this.newActivityRef.child("item").set(image);
     this.newActivityRef.child("activity_type").set("exercise");
+    
     this.newActivityRef.child("knowledge").set(this.props.student.getState());
     this.newActivityRef.child("student_answer").set(studentAnswer);
     this.newActivityRef.child("user_answer").set(userAnswer);
@@ -36,18 +41,24 @@ class TrainWithExercise extends React.Component {
         <ChooseExercise
           onSelectExercise={this.handleSelectExercise}
           onNavigationBackToMenu={this.props.getBackToMenu}
+          activityChosen = {this.props.activityChosen}
         />
       );
     }
+    const data = {
+      mammals: mammalsData[this.state.index],
+      parallelograms: parallelogramData[this.state.index] 
+    }[this.props.activityChosen]
     return (
       <ShowExercise
-        parallelogram={parallelogramData[this.state.index]}
+        data={data}
         getBackToMenu={this.props.getBackToMenu}
         updateScore={this.props.updateScore}
         student={this.props.student}
         recordExerciseActivity={this.recordExerciseActivity}
         genderTeacherMale={this.props.genderTeacherMale}
         studentImg={this.props.studentImg}
+        activityChosen={this.props.activityChosen}
       />
     );
   }
@@ -59,7 +70,8 @@ TrainWithExercise.propTypes = {
   student: PropTypes.object.isRequired,
   sessionRef: PropTypes.object.isRequired,
   genderTeacherMale: PropTypes.bool.isRequired,
-  studentImg: PropTypes.string.isRequired
+  studentImg: PropTypes.string.isRequired,
+  activityChosen: PropTypes.string.isRequired
 };
 
 export default TrainWithExercise;

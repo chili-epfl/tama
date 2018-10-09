@@ -16,7 +16,9 @@ export interface VirtualStudent {
   thinkingAboutExam: Object;
   givePositiveAnswer: Object;
   giveNegativeAnswer: Object;
-  answerParallelogram(shapeFeatures: ShapeFeatures): boolean;
+  givePositiveAnswerMammal: Object;
+  giveNegativeAnswerMammal: Object;
+  answer(shapeFeatures: ShapeFeatures): boolean;
   learn(isParallelogram: boolean, shapeFeatures: ShapeFeatures): void;
   learnLesson(shapeFeatures: ShapeFeatures): void;
   alreadyKnowLesson(shapeFeatures: ShapeFeatures): boolean;

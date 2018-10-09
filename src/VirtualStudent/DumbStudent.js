@@ -71,6 +71,18 @@ class DumbStudent implements VirtualStudent {
       defaultMessage="I don't think this is a parallelogram"
     />
   );
+  givePositiveAnswerMammal = (
+    <FormattedMessage
+      id="dumbStudent.givePositiveAnswerMammal"
+      defaultMessage="Mmm I think this is a mammal"
+    />
+  );
+  giveNegativeAnswerMammal = (
+    <FormattedMessage
+      id="dumbStudent.giveNegativeAnswerMammal"
+      defaultMessage="I don't think this is a mammal"
+    />
+  );
 
   state = {};
 
@@ -78,7 +90,7 @@ class DumbStudent implements VirtualStudent {
     this.name = name;
   }
 
-  answerParallelogram() {
+  answer(){
     return Math.random() > 0.5;
   }
 

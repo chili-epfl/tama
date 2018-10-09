@@ -9,6 +9,7 @@ import BackNavigation from "@material-ui/icons/ArrowBack";
 import Typography from "@material-ui/core/Typography";
 
 import parallelogramData from "../ParallelogramData";
+import mammalsData from "../MammalsData";
 
 const styles = theme => ({
   root: {
@@ -41,7 +42,8 @@ const styles = theme => ({
 const ChooseExercise = ({
   onNavigationBackToMenu,
   onSelectExercise,
-  classes
+  classes,
+  activityChosen
 }) => (
   <div className={classes.root}>
     <div className={classes.header}>
@@ -61,7 +63,7 @@ const ChooseExercise = ({
     </div>
     <div className={classes.gallery}>
       <Gallery
-        images={parallelogramData}
+        images={activityChosen === "mammals"? mammalsData   : parallelogramData}
         onClickThumbnail={onSelectExercise}
         enableImageSelection={false}
         margin={0}
@@ -73,7 +75,8 @@ const ChooseExercise = ({
 ChooseExercise.propTypes = {
   classes: PropTypes.object.isRequired,
   onSelectExercise: PropTypes.func.isRequired,
-  onNavigationBackToMenu: PropTypes.func.isRequired
+  onNavigationBackToMenu: PropTypes.func.isRequired,
+  activityChose: PropTypes.string.isRequired
 };
 
 export default withStyles(styles)(ChooseExercise);
