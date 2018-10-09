@@ -7,7 +7,7 @@ const lesson = [
     title: (
       <FormattedMessage
         id="lessonMammal.item1"
-        defaultMessage="A parallelogram is a quadrilateral"
+        defaultMessage="A mammal is vertebrate"
       />
     ),
     shapeFeatures: {
@@ -18,7 +18,7 @@ const lesson = [
     title: (
       <FormattedMessage
         id="lessonMammal.item2"
-        defaultMessage="A parallelogram has both pairs of opposite sides parallel"
+        defaultMessage="A mammal have glands that give milk"
       />
     ),
     shapeFeatures: {
@@ -29,7 +29,7 @@ const lesson = [
     title: (
       <FormattedMessage
         id="lessonMammal.item3"
-        defaultMessage="The opposite sides of a parallelogram are of equal length"
+        defaultMessage="A mammal is warm-blooded"
       />
     ),
     shapeFeatures: {
@@ -40,7 +40,7 @@ const lesson = [
     title: (
       <FormattedMessage
         id="lessonMammal.item4"
-        defaultMessage="A parallelogram doesn't necessarily have all its sides equal"
+        defaultMessage="A mammal have fur or hair"
       />
     ),
     shapeFeatures: {
