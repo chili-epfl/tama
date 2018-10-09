@@ -41,9 +41,7 @@ class ShowExample extends React.Component {
   render() {
     const { classes, student, data } = this.props;
     const { thinking } = this.state;
-    const bubbleText = thinking
-      ? student.thinkingAboutExample
-      : this.props.activityChosen === "mammals" ? student.questionExampleMammal : student.questionExample;
+    const bubbleText = this.textActivity(thinking, student);
     return (
       <React.Fragment>
         <Grid container className={classes.root}>
@@ -106,6 +104,12 @@ class ShowExample extends React.Component {
         </Grid>
       </React.Fragment>
     );
+  }
+
+  textActivity(thinking, student) {
+    return thinking
+      ? student.thinkingAboutExample
+      : this.props.activityChosen === "mammals" ? student.questionExampleMammal : student.questionExample;
   }
 }
 
