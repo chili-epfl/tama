@@ -189,6 +189,7 @@ class App extends React.Component<PropsT, StateT> {
       view,
       activityChosen
     });
+    this.sessionRef.child("topic").set(activityChosen);
     if (isRegistered && userId) {
       this.recordNewSession(userId);
     }

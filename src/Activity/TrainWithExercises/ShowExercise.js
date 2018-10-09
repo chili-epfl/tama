@@ -63,7 +63,6 @@ class ShowExercise extends React.Component {
 
   render() {
     const { classes } = this.props;
-    console.log('props data' + this.props.data);
     let bubbleText;
     if (this.state.thinking === true) {
       bubbleText = this.props.student.thinkingAboutExercice;

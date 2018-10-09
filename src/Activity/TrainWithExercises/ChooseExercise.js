@@ -75,7 +75,8 @@ const ChooseExercise = ({
 ChooseExercise.propTypes = {
   classes: PropTypes.object.isRequired,
   onSelectExercise: PropTypes.func.isRequired,
-  onNavigationBackToMenu: PropTypes.func.isRequired
+  onNavigationBackToMenu: PropTypes.func.isRequired,
+  activityChose: PropTypes.string.isRequired
 };
 
 export default withStyles(styles)(ChooseExercise);
