@@ -5,7 +5,7 @@ import { injectIntl } from "react-intl";
 
 import ChooseLesson from "./ChooseLesson";
 import ShowLesson from "./ShowLesson";
-import lesson from "./Lesson";
+import lesson from "./LessonParallelograms";
 
 class TrainWithLesson extends React.Component {
   constructor(props) {
@@ -38,6 +38,7 @@ class TrainWithLesson extends React.Component {
         <ChooseLesson
           onSubmit={this.handleSubmit}
           onNavigationBackToMenu={this.props.getBackToMenu}
+          activityChosen={this.props.activityChosen}
         />
       );
     }
