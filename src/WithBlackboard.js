@@ -30,8 +30,8 @@ const styles = () => ({
   },
   studentBubble: {
     position: "relative",
-    left: "40%",
-    width: "55%"
+    left: "35%",
+    width: "50%"
   },
   studentBubbleImage: {
     width: "100%",
@@ -56,23 +56,30 @@ const styles = () => ({
   },
   teacherBubbleText: {
     position: "absolute",
-    top: "45%",
+    top: "40%",
     left: "50%",
     transform: "translate(-50%, -50%)",
     textAlign: "center",
     width: "90%"
   },
-  teacherBubble: {
+  teacherBubbleLeft: {
     position: "relative",
-    left: "10%",
-    width: "55%"
+    transform: "scaleX(1)",
+    left: "-5%",
+    width: "50%"
+  },
+  teacherBubbleRight: {
+    position: "relative",
+    transform: "scaleX(-1)",
+    left: "0%",
+    width: "50%"
   },
   teacherBubbleImage: {
     width: "100%",
     height: "auto"
   },
   teacherImage: {
-    marginLeft: "20%",
+    marginLeft: "10%",
     width: "80%",
     height: "auto"
   },
@@ -113,19 +120,37 @@ const Student = withStyles(styles)(({ classes, bubbleText, studentImg }) => (
 ));
 
 const Teacher = withStyles(styles)(
-  ({ classes, bubbleText, genderTeacherMale, bubbleImage }) => {
+  ({
+    classes,
+    bubbleTextLeft,
+    bubbleTextRight,
+    genderTeacherMale,
+    bubbleImage
+  }) => {
     const teacherImage = genderTeacherMale
       ? "images/teacher/teacher_male.png"
       : "images/teacher/teacher_female.png";
     return (
       <div className={classes.teacherContainer}>
-        <div className={classes.teacherBubble}>
-          <img
-            src={bubbleImage || "images/teacher/bubble-answer.png"}
-            alt="bubble"
-            className={classes.teacherBubbleImage}
-          />
-          <div className={classes.teacherBubbleText}>{bubbleText}</div>
+        <div style={{ display: "flex", flexDirection: "row" }}>
+          <div className={classes.teacherBubbleLeft}>
+            <img
+              src={bubbleImage || "images/teacher/bubble-answer.png"}
+              alt="bubble"
+              className={classes.teacherBubbleImage}
+            />
+            <div className={classes.teacherBubbleText}>{bubbleTextLeft}</div>
+          </div>
+          {bubbleTextRight && (
+            <div className={classes.teacherBubbleRight}>
+              <img
+                src={bubbleImage || "images/teacher/bubble-answer.png"}
+                alt="bubble"
+                className={classes.teacherBubbleImage}
+              />
+              <div className={classes.teacherBubbleText}>{bubbleTextRight}</div>
+            </div>
+          )}
         </div>
         <img
           src={teacherImage}
@@ -151,6 +176,7 @@ const WithBlackboard = ({
   classes,
   studentBubble,
   teacherBubble,
+  teacherBubbleRight,
   studentImg,
   teacherBubbleImage,
   genderTeacherMale,
@@ -169,8 +195,9 @@ const WithBlackboard = ({
       </div>
     </div>
     <Teacher
-      bubbleText={teacherBubble}
       genderTeacherMale={genderTeacherMale}
+      bubbleTextLeft={teacherBubble}
+      bubbleTextRight={teacherBubbleRight}
       bubbleImage={teacherBubbleImage}
     />
   </div>

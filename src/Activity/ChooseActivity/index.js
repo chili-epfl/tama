@@ -19,7 +19,7 @@ const styles = theme => ({
     flexDirection: "column"
   },
   sessionTimeline: {
-    height: "12%",
+    height: "15%",
     display: "flex",
     alignItems: "center"
   },
@@ -183,7 +183,7 @@ const ActivityButton = ({
     focusVisibleClassName={classes.focusVisible}
     onClick={() => {
       setState({
-        teacherBubbleImage: "images/teacher/bubble-answer2.png",
+        teacherBubbleImage: "images/teacher/bubble-answer.png",
         hasChosen: true
       });
       setTimeout(() => handleButtonClick(index), 1000);
