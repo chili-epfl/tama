@@ -60,11 +60,15 @@
   "leaderboard.name": "Name",
   "leaderboard.rank": "Rank",
   "leaderboard.score": "Score",
-  "lesson.item1": "A parallelogram is a quadrilateral",
-  "lesson.item2": "A parallelogram has pairs of opposite sides parallel",
-  "lesson.item3": "The opposite sides of a parallelogram are of equal length",
-  "lesson.item4":
+  "lessonParallelogram.item1": "A parallelogram is a quadrilateral",
+  "lessonParallelogram.item2": "A parallelogram has pairs of opposite sides parallel",
+  "lessonParallelogram.item3": "The opposite sides of a parallelogram are of equal length",
+  "lessonParallelogram.item4":
     "A parallelogram doesn't necessarily have all its sides equal",
+  "lessonMammal.item1": "A mammal is vertebrate",
+  "lessonMammal.item2": "A mammal have glands that give milk",
+  "lessonMammal.item3": "A mammal is warm-blooded",
+  "lessonMammal.item4": "A mammal have fur or hair",
   "notEnoughPointsSnackbar.message":
     "You don't have enough points to do this activity",
   "quickLearnerStudent.feedbackLessonAlreadyKnow": "I already know that",

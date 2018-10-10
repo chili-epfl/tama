@@ -6,7 +6,7 @@ const lesson = [
   {
     title: (
       <FormattedMessage
-        id="lesson.item1"
+        id="lessonParallelogram.item1"
         defaultMessage="A parallelogram is a quadrilateral"
       />
     ),
@@ -17,7 +17,7 @@ const lesson = [
   {
     title: (
       <FormattedMessage
-        id="lesson.item2"
+        id="lessonParallelogram.item2"
         defaultMessage="A parallelogram has both pairs of opposite sides parallel"
       />
     ),
@@ -28,7 +28,7 @@ const lesson = [
   {
     title: (
       <FormattedMessage
-        id="lesson.item3"
+        id="lessonParallelogram.item3"
         defaultMessage="The opposite sides of a parallelogram are of equal length"
       />
     ),
@@ -39,7 +39,7 @@ const lesson = [
   {
     title: (
       <FormattedMessage
-        id="lesson.item4"
+        id="lessonParallelogram.item4"
         defaultMessage="A parallelogram doesn't necessarily have all its sides equal"
       />
     ),

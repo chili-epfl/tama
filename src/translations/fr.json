@@ -65,12 +65,18 @@
   "leaderboard.name": "Nom",
   "leaderboard.rank": "Rang",
   "leaderboard.score": "Score",
-  "lesson.item1": "Un parallélogramme est un quadrilatère",
-  "lesson.item2":
+  "lessonParallelogram.item1": "Un parallélogramme est un quadrilatère",
+  "lessonParallelogram.item2":
     "Un parallélogramme a ses côtés opposés deux à deux parallèles",
-  "lesson.item3": "Un parallélogramme a ses côtés opposés de même longueur",
-  "lesson.item4":
+  "lessonParallelogram.item3": "Un parallélogramme a ses côtés opposés de même longueur",
+  "lessonParallelogram.item4":
     "Un parallélogramme n'a pas obligatoirement tous ses côtés de même longueur",
+  "lessonMammal.item1": "Un mammifère est un vertébré",
+  "lessonMammal.item2":
+      "Un mammifère a des glandes qui donnent du lait",
+  "lessonMammal.item3": "Un mammifère a le sang chaud",
+  "lessonMammal.item4":
+      "Un mammifère a une fourrure ou des poils",
   "notEnoughPointsSnackbar.message":
     "Vous n'avez pas assez de points pour faire cette activité",
   "quickLearnerStudent.feedbackLessonAlreadyKnow": "Je le savais déjà",

@@ -58,6 +58,7 @@ class TrainWithLesson extends React.Component {
         <RadioListLesson
           onSelectLesson={index => this.setState({ checked: index })}
           checked={this.state.checked}
+          activityChosen={this.props.activityChosen}
         />
         <Grid container justify="center">
           <Button
@@ -80,7 +81,8 @@ class TrainWithLesson extends React.Component {
 TrainWithLesson.propTypes = {
   classes: PropTypes.object.isRequired,
   onNavigationBackToMenu: PropTypes.func.isRequired,
-  onSubmit: PropTypes.func.isRequired
+  onSubmit: PropTypes.func.isRequired,
+  activityChosen: PropTypes.string.isRequired
 };
 
 export default withStyles(styles)(TrainWithLesson);
