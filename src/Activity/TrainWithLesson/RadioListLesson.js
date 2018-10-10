@@ -6,7 +6,8 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Radio from "@material-ui/core/Radio";
 import PropTypes from "prop-types";
 
-import lesson from "./Lesson";
+import lessonParallelograms from "./LessonParallelograms";
+import lessonMammals from "./LessonMammals";
 
 class RadioListLesson extends React.Component {
   handleToggle = index => () => {
@@ -14,6 +15,10 @@ class RadioListLesson extends React.Component {
   };
 
   render() {
+    const lesson = {
+      mammals: lessonMammals,
+      parallelograms: lessonParallelograms
+    }[this.props.activityChosen];
     return (
       <div>
         <List>
@@ -36,7 +41,8 @@ class RadioListLesson extends React.Component {
 
 RadioListLesson.propTypes = {
   onSelectLesson: PropTypes.func.isRequired,
-  checked: PropTypes.number.isRequired
+  checked: PropTypes.number.isRequired,
+  activityChosen: PropTypes.string.isRequired
 };
 
 export default RadioListLesson;
