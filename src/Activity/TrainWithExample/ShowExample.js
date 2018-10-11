@@ -5,8 +5,7 @@ import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import PropTypes from "prop-types";
 
-import VirtualStudent from "../../VirtualStudent";
-import TeacherTeaching from "../../Teacher/TeacherTeaching";
+import WithBlackboard from "../../WithBlackboard";
 
 const styles = {
   root: {
@@ -23,15 +22,18 @@ const styles = {
 class ShowExample extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { thinking: false };
+    this.state = {
+      studentThinking: false,
+      bubbleImageLeft: "images/teacher/bubble-thinking.png",
+      bubbleImageRight: "images/teacher/bubble-thinking.png",
+      teacherAnswer: ""
+    };
   }
 
   handleClick = userAnswer => {
     const { student, data, recordExampleActivity } = this.props;
-
     recordExampleActivity(userAnswer);
     this.props.updateScore();
-    this.setState({ thinking: true });
     student.learn(userAnswer, data.shapeFeatures);
     setTimeout(() => {
       this.props.getBackToMenu();
@@ -39,77 +41,90 @@ class ShowExample extends React.Component {
   };
 
   render() {
-    const { classes, student, data } = this.props;
-    const { thinking } = this.state;
-    const bubbleText = this.textActivity(thinking, student);
+    const {
+      classes,
+      student,
+      data,
+      studentImg,
+      genderTeacherMale
+    } = this.props;
+    const {
+      studentThinking,
+      teacherAnswer,
+      bubbleImageLeft,
+      bubbleImageRight
+    } = this.state;
+    const studentBubbleText = this.textActivity(studentThinking, student);
+    const teacherBubbleTextPositive = (
+      <FormattedMessage id="showExample.positiveAnswer" defaultMessage="Yes" />
+    );
+    const teacherBubbleTextNegative = (
+      <FormattedMessage id="showExample.negativeAnswer" defaultMessage="No" />
+    );
+    const textAnswer =
+      teacherAnswer === "left"
+        ? teacherBubbleTextPositive
+        : teacherBubbleTextNegative;
     return (
-      <React.Fragment>
-        <Grid container className={classes.root}>
-          <Grid item xs={12} sm={4}>
-            <Grid
-              container
-              justify="center"
-              alignItems="flex-end"
-              className={classes.group}
-            >
-              <VirtualStudent
-                bubbleText={bubbleText}
-                studentImg={this.props.studentImg}
-              />
-            </Grid>
-          </Grid>
-          <Grid item xs={12} sm={4}>
-            <Grid
-              container
-              justify="center"
-              alignItems="flex-start"
-              className={classes.shape}
-            >
-              <img
-                className={classes.imagePara}
-                src={data.src}
-                alt="data"
-                width="300"
-                height="300"
-                border="1px solid"
-              />
-            </Grid>
-          </Grid>
-          <Grid item xs={12} sm={4}>
-            <Grid
-              container
-              justify="center"
-              alignItems="flex-end"
-              className={classes.group}
-            >
-              <TeacherTeaching
-                onClickBubble={this.handleClick}
-                positiveAnswer={
-                  <FormattedMessage
-                    id="showExample.positiveAnswer"
-                    defaultMessage="Yes"
-                  />
-                }
-                negativeAnswer={
-                  <FormattedMessage
-                    id="showExample.negativeAnswer"
-                    defaultMessage="No"
-                  />
-                }
-                waitingForStudent={false}
-                genderTeacherMale={this.props.genderTeacherMale}
-              />
-            </Grid>
-          </Grid>
-        </Grid>
-      </React.Fragment>
+      <WithBlackboard
+        studentBubble={studentBubbleText}
+        studentImg={studentImg}
+        genderTeacherMale={genderTeacherMale}
+        teacherBubble={!teacherAnswer ? teacherBubbleTextPositive : textAnswer}
+        teacherBubbleRight={
+          !teacherAnswer ? teacherBubbleTextNegative : undefined
+        }
+        teacherBubbleImage={
+          !teacherAnswer ? bubbleImageLeft : "images/teacher/bubble-answer.png"
+        }
+        teacherBubbleImageRight={!teacherAnswer ? bubbleImageRight : undefined}
+        onTeacherBubbleClick={side => {
+          this.setState({
+            studentThinking: true,
+            teacherAnswer: side
+          });
+          this.handleClick(side === "left");
+        }}
+        onTeacherBubbleMouseEnter={side => {
+          const bubbleImagekey =
+            side === "right" ? "bubbleImageRight" : "bubbleImageLeft";
+          this.setState({
+            [bubbleImagekey]: "images/teacher/bubble-thinking-focus.png"
+          });
+        }}
+        onTeacherBubbleMouseLeave={side => {
+          const bubbleImagekey =
+            side === "right" ? "bubbleImageRight" : "bubbleImageLeft";
+          this.setState({
+            [bubbleImagekey]: "images/teacher/bubble-thinking.png"
+          });
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            height: "100%",
+            width: "100%",
+            justifyContent: "center"
+          }}
+        >
+          <img
+            className={classes.imagePara}
+            src={data.src}
+            alt="example"
+            style={{ height: "100%", width: "auto" }}
+          />
+        </div>
+      </WithBlackboard>
     );
   }
 
   textActivity(thinking, student) {
     return thinking
       ? student.thinkingAboutExample
-      : this.props.activityChosen === "mammals" ? student.questionExampleMammal : student.questionExample;
+      : this.props.activityChosen === "mammals"
+        ? student.questionExampleMammal
+        : student.questionExample;
   }
 }
 

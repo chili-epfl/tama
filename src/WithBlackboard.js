@@ -64,13 +64,11 @@ const styles = () => ({
   },
   teacherBubbleLeft: {
     position: "relative",
-    transform: "scaleX(1)",
     left: "-5%",
     width: "50%"
   },
   teacherBubbleRight: {
     position: "relative",
-    transform: "scaleX(-1)",
     left: "0%",
     width: "50%"
   },
@@ -125,7 +123,12 @@ const Teacher = withStyles(styles)(
     bubbleTextLeft,
     bubbleTextRight,
     genderTeacherMale,
-    bubbleImage
+    onTeacherBubbleClick,
+    onTeacherBubbleMouseEnter,
+    onTeacherBubbleMouseLeave,
+    bubbleImageLeft,
+    bubbleImageRight,
+    styleMouseCursor
   }) => {
     const teacherImage = genderTeacherMale
       ? "images/teacher/teacher_male.png"
@@ -133,20 +136,33 @@ const Teacher = withStyles(styles)(
     return (
       <div className={classes.teacherContainer}>
         <div style={{ display: "flex", flexDirection: "row" }}>
-          <div className={classes.teacherBubbleLeft}>
+          <div
+            className={classes.teacherBubbleLeft}
+            onClick={() => onTeacherBubbleClick("left")}
+            onMouseEnter={() => onTeacherBubbleMouseEnter("left")}
+            onMouseLeave={() => onTeacherBubbleMouseLeave("left")}
+            style={styleMouseCursor ? { cursor: "pointer" } : {}}
+          >
             <img
-              src={bubbleImage || "images/teacher/bubble-answer.png"}
+              src={bubbleImageLeft || "images/teacher/bubble-answer.png"}
               alt="bubble"
               className={classes.teacherBubbleImage}
             />
             <div className={classes.teacherBubbleText}>{bubbleTextLeft}</div>
           </div>
           {bubbleTextRight && (
-            <div className={classes.teacherBubbleRight}>
+            <div
+              className={classes.teacherBubbleRight}
+              onClick={() => onTeacherBubbleClick("right")}
+              onMouseEnter={() => onTeacherBubbleMouseEnter("right")}
+              onMouseLeave={() => onTeacherBubbleMouseLeave("right")}
+              style={styleMouseCursor ? { cursor: "pointer" } : {}}
+            >
               <img
-                src={bubbleImage || "images/teacher/bubble-answer.png"}
+                src={bubbleImageRight || "images/teacher/bubble-answer.png"}
                 alt="bubble"
                 className={classes.teacherBubbleImage}
+                style={{ transform: "scaleX(-1)" }}
               />
               <div className={classes.teacherBubbleText}>{bubbleTextRight}</div>
             </div>
@@ -166,11 +182,18 @@ type PropsT = {
   classes: Object,
   studentBubble: any,
   teacherBubble: any,
+  teacherBubbleRight: any,
   children: any,
   teacherBubbleImage: string,
+  teacherBubbleImageRight: string,
   studentImg: string,
-  genderTeacherMale: boolean
+  genderTeacherMale: boolean,
+  onTeacherBubbleClick: Function,
+  onTeacherBubbleMouseEnter: Function,
+  onTeacherBubbleMouseLeave: Function
 };
+
+const nothing = () => {};
 
 const WithBlackboard = ({
   classes,
@@ -179,7 +202,11 @@ const WithBlackboard = ({
   teacherBubbleRight,
   studentImg,
   teacherBubbleImage,
+  teacherBubbleImageRight,
   genderTeacherMale,
+  onTeacherBubbleClick,
+  onTeacherBubbleMouseEnter,
+  onTeacherBubbleMouseLeave,
   children
 }: PropsT) => (
   <div className={classes.root}>
@@ -198,7 +225,12 @@ const WithBlackboard = ({
       genderTeacherMale={genderTeacherMale}
       bubbleTextLeft={teacherBubble}
       bubbleTextRight={teacherBubbleRight}
-      bubbleImage={teacherBubbleImage}
+      bubbleImageLeft={teacherBubbleImage}
+      bubbleImageRight={teacherBubbleImageRight}
+      styleMouseCursor={!!onTeacherBubbleClick}
+      onTeacherBubbleClick={onTeacherBubbleClick || nothing}
+      onTeacherBubbleMouseEnter={onTeacherBubbleMouseEnter || nothing}
+      onTeacherBubbleMouseLeave={onTeacherBubbleMouseLeave || nothing}
     />
   </div>
 );
