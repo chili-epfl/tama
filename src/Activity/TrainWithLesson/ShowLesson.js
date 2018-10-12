@@ -93,7 +93,7 @@ class ShowLesson extends React.Component<PropsT, StateT> {
           >
             <div className={classes.blackboard}>
               <img
-                src="images/blackboard.jpg"
+                src="images/blackboard.png"
                 alt="Blackboard"
                 width="400"
                 height="300"
