@@ -107,9 +107,14 @@ class ShowExample extends React.Component {
   }
 
   textActivity(thinking, student) {
+    const question = {
+      mammals: student.questionExampleMammal,
+      parallelograms: student.questionExample,
+      adverbs: student.questionExampleAdverb
+    }[this.props.activityChosen];
     return thinking
       ? student.thinkingAboutExample
-      : this.props.activityChosen === "mammals" ? student.questionExampleMammal : student.questionExample;
+      : question;
   }
 }
 

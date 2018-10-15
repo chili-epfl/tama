@@ -26,6 +26,12 @@ class DumbStudent implements VirtualStudent {
       defaultMessage = "Is it a mammal ?"
     />
   );
+  questionExampleAdverb =(
+    <FormattedMessage
+      id="dumbStudent.questionExampleAdverb"
+      defaultMessage = "Is it an adverb ?"
+    />
+  );
   thinkingAboutExercice = (
     <FormattedMessage
       id="dumbStudent.thinkingAboutExercise"

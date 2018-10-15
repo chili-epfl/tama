@@ -10,6 +10,7 @@ import BackNavigation from "@material-ui/icons/ArrowBack";
 
 import parallelogramData from "../ParallelogramData";
 import mammalsData from "../MammalsData";
+import adverbsData from "../AdverbsData";
 
 const styles = theme => ({
   root: {
@@ -39,6 +40,14 @@ const styles = theme => ({
   }
 });
 
+const images = (activityChosen) => {
+  return {
+    mammals: mammalsData,
+    parallelograms: parallelogramData,
+    adverbs: adverbsData
+  }[activityChosen];
+}
+
 const ChooseExample = ({
   activityChosen,
   onNavigationBackToMenu,
@@ -63,7 +72,7 @@ const ChooseExample = ({
     </div>
     <div className={classes.gallery}>
       <Gallery
-        images={activityChosen === "mammals" ? mammalsData : parallelogramData}
+        images={images(activityChosen)}
         onClickThumbnail={onSelectExample}
         enableImageSelection={false}
         margin={0}

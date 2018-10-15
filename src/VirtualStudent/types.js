@@ -8,6 +8,7 @@ export interface VirtualStudent {
   feedbackLessonAlreadyKnow: Object;
   questionExample: Object;
   questionExampleMammal: Object;
+  questionExampleAdverb: Object;
   thinkingAboutExercice: Object;
   hasRightAnswerExercise: Object;
   hasFalseAnswerExercise: Object;

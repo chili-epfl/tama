@@ -18,7 +18,6 @@ import TrainWithLesson from "./Activity/TrainWithLesson";
 import TestView from "./Activity/TestView";
 import Home from "./Home";
 import GameStart from "./GameStart";
-import Adverbs from "./Adverbs";
 import getVirtualStudent from "./VirtualStudent/utils";
 import AppDrawer from "./AppDrawer";
 import SessionHistory from "./SessionHistory";
@@ -292,15 +291,13 @@ class App extends React.Component<PropsT, StateT> {
             this.gameStartButtons("chooseActivity", "mammals",isRegistered, userId)
           }}
           onClickStartAdverbs={() => {
-            this.gameStartButtons("adverbs", isRegistered, userId)
+            this.gameStartButtons("chooseActivity","adverbs", isRegistered, userId)
           }}
           studentName={this.studentName}
           studentImg={this.studentBackpackImg}
           genderTeacherMale={this.genderTeacherMale}
         />
       );
-    } else if( view === "adverbs"){
-      displayed = <Adverbs />; 
     }else if (view === "leaderboard") {
       displayed = <Leaderboard />;
     } else if (view === "stats") {
