@@ -136,22 +136,22 @@ const activities = [
       />
     )
   },
-  {
-    url: "images/lesson_1536x512.png",
-    title: (
-      <FormattedMessage
-        id="chooseActivity.giveLesson"
-        defaultMessage="Give a lesson"
-      />
-    ),
-    learningCost: "50",
-    teacherText: (
-      <FormattedMessage
-        id="chooseActivity.giveLessonTeacherText"
-        defaultMessage="I'm going to give you a definition"
-      />
-    )
-  },
+  // {
+  //   url: "images/lesson_1536x512.png",
+  //   title: (
+  //     <FormattedMessage
+  //       id="chooseActivity.giveLesson"
+  //       defaultMessage="Give a lesson"
+  //     />
+  //   ),
+  //   learningCost: "50",
+  //   teacherText: (
+  //     <FormattedMessage
+  //       id="chooseActivity.giveLessonTeacherText"
+  //       defaultMessage="I'm going to give you a definition"
+  //     />
+  //   )
+  // },
   {
     url: "images/medal_600x200.png",
     title: (
@@ -279,7 +279,6 @@ class ChooseActivity extends React.Component<PropsT, StateT> {
   render() {
     const { classes, sessionRef, genderTeacherMale, studentImg } = this.props;
     const { teacherText, teacherBubbleImage, hasChosen } = this.state;
-    console.log(this.state);
     return (
       <div className={classes.root}>
         <div className={classes.sessionTimeline}>
