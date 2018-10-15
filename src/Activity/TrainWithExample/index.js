@@ -7,6 +7,11 @@ import ShowExample from "./ShowExample";
 import parallelogramData from "../ParallelogramData";
 import mammalsData from "../MammalsData";
 
+const exampleData = {
+  mammals: mammalsData,
+  parallelograms: parallelogramData
+};
+
 class TrainWithExample extends React.Component {
   constructor(props) {
     super(props);
@@ -21,11 +26,10 @@ class TrainWithExample extends React.Component {
   };
 
   recordExampleActivity = userAnswer => {
+    const { activityChosen } = this.props;
+    const image = exampleData[activityChosen][this.state.index].src;
+
     this.newActivityRef.child("activity_type").set("example");
-    const image = {
-      mammals: mammalsData[this.state.index].src,
-      parallelograms: parallelogramData[this.state.index].src 
-    }[this.props.activityChosen]
     this.newActivityRef.child("item").set(image);
     this.newActivityRef.child("knowledge").set(this.props.student.getState());
     this.newActivityRef.child("user_answer").set(userAnswer);
@@ -38,14 +42,12 @@ class TrainWithExample extends React.Component {
         <ChooseExample
           onSelectExample={this.handleSelectExample}
           onNavigationBackToMenu={this.props.getBackToMenu}
-          activityChosen= {this.props.activityChosen}
+          activityChosen={this.props.activityChosen}
         />
       );
     }
-    const data = {
-      mammals: mammalsData[this.state.index],
-      parallelograms: parallelogramData[this.state.index] 
-    }[this.props.activityChosen]
+    const { activityChosen } = this.props;
+    const data = exampleData[activityChosen][this.state.index];
     return (
       <ShowExample
         data={data}
@@ -55,7 +57,7 @@ class TrainWithExample extends React.Component {
         recordExampleActivity={this.recordExampleActivity}
         genderTeacherMale={this.props.genderTeacherMale}
         studentImg={this.props.studentImg}
-        activityChosen = {this.props.activityChosen}
+        activityChosen={activityChosen}
       />
     );
   }
