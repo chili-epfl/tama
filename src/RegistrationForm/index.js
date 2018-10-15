@@ -266,61 +266,6 @@ class RegistrationForm extends React.Component {
                     ]}
                   />
                 </div>
-                <div className={classes.group}>
-                  <FormLabel component="legend">
-                    <FormattedMessage
-                      id="registrationForm.knowledgeParallelograms"
-                      defaultMessage="My knowledge of parallelograms:"
-                    />
-                  </FormLabel>
-                  <RadioGroup
-                    name="knowledge"
-                    value={this.state.form.knowledge}
-                    onChange={this.handleInputChange}
-                    row
-                  >
-                    <FormControlLabel
-                      value="no"
-                      control={<Radio />}
-                      label={
-                        <FormattedMessage
-                          id="registrationForm.knowledgeParallelogramsNo"
-                          defaultMessage="No"
-                        />
-                      }
-                    />
-                    <FormControlLabel
-                      value="poor"
-                      control={<Radio />}
-                      label={
-                        <FormattedMessage
-                          id="registrationForm.knowledgeParallelogramsPoor"
-                          defaultMessage="Poor"
-                        />
-                      }
-                    />
-                    <FormControlLabel
-                      value="average"
-                      control={<Radio />}
-                      label={
-                        <FormattedMessage
-                          id="registrationForm.knowledgeParallelogramsAverage"
-                          defaultMessage="Average"
-                        />
-                      }
-                    />
-                    <FormControlLabel
-                      value="solid"
-                      control={<Radio />}
-                      label={
-                        <FormattedMessage
-                          id="registrationForm.knowledgeParallelogramsSolid"
-                          defaultMessage="Solid"
-                        />
-                      }
-                    />
-                  </RadioGroup>
-                </div>
                 <Button
                   variant="contained"
                   color="primary"
@@ -355,3 +300,59 @@ RegistrationForm.propTypes = {
 };
 
 export default withStyles(styles)(RegistrationForm);
+
+// <div className={classes.group}>
+// <FormLabel component="legend">
+//   <FormattedMessage
+//     id="registrationForm.knowledgeParallelograms"
+//     defaultMessage="My knowledge of parallelograms:"
+//   />
+// </FormLabel>
+// <RadioGroup
+//   name="knowledge"
+//   value={this.state.form.knowledge}
+//   onChange={this.handleInputChange}
+//   row
+// >
+//   <FormControlLabel
+//     value="no"
+//     control={<Radio />}
+//     label={
+//       <FormattedMessage
+//         id="registrationForm.knowledgeParallelogramsNo"
+//         defaultMessage="No"
+//       />
+//     }
+//   />
+//   <FormControlLabel
+//     value="poor"
+//     control={<Radio />}
+//     label={
+//       <FormattedMessage
+//         id="registrationForm.knowledgeParallelogramsPoor"
+//         defaultMessage="Poor"
+//       />
+//     }
+//   />
+//   <FormControlLabel
+//     value="average"
+//     control={<Radio />}
+//     label={
+//       <FormattedMessage
+//         id="registrationForm.knowledgeParallelogramsAverage"
+//         defaultMessage="Average"
+//       />
+//     }
+//   />
+//   <FormControlLabel
+//     value="solid"
+//     control={<Radio />}
+//     label={
+//       <FormattedMessage
+//         id="registrationForm.knowledgeParallelogramsSolid"
+//         defaultMessage="Solid"
+//       />
+//     }
+//   />
+// </RadioGroup>
+// </div>
