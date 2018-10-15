@@ -21,10 +21,10 @@ class GodStudent implements VirtualStudent {
       defaultMessage="Is it a parallelogram?"
     />
   );
-  questionExampleMammal =(
+  questionExampleMammal = (
     <FormattedMessage
       id="dumbStudent.questionExampleMammal"
-      defaultMessage = "Is it a mammal ?"
+      defaultMessage="Is it a mammal ?"
     />
   );
   thinkingAboutExercice = (
@@ -80,7 +80,7 @@ class GodStudent implements VirtualStudent {
     this.name = name;
   }
 
-  answerParallelogram(shape: ShapeFeatures) {
+  answer(shape: ShapeFeatures) {
     return shape.hasFourEdges && shape.hasEveryPairOppositeEdgesParallel;
   }
 

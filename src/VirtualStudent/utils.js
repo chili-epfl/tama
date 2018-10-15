@@ -2,10 +2,11 @@
 
 import { VirtualStudent } from "./types";
 import DumbStudent from "./DumbStudent";
-// import NoMemory from "./NoMemory";
-// import WeightModel from "./WeightModel";
-// import FullMemory from "./FullMemory";
-// import FixedMemory from "./FixedMemory";
+import NoMemory from "./NoMemory";
+import WeightModel from "./WeightModel";
+import FullMemory from "./FullMemory";
+import FixedMemory from "./FixedMemory";
+import GodStudent from "./GodStudent";
 
 export const featureList = [
   "hasThreeEdges",
@@ -26,7 +27,7 @@ export const featureList = [
   "hasAtLeastOneRightAngle"
 ];
 
-const getVirtualStudent = (name: string): VirtualStudent => {
+const getVirtualStudent = (name: string): VirtualStudent =>
   // let RandModel = DumbStudent;
   // const studentModels = [
   //   [WeightModel, 0.15],
@@ -41,7 +42,6 @@ const getVirtualStudent = (name: string): VirtualStudent => {
   // }, Math.random());
 
   // return new RandModel(name);
-  return new DumbStudent(name);
-};
+  new FullMemory(name);
 
 export default getVirtualStudent;

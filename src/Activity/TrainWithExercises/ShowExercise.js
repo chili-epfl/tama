@@ -2,11 +2,10 @@ import React from "react";
 
 import { FormattedMessage } from "react-intl";
 import { withStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
+import Button from "@material-ui/core/Button";
 import PropTypes from "prop-types";
 
-import VirtualStudent from "../../VirtualStudent";
-import TeacherTeaching from "../../Teacher/TeacherTeaching";
+import WithBlackboard from "./../../WithBlackboard";
 
 const styles = () => ({
   root: {
@@ -23,35 +22,21 @@ const styles = () => ({
 class ShowExercise extends React.Component {
   constructor(props) {
     super(props);
+    const { selected, student, data } = props;
     this.state = {
-      thinking: true,
-      learning: false,
-      userAnswer: false,
-      studentAnswer: false
+      studentAnswers: selected.map(exampleIndex =>
+        student.answer(data[exampleIndex].shapeFeatures)
+      )
     };
   }
-  handleSudentAnswer = () => this.props.student.answer();
 
   componentDidMount() {
     this.props.updateScore();
-    this.timeout = setTimeout(() => {
-      this.setState({
-        thinking: false,
-        studentAnswer: this.handleSudentAnswer()
-      });
-    }, 2000);
   }
 
-  handleClick = userAnswer => {
-    this.props.recordExerciseActivity(userAnswer, this.state.studentAnswer);
-    this.setState({ learning: true, userAnswer });
-    this.props.student.learn(
-      this.state.studentAnswer ? userAnswer : !userAnswer,
-      this.props.data.shapeFeatures
-    );
-    setTimeout(() => {
-      this.props.getBackToMenu();
-    }, 2000);
+  handleClick = () => {
+    this.props.recordExerciseActivity(this.state.studentAnswers);
+    this.props.getBackToMenu();
   };
 
   componentWillUnmount() {
@@ -62,97 +47,63 @@ class ShowExercise extends React.Component {
   }
 
   render() {
-    const { classes } = this.props;
-    let bubbleText;
-    if (this.state.thinking === true) {
-      bubbleText = this.props.student.thinkingAboutExercice;
-    } else if (this.state.learning === true) {
-      if (this.state.userAnswer) {
-        bubbleText = this.props.student.hasRightAnswerExercise;
-      } else {
-        bubbleText = this.props.student.hasFalseAnswerExercise;
-      }
-    } else if (this.state.studentAnswer) {
-      bubbleText = this.props.student.givePositiveAnswer;
-      if (this.props.activityChosen === "mammals"){
-        bubbleText = this.props.student.givePositiveAnswerMammal;
-      }
-    } else {
-      bubbleText = this.props.student.giveNegativeAnswer;
-      if (this.props.activityChosen === "mammals"){
-        bubbleText = this.props.student.giveNegativeAnswerMammal;
-      }
-    }
+    const {
+      classes,
+      studentImg,
+      genderTeacherMale,
+      data,
+      selected
+    } = this.props;
 
     return (
-      <React.Fragment>
-        <Grid container className={classes.root}>
-          <Grid item xs={12} sm={4}>
-            <Grid
-              container
-              justify="center"
-              alignItems="flex-end"
-              className={classes.group}
-            >
-              <VirtualStudent
-                bubbleText={bubbleText}
-                studentImg={this.props.studentImg}
-              />
-            </Grid>
-          </Grid>
-          <Grid item xs={12} sm={4}>
-            <Grid
-              container
-              justify="center"
-              alignItems="flex-start"
-              className={classes.shape}
+      <WithBlackboard
+        studentBubble="This is what I think."
+        studentImg={studentImg}
+        genderTeacherMale={genderTeacherMale}
+        teacherBubbleImage="images/teacher/bubble-answer.png"
+      >
+        <div
+          style={{
+            display: "flex",
+            height: "100%",
+            width: "100%",
+            flexDirection: "column",
+            overflow: "auto"
+          }}
+        >
+          {selected.map((exampleIndex, answerIndex) => (
+            <div
+              key={exampleIndex}
+              style={{
+                height: "25%",
+                width: "100%",
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center"
+              }}
             >
               <img
                 className={classes.imagePara}
-                src={this.props.data.src}
-                alt="data"
-                width="300"
-                height="300"
-                border="1px solid"
+                src={data[exampleIndex].src}
+                alt="example"
+                style={{ height: "100%", width: "auto" }}
               />
-            </Grid>
-          </Grid>
-          <Grid item xs={12} sm={4}>
-            <Grid
-              container
-              justify="center"
-              alignItems="flex-end"
-              className={classes.group}
-            >
-              {this.state.thinking ? (
-                <TeacherTeaching
-                  onClickBubble={this.handleClick}
-                  waitingForStudent
-                  genderTeacherMale={this.props.genderTeacherMale}
-                />
-              ) : (
-                <TeacherTeaching
-                  onClickBubble={this.handleClick}
-                  positiveAnswer={
-                    <FormattedMessage
-                      id="showExercise.positiveAnswer"
-                      defaultMessage="True"
-                    />
-                  }
-                  negativeAnswer={
-                    <FormattedMessage
-                      id="showExercise.negativeAnswer"
-                      defaultMessage="False"
-                    />
-                  }
-                  waitingForStudent={false}
-                  genderTeacherMale={this.props.genderTeacherMale}
-                />
-              )}
-            </Grid>
-          </Grid>
-        </Grid>
-      </React.Fragment>
+              <span style={{ color: "white" }}>
+                {this.state.studentAnswers[answerIndex]
+                  ? "This is a parallelogram"
+                  : "This is NOT a parallelogram"}
+              </span>
+              <Button
+                variant="contained"
+                style={{ position: "absolute", bottom: 0, right: 0 }}
+                onClick={this.handleClick}
+              >
+                OK
+              </Button>
+            </div>
+          ))}
+        </div>
+      </WithBlackboard>
     );
   }
 }
@@ -160,13 +111,13 @@ class ShowExercise extends React.Component {
 ShowExercise.propTypes = {
   classes: PropTypes.object.isRequired,
   getBackToMenu: PropTypes.func.isRequired,
-  data: PropTypes.object.isRequired,
+  data: PropTypes.array.isRequired,
   updateScore: PropTypes.func.isRequired,
   student: PropTypes.object.isRequired,
   recordExerciseActivity: PropTypes.func.isRequired,
   genderTeacherMale: PropTypes.bool.isRequired,
   studentImg: PropTypes.string.isRequired,
-  activityChosen: PropTypes.string.isRequired
+  selected: PropTypes.array.isRequired
 };
 
 export default withStyles(styles)(ShowExercise);

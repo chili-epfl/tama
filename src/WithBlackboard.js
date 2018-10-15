@@ -136,20 +136,22 @@ const Teacher = withStyles(styles)(
     return (
       <div className={classes.teacherContainer}>
         <div style={{ display: "flex", flexDirection: "row" }}>
-          <div
-            className={classes.teacherBubbleLeft}
-            onClick={() => onTeacherBubbleClick("left")}
-            onMouseEnter={() => onTeacherBubbleMouseEnter("left")}
-            onMouseLeave={() => onTeacherBubbleMouseLeave("left")}
-            style={styleMouseCursor ? { cursor: "pointer" } : {}}
-          >
-            <img
-              src={bubbleImageLeft || "images/teacher/bubble-answer.png"}
-              alt="bubble"
-              className={classes.teacherBubbleImage}
-            />
-            <div className={classes.teacherBubbleText}>{bubbleTextLeft}</div>
-          </div>
+          {bubbleTextLeft && (
+            <div
+              className={classes.teacherBubbleLeft}
+              onClick={() => onTeacherBubbleClick("left")}
+              onMouseEnter={() => onTeacherBubbleMouseEnter("left")}
+              onMouseLeave={() => onTeacherBubbleMouseLeave("left")}
+              style={styleMouseCursor ? { cursor: "pointer" } : {}}
+            >
+              <img
+                src={bubbleImageLeft || "images/teacher/bubble-answer.png"}
+                alt="bubble"
+                className={classes.teacherBubbleImage}
+              />
+              <div className={classes.teacherBubbleText}>{bubbleTextLeft}</div>
+            </div>
+          )}
           {bubbleTextRight && (
             <div
               className={classes.teacherBubbleRight}

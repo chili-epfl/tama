@@ -41,10 +41,10 @@ class FullMemory implements VirtualStudent {
       defaultMessage="Is it a parallelogram?"
     />
   );
-  questionExampleMammal =(
+  questionExampleMammal = (
     <FormattedMessage
       id="dumbStudent.questionExampleMammal"
-      defaultMessage = "Is it a mammal ?"
+      defaultMessage="Is it a mammal ?"
     />
   );
   thinkingAboutExercice = (
@@ -130,13 +130,14 @@ class FullMemory implements VirtualStudent {
   }
 
   // All necessary features should correspond to identify the shape as a parallelogram
-  answerParallelogram(shape: ShapeFeatures) {
+  answer(shape: ShapeFeatures) {
     return this.state.model(shape);
   }
 
   learn(isParallelogram: boolean, shape: ShapeFeatures) {
+    if (Math.random() < 0.3) return;
     this.memory.push([isParallelogram, shape]);
-    if (isParallelogram !== this.answerParallelogram(shape)) {
+    if (isParallelogram !== this.answer(shape)) {
       let minErrors = this.memory.length;
 
       const [model, features] =

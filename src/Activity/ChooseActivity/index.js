@@ -233,7 +233,6 @@ type PropsT = {
   hasShownRules: () => void,
   onClickExample: () => void,
   onClickExercise: () => void,
-  onClickLesson: () => void,
   onConfirmTestDialog: () => void
 };
 
@@ -267,11 +266,10 @@ class ChooseActivity extends React.Component<PropsT, StateT> {
   }
 
   handleButtonClick = key => {
-    const { onClickExample, onClickExercise, onClickLesson } = this.props;
+    const { onClickExample, onClickExercise } = this.props;
     [
       onClickExample,
       onClickExercise,
-      onClickLesson,
       () => this.setState({ openTestDialog: true })
     ][key]();
   };

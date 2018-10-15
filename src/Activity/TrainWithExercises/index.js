@@ -7,51 +7,53 @@ import ShowExercise from "./ShowExercise";
 import parallelogramData from "../ParallelogramData";
 import mammalsData from "../MammalsData";
 
+const exampleData = {
+  mammals: mammalsData,
+  parallelograms: parallelogramData
+};
+
 class TrainWithExercise extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      index: 0,
-      hasChosenExercise: false
+      selected: [],
+      hasChosenExercises: false
     };
     this.newActivityRef = this.props.sessionRef.child("activities").push();
   }
 
-  handleSelectExercise = index => {
-    this.setState({ hasChosenExercise: true, index });
+  handleSelectExercises = selected => {
+    this.setState({ hasChosenExercises: true, selected });
   };
 
-  recordExerciseActivity = (userAnswer, studentAnswer) => {
-    const image = {
-      mammals: mammalsData[this.state.index].src,
-      parallelograms: parallelogramData[this.state.index].src 
-    }[this.props.activityChosen]
-    this.newActivityRef.child("item").set(image);
+  recordExerciseActivity = studentAnswers => {
+    const { selected } = this.state;
+    const images = exampleData[this.props.activityChosen]
+      .filter((_, i) => selected.includes(i))
+      .map(x => x.src);
+
+    this.newActivityRef.child("items").set(images);
     this.newActivityRef.child("activity_type").set("exercise");
-    
     this.newActivityRef.child("knowledge").set(this.props.student.getState());
-    this.newActivityRef.child("student_answer").set(studentAnswer);
-    this.newActivityRef.child("user_answer").set(userAnswer);
+    this.newActivityRef.child("student_answers").set(studentAnswers);
     this.newActivityRef.child("time").set(new Date().getTime());
   };
 
   render() {
-    if (!this.state.hasChosenExercise) {
+    if (!this.state.hasChosenExercises) {
       return (
         <ChooseExercise
-          onSelectExercise={this.handleSelectExercise}
+          onSelectExercises={this.handleSelectExercises}
           onNavigationBackToMenu={this.props.getBackToMenu}
-          activityChosen = {this.props.activityChosen}
+          activityChosen={this.props.activityChosen}
         />
       );
     }
-    const data = {
-      mammals: mammalsData[this.state.index],
-      parallelograms: parallelogramData[this.state.index] 
-    }[this.props.activityChosen]
+    const data = exampleData[this.props.activityChosen];
     return (
       <ShowExercise
         data={data}
+        selected={this.state.selected}
         getBackToMenu={this.props.getBackToMenu}
         updateScore={this.props.updateScore}
         student={this.props.student}

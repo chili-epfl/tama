@@ -119,7 +119,7 @@ class App extends React.Component<PropsT, StateT> {
       alreadyShownRules: false,
       openSnackbar: false,
       displayResultTest: false,
-      activityChosen: "",
+      activityChosen: ""
     };
     this.initializeConstructorVars();
     addLocaleData([...localeEn, ...localeFr]);
@@ -183,7 +183,7 @@ class App extends React.Component<PropsT, StateT> {
       this.setState({ scoreDisplayed: this.state.score.toString() });
     }, 2000);
   };
-  gameStartButtons = (view , activityChosen, isRegistered, userId) =>{
+  gameStartButtons = (view, activityChosen, isRegistered, userId) => {
     this.setState({
       hasBeenWelcomed: true,
       view,
@@ -193,7 +193,7 @@ class App extends React.Component<PropsT, StateT> {
     if (isRegistered && userId) {
       this.recordNewSession(userId);
     }
-  }
+  };
 
   runTest = () => {
     const questions = [...parallelogramData]
@@ -204,9 +204,7 @@ class App extends React.Component<PropsT, StateT> {
         shapeFeatures: x.shapeFeatures,
         valid: x.valid
       }));
-    const answers = questions.map(q =>
-      this.student.answerParallelogram(q.shapeFeatures)
-    );
+    const answers = questions.map(q => this.student.answer(q.shapeFeatures));
     const grade = questions.reduce(
       (g, q, i) => (q.valid === answers[i] ? g + 1 : g),
       0
@@ -286,22 +284,32 @@ class App extends React.Component<PropsT, StateT> {
       displayed = (
         <GameStart
           onClickStart={() => {
-            this.gameStartButtons("chooseActivity", "parallelograms", isRegistered, userId)
+            this.gameStartButtons(
+              "chooseActivity",
+              "parallelograms",
+              isRegistered,
+              userId
+            );
           }}
           onClickStartMamiferes={() => {
-            this.gameStartButtons("chooseActivity", "mammals",isRegistered, userId)
+            this.gameStartButtons(
+              "chooseActivity",
+              "mammals",
+              isRegistered,
+              userId
+            );
           }}
           onClickStartAdverbs={() => {
-            this.gameStartButtons("adverbs", isRegistered, userId)
+            this.gameStartButtons("adverbs", isRegistered, userId);
           }}
           studentName={this.studentName}
           studentImg={this.studentBackpackImg}
           genderTeacherMale={this.genderTeacherMale}
         />
       );
-    } else if( view === "adverbs"){
-      displayed = <Adverbs />; 
-    }else if (view === "leaderboard") {
+    } else if (view === "adverbs") {
+      displayed = <Adverbs />;
+    } else if (view === "leaderboard") {
       displayed = <Leaderboard />;
     } else if (view === "stats") {
       displayed = <Stats />;
@@ -357,7 +365,7 @@ class App extends React.Component<PropsT, StateT> {
             genderTeacherMale={this.genderTeacherMale}
           />
         );
-      }else if (this.state.hasChosenActivityType) {
+      } else if (this.state.hasChosenActivityType) {
         if (hasChosenActivity === "example") {
           displayed = (
             <TrainWithExample
@@ -369,7 +377,7 @@ class App extends React.Component<PropsT, StateT> {
               sessionRef={this.sessionRef}
               genderTeacherMale={this.genderTeacherMale}
               studentImg={this.studentLearningImg}
-              activityChosen = {this.state.activityChosen}
+              activityChosen={this.state.activityChosen}
             />
           );
         } else if (hasChosenActivity === "exercise") {
@@ -383,7 +391,7 @@ class App extends React.Component<PropsT, StateT> {
               sessionRef={this.sessionRef}
               genderTeacherMale={this.genderTeacherMale}
               studentImg={this.studentLearningImg}
-              activityChosen = {this.state.activityChosen}
+              activityChosen={this.state.activityChosen}
             />
           );
         } else if (hasChosenActivity === "lesson") {
@@ -396,7 +404,7 @@ class App extends React.Component<PropsT, StateT> {
               student={this.student}
               sessionRef={this.sessionRef}
               studentImg={this.studentLearningImg}
-              activityChosen = {this.state.activityChosen}
+              activityChosen={this.state.activityChosen}
             />
           );
         } else if (hasChosenActivity === "test") {
@@ -419,7 +427,7 @@ class App extends React.Component<PropsT, StateT> {
                 this.setState({ displayResultTest: true })
               }
               studentImg={this.studentLearningImg}
-              activityChosen = {this.state.activityChosen}
+              activityChosen={this.state.activityChosen}
             />
           );
         }

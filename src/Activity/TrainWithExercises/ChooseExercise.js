@@ -39,42 +39,65 @@ const styles = theme => ({
   }
 });
 
-const ChooseExercise = ({
-  onNavigationBackToMenu,
-  onSelectExercise,
-  classes,
-  activityChosen
-}) => (
-  <div className={classes.root}>
-    <div className={classes.header}>
-      <IconButton
-        className={classes.button}
-        onClick={onNavigationBackToMenu}
-        color="inherit"
-      >
-        <BackNavigation />
-      </IconButton>
-      <Typography variant="headline" className={classes.title}>
-        <FormattedMessage
-          id="chooseExercise.statement"
-          defaultMessage="Choose a shape for the exercise"
-        />
-      </Typography>
-    </div>
-    <div className={classes.gallery}>
-      <Gallery
-        images={activityChosen === "mammals" ? mammalsData : parallelogramData}
-        onClickThumbnail={onSelectExercise}
-        enableImageSelection={false}
-        margin={0}
-      />
-    </div>
-  </div>
-);
+const data = {
+  mammals: mammalsData,
+  parallelograms: parallelogramData
+};
+
+class ChooseExercise extends React.Component<*, *> {
+  state = { selected: [] };
+
+  handleSelect = e => {
+    const exampleIndex = e;
+    const { selected } = this.state;
+    if (selected.includes(exampleIndex)) {
+      this.setState({ selected: selected.filter(x => x !== exampleIndex) });
+    } else if (selected.length < 4) {
+      this.setState({ selected: [...selected, exampleIndex] });
+    } else {
+      this.props.onSelectExercises([...selected, exampleIndex]);
+    }
+  };
+
+  render() {
+    const { onNavigationBackToMenu, classes, activityChosen } = this.props;
+    const { selected } = this.state;
+    return (
+      <div className={classes.root}>
+        <div className={classes.header}>
+          <IconButton
+            className={classes.button}
+            onClick={onNavigationBackToMenu}
+            color="inherit"
+          >
+            <BackNavigation />
+          </IconButton>
+          <Typography variant="headline" className={classes.title}>
+            <FormattedMessage
+              id="chooseExercise.statement"
+              defaultMessage="Choose a shape for the exercise"
+            />
+          </Typography>
+        </div>
+        <div className={classes.gallery}>
+          <Gallery
+            images={data[activityChosen].map((x, i) => ({
+              ...x,
+              isSelected: selected.includes(i)
+            }))}
+            onClickThumbnail={this.handleSelect}
+            enableImageSelection={false}
+            margin={0}
+          />
+        </div>
+      </div>
+    );
+  }
+}
 
 ChooseExercise.propTypes = {
   classes: PropTypes.object.isRequired,
-  onSelectExercise: PropTypes.func.isRequired,
+  onSelectExercises: PropTypes.func.isRequired,
   onNavigationBackToMenu: PropTypes.func.isRequired,
   activityChosen: PropTypes.string.isRequired
 };
