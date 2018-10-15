@@ -275,13 +275,10 @@ class ChooseActivity extends React.Component<PropsT, StateT> {
   };
 
   render() {
-    const { classes, sessionRef, genderTeacherMale, studentImg } = this.props;
+    const { classes, genderTeacherMale, studentImg } = this.props;
     const { teacherText, teacherBubbleImage, hasChosen } = this.state;
     return (
       <div className={classes.root}>
-        <div className={classes.sessionTimeline}>
-          <SessionTimeline sessionRef={sessionRef} />
-        </div>
         <WithBlackboard
           studentBubble={
             <FormattedMessage

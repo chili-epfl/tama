@@ -95,7 +95,12 @@ class ShowExercise extends React.Component {
               </span>
               <Button
                 variant="contained"
-                style={{ position: "absolute", bottom: 0, right: 0 }}
+                style={{
+                  position: "absolute",
+                  bottom: 0,
+                  right: 30,
+                  zIndex: 99
+                }}
                 onClick={this.handleClick}
               >
                 OK
