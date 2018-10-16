@@ -16,6 +16,8 @@
   "chooseActivity.takeTest": "Passer le test",
   "chooseActivity.takeTestTeacherText": "C'est l'heure de passer le test !",
   "chooseExample.statement": "Choisissez une forme à montrer",
+  "chooseExample.statementMammal": "Choisissez une image à montrer",
+  "chooseExample.statementAdverb": "Choisissez une phrase à montrer",
   "chooseExercise.statement": "Choisissez une forme pour l'exercice",
   "chooseLesson.statement": "Choisissez une leçon à donner",
   "dumbStudent.feedbackLessonAlreadyKnow": "Je le savais déjà",

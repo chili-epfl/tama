@@ -16,6 +16,8 @@
   "chooseActivity.takeTest": "Take the test",
   "chooseActivity.takeTestTeacherText": "It's time for you to take the test!",
   "chooseExample.statement": "Choose a shape to show",
+  "chooseExample.statementMammal": "Choose an image to show",
+  "chooseExample.statementAdverb": "Choose a sentence to show",
   "chooseExercise.statement": "Choose a shape for the exercise",
   "chooseLesson.statement": "Choose a lesson to give",
   "dumbStudent.feedbackLessonAlreadyKnow": "I already know that",
