@@ -11,7 +11,8 @@ const lesson = [
       />
     ),
     shapeFeatures: {
-      hasFourEdges: true
+      isVertebrate: true,
+      isInvertebrate:false
     }
   },
   {
@@ -22,9 +23,10 @@ const lesson = [
       />
     ),
     shapeFeatures: {
-      hasEveryPairOppositeEdgesParallel: true
+      giveBirth: true,
+      layEggs: false
     }
-  },
+  }, 
   {
     title: (
       <FormattedMessage
@@ -33,7 +35,7 @@ const lesson = [
       />
     ),
     shapeFeatures: {
-      hasSameLengthEveryPairOppositeEdges: true
+      isWarmBlooded: true
     }
   },
   {
@@ -44,7 +46,8 @@ const lesson = [
       />
     ),
     shapeFeatures: {
-      hasSameLengthEdges: false
+      hasFurOrHair: true,
+      isABird: false
     }
   }
 ];

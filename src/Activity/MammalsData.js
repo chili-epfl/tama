@@ -23,7 +23,9 @@ const mammalsData = [
       isAquatic: false,
       layEggs: false,
       giveBirth: true,
-      hasWings: false
+      hasWings: false,
+      hasFurOrHair: true,
+      isWarmBlooded:true
     }
   },
   {
@@ -44,7 +46,9 @@ const mammalsData = [
       isAquatic: true,
       layEggs: true,
       giveBirth: false,
-      hasWings: false
+      hasWings: false,
+      hasFurOrHair: false,
+      isWarmBlooded:false
     }
   },
   {
@@ -65,7 +69,9 @@ const mammalsData = [
       isAquatic: true,
       layEggs: true,
       giveBirth: false,
-      hasWings: false
+      hasWings: false,
+      hasFurOrHair: false,
+      isWarmBlooded:false
     }
   },
   {
@@ -86,7 +92,9 @@ const mammalsData = [
       isAquatic: true,
       layEggs: false,
       giveBirth: true,
-      hasWings: false
+      hasWings: false,
+      hasFurOrHair: false,
+      isWarmBlooded:false
     }
   },
   {
@@ -107,7 +115,9 @@ const mammalsData = [
       isAquatic: false,
       layEggs: false,
       giveBirth: true,
-      hasWings: false
+      hasWings: false,
+      hasFurOrHair: true,
+      isWarmBlooded:true
     }
   },
   {
@@ -128,7 +138,9 @@ const mammalsData = [
       isAquatic: true,
       layEggs: false,
       giveBirth: true,
-      hasWings: false
+      hasWings: false,
+      hasFurOrHair: true,
+      isWarmBlooded:true
     }
   },
   {
@@ -149,7 +161,9 @@ const mammalsData = [
       isAquatic: false,
       layEggs: false,
       giveBirth: true,
-      hasWings: true
+      hasWings: true,
+      hasFurOrHair: true,
+      isWarmBlooded:true
     }
   },
   {
@@ -170,7 +184,9 @@ const mammalsData = [
       isAquatic: false,
       layEggs: true,
       giveBirth: false,
-      hasWings: true
+      hasWings: true,
+      hasFurOrHair: false,
+      isWarmBlooded:false
     }
   },
   {
@@ -191,7 +207,9 @@ const mammalsData = [
       isAquatic: false,
       layEggs: false,
       giveBirth: true,
-      hasWings: false
+      hasWings: false,
+      hasFurOrHair: true,
+      isWarmBlooded:true
     }
   },
   {
@@ -212,7 +230,9 @@ const mammalsData = [
       isAquatic: false,
       layEggs: false,
       giveBirth: true,
-      hasWings: false
+      hasWings: false,
+      hasFurOrHair: true,
+      isWarmBlooded:true
     }
   },
   {
@@ -233,7 +253,9 @@ const mammalsData = [
       isAquatic: true,
       layEggs: true,
       giveBirth: false,
-      hasWings: false
+      hasWings: false,
+      hasFurOrHair: false,
+      isWarmBlooded:false
     }
   },
   {
@@ -254,7 +276,9 @@ const mammalsData = [
       isAquatic: false,
       layEggs: false,
       giveBirth: true,
-      hasWings: false
+      hasWings: false,
+      hasFurOrHair: true,
+      isWarmBlooded:true
     }
   },
 ].sort(() => 0.5 - Math.random())
