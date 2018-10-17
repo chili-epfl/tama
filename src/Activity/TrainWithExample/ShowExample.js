@@ -65,14 +65,20 @@ class ShowExample extends React.Component {
               alignItems="flex-start"
               className={classes.shape}
             >
-              <img
-                className={classes.imagePara}
-                src={data.src}
-                alt="data"
-                width="300"
-                height="300"
-                border="1px solid"
-              />
+              {
+                this.props.activityChosen ==="adverbs" ?
+                <h1> {data.adverb} </h1>
+                :
+                              
+                <img
+                  className={classes.imagePara}
+                  src={data.src}
+                  alt="data"
+                  width="300"
+                  height="300"
+                  border="1px solid"
+                />
+              }
             </Grid>
           </Grid>
           <Grid item xs={12} sm={4}>

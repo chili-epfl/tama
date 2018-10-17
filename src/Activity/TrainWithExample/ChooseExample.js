@@ -7,11 +7,7 @@ import PropTypes from "prop-types";
 import Gallery from "react-grid-gallery";
 import IconButton from "@material-ui/core/IconButton";
 import BackNavigation from "@material-ui/icons/ArrowBack";
-import { List } from "@material-ui/core";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import Radio from "@material-ui/core/Radio";
-
+import AdverbsList from "../Utils/AdverbsList";
 
 import parallelogramData from "../ParallelogramData";
 import mammalsData from "../MammalsData";
@@ -43,70 +39,34 @@ const styles = theme => ({
   title: {
     display: "flex",
     alignItems: "center"
-  },
-  adverb: {
-    color: "red"
   }
 });
 
 
-
-const images = (activityChosen) => {
-  return {
+const topicData =  {
     mammals: mammalsData,
     parallelograms: parallelogramData,
     adverbs: adverbsData
-  }[activityChosen];
-}
+  };
 
-const formattedMessage = (activityChosen) => {
-  return{
-    adverbs: <FormattedMessage
-              id="chooseExample.statementAdverb"
-              defaultMessage="Choose an adverb to show"
-              />,
-    mammals: <FormattedMessage
-    id="chooseExample.statementMammal"
-    defaultMessage="Choose a mammal to show"
-  />,
-    parallelograms: <FormattedMessage
-                                id="chooseExample.statement"
-                                defaultMessage="Choose a shape to show"
-                              />
-  }[activityChosen]
-}
+const formattedMessage = {
+    adverbs: 
+      <FormattedMessage
+        id="chooseExample.statementAdverb"
+        defaultMessage="Choose an adverb to show"
+      />,
+    mammals: 
+      <FormattedMessage
+        id="chooseExample.statementMammal"
+        defaultMessage="Choose a mammal to show"
+      />,
+    parallelograms: 
+      <FormattedMessage
+        id="chooseExample.statement"
+        defaultMessage="Choose a shape to show"
+      />
+    };
 
-const gallery = (activityChosen, onSelectExample, classes) =>{
-  if (activityChosen === "adverbs"){
-    const adverbs = adverbsData;
-    return (<div>
-      <List>
-          {adverbs.map((value, index) => (
-            <ListItem
-              key={value.id}
-              dense={false}
-              button
-            >
-              <Radio checked={false} />
-              <ListItemText>
-                <span>{value.sentence1}</span>
-                <span className={classes.adverb}> {value.adverb} </span>
-                <span> {value.sentence2} </span>
-              </ListItemText>
-            </ListItem>
-          ))}
-        </List>
-    </div>);
-  }
-    return (<Gallery
-      images={images(activityChosen)}
-      onClickThumbnail={onSelectExample}
-      enableImageSelection={false}
-      margin={0}
-    />);
-  
-
-}
 
 const ChooseExample = ({
   activityChosen,
@@ -124,11 +84,23 @@ const ChooseExample = ({
         <BackNavigation />
       </IconButton>
       <Typography variant="headline" className={classes.title}>
-      {formattedMessage(activityChosen)}
+      {formattedMessage[activityChosen]}
       </Typography>
     </div>
     <div className={classes.gallery}>
-    {gallery(activityChosen,onSelectExample, classes)}
+    {activityChosen === "adverbs" ? 
+      <AdverbsList
+        adverbs={adverbsData}
+        onSelectExample = {onSelectExample}
+      />
+      :
+      <Gallery
+        images={topicData[activityChosen]}
+        onClickThumbnail={onSelectExample}
+        enableImageSelection={false}
+        margin={0}
+      />
+    }
     </div>
   </div>
 );

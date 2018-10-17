@@ -26,7 +26,7 @@ class TrainWithExample extends React.Component {
     const image = {
       mammals: mammalsData[this.state.index].src,
       parallelograms: parallelogramData[this.state.index].src,
-      adverbs: adverbsData[this.state.index].src 
+      adverbs: adverbsData[this.state.index].adverb 
     }[this.props.activityChosen]
     this.newActivityRef.child("item").set(image);
     this.newActivityRef.child("knowledge").set(this.props.student.getState());
