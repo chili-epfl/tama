@@ -205,7 +205,7 @@ class App extends React.Component<PropsT, StateT> {
         valid: x.valid
       }));
     const answers = questions.map(q =>
-      this.student.answerParallelogram(q.shapeFeatures)
+      this.student.answer(q.shapeFeatures)
     );
     const grade = questions.reduce(
       (g, q, i) => (q.valid === answers[i] ? g + 1 : g),
