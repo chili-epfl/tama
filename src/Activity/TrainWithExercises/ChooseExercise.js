@@ -63,7 +63,7 @@ const ChooseExercise = ({
     </div>
     <div className={classes.gallery}>
       <Gallery
-        images={activityChosen === "mammals"? mammalsData   : parallelogramData}
+        images={activityChosen === "mammals" ? mammalsData : parallelogramData}
         onClickThumbnail={onSelectExercise}
         enableImageSelection={false}
         margin={0}
@@ -76,7 +76,7 @@ ChooseExercise.propTypes = {
   classes: PropTypes.object.isRequired,
   onSelectExercise: PropTypes.func.isRequired,
   onNavigationBackToMenu: PropTypes.func.isRequired,
-  activityChose: PropTypes.string.isRequired
+  activityChosen: PropTypes.string.isRequired
 };
 
 export default withStyles(styles)(ChooseExercise);
