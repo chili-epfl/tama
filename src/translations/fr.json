@@ -181,5 +181,17 @@
   "testShowQuestions.question":
     "Question {index} / {numberOfQuestions} : Est-ce un parallélogramme ?",
   "testShowQuestions.seeResult": "Voir le résultat",
-  "testShowQuestions.skipToResult": "Aller au résultat"
+  "testShowQuestions.skipToResult": "Aller au résultat",
+  "lessonAdverb.item1":"Un adverbe est une réponse à une question de manière",
+  "lessonAdverb.item2":"Un adverbe est une réponse à une question de lieu",
+  "lessonAdverb.item3":"Un adverbe est une réponse à une question de temps",
+  "lessonAdverb.item4":"Un adverbe peut-être une affirmation",
+  "lessonAdverb.item5":"Un adverbe peut-être une négation",
+  "lessonAdverb.item6":"Un adverbe peut se terminer par amment",
+  "lessonAdverb.item7":"Un adverbe peut se terminer par emment",
+  "lessonAdverb.item8":"Un adverbe peut se terminer par ement",
+  "lessonAdverb.item9":"Un adverbe peut se terminer par ment",
+  "lessonAdverb.item10":"Un adverbe affecte un verbe",
+  "lessonAdverb.item11":"Un adverbe affecte une proposition",
+  "lessonAdverb.item12":"Un adverbe affecte un adjective"
 }

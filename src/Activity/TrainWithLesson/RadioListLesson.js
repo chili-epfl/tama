@@ -6,6 +6,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Radio from "@material-ui/core/Radio";
 import PropTypes from "prop-types";
 
+import lessonAdverbs from "./LessonAdverbs";
 import lessonParallelograms from "./LessonParallelograms";
 import lessonMammals from "./LessonMammals";
 
@@ -17,7 +18,8 @@ class RadioListLesson extends React.Component {
   render() {
     const lesson = {
       mammals: lessonMammals,
-      parallelograms: lessonParallelograms
+      parallelograms: lessonParallelograms,
+      adverbs: lessonAdverbs
     }[this.props.activityChosen];
     return (
       <div>
