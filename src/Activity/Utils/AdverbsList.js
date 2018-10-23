@@ -14,7 +14,7 @@ const styles ={
 
 
 const AdverbsList = ({
-onSelectExample,
+onSelect,
 adverbs
 })=>(
     <div>
@@ -24,7 +24,7 @@ adverbs
               key={value.id}
               button
               dense={false}
-              onClick={() => onSelectExample(index)}
+              onClick={() => onSelect(index)}
             >
                 <Radio checked={false} />
                 <ListItemText>
@@ -40,7 +40,7 @@ adverbs
 
 
 AdverbsList.propTypes = {
-    onSelectExample: PropTypes.func.isRequired,
+    onSelect: PropTypes.func.isRequired,
     adverbs: PropTypes.array.isRequired
 };
 

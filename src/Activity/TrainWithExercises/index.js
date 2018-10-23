@@ -6,6 +6,7 @@ import ChooseExercise from "./ChooseExercise";
 import ShowExercise from "./ShowExercise";
 import parallelogramData from "../ParallelogramData";
 import mammalsData from "../MammalsData";
+import adverbsData from "../AdverbsData";
 
 class TrainWithExercise extends React.Component {
   constructor(props) {
@@ -24,7 +25,8 @@ class TrainWithExercise extends React.Component {
   recordExerciseActivity = (userAnswer, studentAnswer) => {
     const image = {
       mammals: mammalsData[this.state.index].src,
-      parallelograms: parallelogramData[this.state.index].src 
+      parallelograms: parallelogramData[this.state.index].src,
+      adverbs: adverbsData[this.state.index].adverb 
     }[this.props.activityChosen]
     this.newActivityRef.child("item").set(image);
     this.newActivityRef.child("activity_type").set("exercise");
@@ -47,7 +49,8 @@ class TrainWithExercise extends React.Component {
     }
     const data = {
       mammals: mammalsData[this.state.index],
-      parallelograms: parallelogramData[this.state.index] 
+      parallelograms: parallelogramData[this.state.index],
+      adverbs: adverbsData[this.state.index] 
     }[this.props.activityChosen]
     return (
       <ShowExercise

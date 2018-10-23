@@ -46,7 +46,6 @@ const styles = theme => ({
 const topicData =  {
     mammals: mammalsData,
     parallelograms: parallelogramData,
-    adverbs: adverbsData
   };
 
 const formattedMessage = {
@@ -91,7 +90,7 @@ const ChooseExample = ({
     {activityChosen === "adverbs" ? 
       <AdverbsList
         adverbs={adverbsData}
-        onSelectExample = {onSelectExample}
+        onSelect= {onSelectExample}
       />
       :
       <Gallery

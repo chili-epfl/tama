@@ -89,6 +89,19 @@ class DumbStudent implements VirtualStudent {
       defaultMessage="I don't think this is a mammal"
     />
   );
+  givePositiveAnswerAdverb = (
+    <FormattedMessage
+      id="dumbStudent.givePositiveAnswerAdverb"
+      defaultMessage="Mmm I think this is a Adverb"
+    />
+  );
+  giveNegativeAnswerAdverb = (
+    <FormattedMessage
+      id="dumbStudent.giveNegativeAnswerAdverb"
+      defaultMessage="I don't think this is a Adverb"
+    />
+  );
+
 
   state = {};
 
