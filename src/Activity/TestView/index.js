@@ -179,45 +179,6 @@ class TestStudent extends React.Component<PropsT, StateT> {
     clearInterval(this.interval);
   }
 
-  parallelogram(classes, qY, index, qN){
-    return (
-      <Grid item xs={9} className={classes.studentAnswers}>
-          <FormattedMessage
-            id="test.arepara"
-            defaultMessage="I think these ARE parallelograms:"
-          />
-          <QuestionsList classes={classes} questions={qY} index={index} />
-          <FormattedMessage
-            id="test.arenotpara"
-            defaultMessage="I think these ARE NOT parallelograms:"
-          />
-          <QuestionsList classes={classes} questions={qN} index={index} />
-      </Grid>
-    )
-  }
-  mammal(classes, qY, index, qN){
-    return (
-        <Grid item xs={9} className={classes.studentAnswers}>
-          <FormattedMessage
-            id="test.areMammal"
-            defaultMessage="I think these ARE mammals:"
-          />
-          <QuestionsList classes={classes} questions={qY} index={index} />
-          <FormattedMessage
-            id="test.arenotMammal"
-            defaultMessage="I think these ARE NOT mammals:"
-          />
-          <QuestionsList classes={classes} questions={qN} index={index} />
-        </Grid>
-    )
-  }
-  questionList(classes, qY, index, qN){
-    return {
-      mammals: this.mammal(classes, qY, index, qN),
-      parallelograms: this.parallelogram(classes, qY, index, qN)
-    }[this.props.activityChosen]
-  }
-
 
   render() {
     const { classes, test, studentImg, activityScore } = this.props;
@@ -250,7 +211,18 @@ class TestStudent extends React.Component<PropsT, StateT> {
             {scoreIndex} / {Math.min(10, index)}
           </div>
         </Grid>
-        {this.questionList(classes, qY, index, qN)}
+        <Grid item xs={9} className={classes.studentAnswers}>
+        <FormattedMessage
+          id= {{ mammals: "test.areMammal", parallelograms: "test.arepara" }[this.props.activityChosen]}
+          defaultMessage="I think these ARE mammals:"
+        />
+          <QuestionsList classes={classes} questions={qY} index={index} />
+          <FormattedMessage
+            id= {{ mammals: "test.arenotMammal", parallelograms: "test.arenotpara" }[this.props.activityChosen]}
+            defaultMessage="I think these ARE not mammals:"
+          />
+          <QuestionsList classes={classes} questions={qN} index={index} />
+        </Grid>
         <Grid item xs={6} className={classes.scoreBoard}>
           <ScoreBoard
             show={index}

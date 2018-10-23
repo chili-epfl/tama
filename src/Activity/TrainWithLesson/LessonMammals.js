@@ -26,11 +26,7 @@ const lesson = [
       giveBirth: true,
       layEggs: false
     }
-<<<<<<< HEAD
   },
-=======
-  }, 
->>>>>>> master
   {
     title: (
       <FormattedMessage
