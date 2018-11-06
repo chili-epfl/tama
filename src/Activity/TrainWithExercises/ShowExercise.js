@@ -30,7 +30,7 @@ class ShowExercise extends React.Component {
       studentAnswer: false
     };
   }
-  handleSudentAnswer = () => this.props.student.answer();
+  handleSudentAnswer = () => this.props.student.answer(this.props.data.shapeFeatures);
 
   componentDidMount() {
     this.props.updateScore();
@@ -45,10 +45,17 @@ class ShowExercise extends React.Component {
   handleClick = userAnswer => {
     this.props.recordExerciseActivity(userAnswer, this.state.studentAnswer);
     this.setState({ learning: true, userAnswer });
-    this.props.student.learn(
-      this.state.studentAnswer ? userAnswer : !userAnswer,
-      this.props.data.shapeFeatures
-    );
+    if (this.props.activityChosen==="mammals"&&this.props.data.valid){// We learn it only if it is Mammal
+      this.props.student.learnMammal(
+        true, 
+        this.props.data.shapeFeatures
+      );
+    }else{
+      this.props.student.learn(
+        this.state.studentAnswer ? userAnswer : !userAnswer,
+       this.props.data.shapeFeatures
+      );
+    }
     setTimeout(() => {
       this.props.getBackToMenu();
     }, 2000);

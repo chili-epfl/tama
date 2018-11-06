@@ -1,7 +1,9 @@
 // @flow
 
 import { VirtualStudent } from "./types";
-import DumbStudent from "./DumbStudent";
+// import MammalType from './mammalTypeAlgorithm'
+import Algorithm from "./newAlgorithm";
+// import DumbStudent from "./DumbStudent";
 // import NoMemory from "./NoMemory";
 // import WeightModel from "./WeightModel";
 // import FullMemory from "./FullMemory";
@@ -41,7 +43,7 @@ const getVirtualStudent = (name: string): VirtualStudent => {
   // }, Math.random());
 
   // return new RandModel(name);
-  return new DumbStudent(name);
+  return new Algorithm(name);
 };
 
 export default getVirtualStudent;

@@ -25,7 +25,13 @@ const mammalsData = [
       giveBirth: true,
       hasWings: false,
       hasFurOrHair: true,
-      isWarmBlooded:true
+      isWarmBlooded:true,
+      isGigantic: false,
+	    isAverageSized: true,
+	    isCarnivore: false,
+	    isOmnivore: true,
+	    isHerbivore: false,
+	    isFrugivore: true
     }
   },
   {
@@ -48,7 +54,13 @@ const mammalsData = [
       giveBirth: false,
       hasWings: false,
       hasFurOrHair: false,
-      isWarmBlooded:false
+      isWarmBlooded:false,
+      isGigantic: false,
+	    isAverageSized: true,
+	    isCarnivore: false,
+	    isOmnivore: false,
+	    isHerbivore: true,
+	    isFrugivore: false
     }
   },
   {
@@ -71,7 +83,13 @@ const mammalsData = [
       giveBirth: false,
       hasWings: false,
       hasFurOrHair: false,
-      isWarmBlooded:false
+      isWarmBlooded:false,
+      isGigantic: false,
+	    isAverageSized: true,
+	    isCarnivore: true,
+	    isOmnivore: false,
+	    isHerbivore: false,
+	    isFrugivore: false
     }
   },
   {
@@ -94,7 +112,13 @@ const mammalsData = [
       giveBirth: true,
       hasWings: false,
       hasFurOrHair: false,
-      isWarmBlooded:false
+      isWarmBlooded:false,
+      isGigantic: true,
+	    isAverageSized: false,
+	    isCarnivore: true,
+	    isOmnivore: false,
+	    isHerbivore: false,
+	    isFrugivore: false
     }
   },
   {
@@ -117,7 +141,13 @@ const mammalsData = [
       giveBirth: true,
       hasWings: false,
       hasFurOrHair: true,
-      isWarmBlooded:true
+      isWarmBlooded:true,
+      isGigantic: true,
+	    isAverageSized: false,
+	    isCarnivore: true,
+	    isOmnivore: false,
+	    isHerbivore: false,
+	    isFrugivore: false
     }
   },
   {
@@ -140,7 +170,13 @@ const mammalsData = [
       giveBirth: true,
       hasWings: false,
       hasFurOrHair: true,
-      isWarmBlooded:true
+      isWarmBlooded:true,
+      isGigantic: true,
+	    isAverageSized: false,
+	    isCarnivore: true,
+	    isOmnivore: false,
+	    isHerbivore: false,
+	    isFrugivore: false
     }
   },
   {
@@ -163,7 +199,13 @@ const mammalsData = [
       giveBirth: true,
       hasWings: true,
       hasFurOrHair: true,
-      isWarmBlooded:true
+      isWarmBlooded:true,
+      isGigantic: false,
+	    isAverageSized: true,
+	    isCarnivore: true,
+	    isOmnivore: false,
+	    isHerbivore: false,
+	    isFrugivore: false
     }
   },
   {
@@ -181,12 +223,18 @@ const mammalsData = [
       isInvertebrate: false,
       isVertebrate: true,
       isTerrestrial: true,
-      isAquatic: false,
+      isAquatic: true,
       layEggs: true,
       giveBirth: false,
       hasWings: true,
       hasFurOrHair: false,
-      isWarmBlooded:false
+      isWarmBlooded:false,
+      isGigantic: false,
+	    isAverageSized: true,
+	    isCarnivore: false,
+	    isOmnivore: true,
+	    isHerbivore: false,
+	    isFrugivore: false
     }
   },
   {
@@ -209,7 +257,13 @@ const mammalsData = [
       giveBirth: true,
       hasWings: false,
       hasFurOrHair: true,
-      isWarmBlooded:true
+      isWarmBlooded:true,
+      isGigantic: false,
+	    isAverageSized: true,
+	    isCarnivore: false,
+	    isOmnivore: false,
+	    isHerbivore: true,
+	    isFrugivore: false
     }
   },
   {
@@ -232,7 +286,13 @@ const mammalsData = [
       giveBirth: true,
       hasWings: false,
       hasFurOrHair: true,
-      isWarmBlooded:true
+      isWarmBlooded:true,
+      isGigantic: false,
+	    isAverageSized: true,
+	    isCarnivore: true,
+	    isOmnivore: false,
+	    isHerbivore: false,
+	    isFrugivore: false
     }
   },
   {
@@ -253,9 +313,15 @@ const mammalsData = [
       isAquatic: true,
       layEggs: true,
       giveBirth: false,
-      hasWings: false,
+      hasWings: true,
       hasFurOrHair: false,
-      isWarmBlooded:false
+      isWarmBlooded:true,
+      isGigantic: false,
+	    isAverageSized: true,
+	    isCarnivore: true,
+	    isOmnivore: false,
+	    isHerbivore: false,
+	    isFrugivore: false
     }
   },
   {
@@ -278,7 +344,332 @@ const mammalsData = [
       giveBirth: true,
       hasWings: false,
       hasFurOrHair: true,
-      isWarmBlooded:true
+      isWarmBlooded:true,
+      isGigantic: true,
+	    isAverageSized: false,
+	    isCarnivore: false,
+	    isOmnivore: false,
+	    isHerbivore: true,
+	    isFrugivore: false
+    }
+  },
+  {
+    src: "images/examplesMammals/13.jpeg",
+    thumbnail: "images/examplesMammals/13.jpeg",
+    itemType: "mammal",
+    valid: true,
+    shapeFeatures: {
+      isWild: true,
+      isDomisticated: false,
+      isABird: false,
+      isAFish: false,
+      isAReptile: false,
+      isAnAmphibian: false,
+      isInvertebrate: false,
+      isVertebrate: true,
+      isTerrestrial: true,
+      isAquatic: true,
+      layEggs: false,
+      giveBirth: true,
+      hasWings: false,
+      hasFurOrHair: true,
+      isWarmBlooded:true,
+	    isGigantic: true,
+	    isAverageSized: false,
+	    isCarnivore: true,
+	    isOmnivore: false,
+	    isHerbivore: false,
+	    isFrugivore: false
+    }
+  },
+  {
+    src: "images/examplesMammals/14.jpeg",
+    thumbnail: "images/examplesMammals/14.jpeg",
+    itemType: "mammal",
+    valid: true,
+    shapeFeatures: {
+      isWild: true,
+      isDomisticated: false,
+      isABird: false,
+      isAFish: false,
+      isAReptile: false,
+      isAnAmphibian: false,
+      isInvertebrate: false,
+      isVertebrate: true,
+      isTerrestrial: true,
+      isAquatic: true,
+      layEggs: false,
+      giveBirth: true,
+      hasWings: false,
+      hasFurOrHair: true,
+      isWarmBlooded:true,
+	    isGigantic: true,
+	    isAverageSized: false,
+	    isCarnivore: true,
+	    isOmnivore: false,
+	    isHerbivore: false,
+	    isFrugivore: false
+    }
+  },
+  {
+    src: "images/examplesMammals/15.jpeg",
+    thumbnail: "images/examplesMammals/15.jpeg",
+    itemType: "mammal",
+    valid: true,
+    shapeFeatures: {
+      isWild: true,
+      isDomisticated: false,
+      isABird: false,
+      isAFish: false,
+      isAReptile: false,
+      isAnAmphibian: false,
+      isInvertebrate: false,
+      isVertebrate: true,
+      isTerrestrial: false,
+      isAquatic: true,
+      layEggs: false,
+      giveBirth: true,
+      hasWings: false,
+      hasFurOrHair: true,
+      isWarmBlooded:true,
+	    isGigantic: true,
+	    isAverageSized: false,
+	    isCarnivore: false,
+	    isOmnivore: false,
+	    isHerbivore: true,
+	    isFrugivore: false
+    }
+  },
+  {
+    src: "images/examplesMammals/16.jpeg",
+    thumbnail: "images/examplesMammals/16.jpeg",
+    itemType: "mammal",
+    valid: true,
+    shapeFeatures: {
+      isWild: true,
+      isDomisticated: false,
+      isABird: false,
+      isAFish: false,
+      isAReptile: false,
+      isAnAmphibian: false,
+      isInvertebrate: false,
+      isVertebrate: true,
+      isTerrestrial: true,
+      isAquatic: true,
+      layEggs: false,
+      giveBirth: true,
+      hasWings: false,
+      hasFurOrHair: true,
+      isWarmBlooded:true,
+	    isGigantic: true,
+	    isAverageSized: false,
+	    isCarnivore: false,
+	    isOmnivore: false,
+	    isHerbivore: true,
+	    isFrugivore: false
+    }
+  },
+  {
+    src: "images/examplesMammals/17.jpeg",
+    thumbnail: "images/examplesMammals/17.jpeg",
+    itemType: "not a mammal",
+    valid: false,
+    shapeFeatures: {
+      isWild: true,
+      isDomisticated: false,
+      isABird: false,
+      isAFish: false,
+      isAReptile: false,
+      isAnAmphibian: false,
+      isInvertebrate: false,
+      isVertebrate: false,
+      isTerrestrial: false,
+      isAquatic: true,
+      layEggs: true,
+      giveBirth: false,
+      hasWings: false,
+      hasFurOrHair: false,
+      isWarmBlooded:false,
+	    isGigantic: false,
+	    isAverageSized: true,
+	    isCarnivore: true,
+	    isOmnivore: false,
+	    isHerbivore: false,
+	    isFrugivore: false
+    }
+  },
+  {
+    src: "images/examplesMammals/18.jpeg",
+    thumbnail: "images/examplesMammals/18.jpeg",
+    itemType: "not a mammal",
+    valid: false,
+    shapeFeatures: {
+      isWild: true,
+      isDomisticated: false,
+      isABird: false,
+      isAFish: true,
+      isAReptile: false,
+      isAnAmphibian: false,
+      isInvertebrate: false,
+      isVertebrate: true,
+      isTerrestrial: false,
+      isAquatic: true,
+      layEggs: true,
+      giveBirth: false,
+      hasWings: false,
+      hasFurOrHair: false,
+      isWarmBlooded:false,
+	    isGigantic: false,
+	    isAverageSized: true,
+	    isCarnivore: false,
+	    isOmnivore: false,
+	    isHerbivore: true,
+	    isFrugivore: false
+    }
+  },
+  {
+    src: "images/examplesMammals/19.jpeg",
+    thumbnail: "images/examplesMammals/19.jpeg",
+    itemType: "not a mammal",
+    valid: false,
+    shapeFeatures: {
+      isWild: true,
+      isDomisticated: false,
+      isABird: false,
+      isAFish: true,
+      isAReptile: false,
+      isAnAmphibian: false,
+      isInvertebrate: false,
+      isVertebrate: true,
+      isTerrestrial: false,
+      isAquatic: true,
+      layEggs: true,
+      giveBirth: false,
+      hasWings: false,
+      hasFurOrHair: false,
+      isWarmBlooded:false,
+	    isGigantic: false,
+	    isAverageSized: true,
+	    isCarnivore: true,
+	    isOmnivore: false,
+	    isHerbivore: false,
+	    isFrugivore: false
+    }
+  },
+  {
+    src: "images/examplesMammals/20.jpeg",
+    thumbnail: "images/examplesMammals/20.jpeg",
+    itemType: "mammal",
+    valid: true,
+    shapeFeatures: {
+      isWild: true,
+      isDomisticated: false,
+      isABird: false,
+      isAFish: false,
+      isAReptile: false,
+      isAnAmphibian: false,
+      isInvertebrate: false,
+      isVertebrate: true,
+      isTerrestrial: true,
+      isAquatic: false,
+      layEggs: false,
+      giveBirth: true,
+      hasWings: false,
+      hasFurOrHair: true,
+      isWarmBlooded:true,
+	    isGigantic: true,
+	    isAverageSized: false,
+	    isCarnivore: false,
+	    isOmnivore: false,
+	    isHerbivore: true,
+	    isFrugivore: false
+    }
+  },
+  {
+    src: "images/examplesMammals/21.jpeg",
+    thumbnail: "images/examplesMammals/21.jpeg",
+    itemType: "not a mammal",
+    valid: false,
+    shapeFeatures: {
+      isWild: true,
+      isDomisticated: false,
+      isABird: false,
+      isAFish: false,
+      isAReptile: true,
+      isAnAmphibian: false,
+      isInvertebrate: false,
+      isVertebrate: true,
+      isTerrestrial: true,
+      isAquatic: true,
+      layEggs: true,
+      giveBirth: false,
+      hasWings: false,
+      hasFurOrHair: false,
+      isWarmBlooded:true,
+	    isGigantic: true,
+	    isAverageSized: false,
+	    isCarnivore: true,
+	    isOmnivore: false,
+	    isHerbivore: false,
+	    isFrugivore: false
+    }
+  },
+  {
+    src: "images/examplesMammals/22.jpeg",
+    thumbnail: "images/examplesMammals/22.jpeg",
+    itemType: "not a mammal",
+    valid: false,
+    shapeFeatures: {
+      isWild: true,
+      isDomisticated: false,
+      isABird: false,
+      isAFish: false,
+      isAReptile: true,
+      isAnAmphibian: false,
+      isInvertebrate: false,
+      isVertebrate: true,
+      isTerrestrial: true,
+      isAquatic: false,
+      layEggs: true,
+      giveBirth: false,
+      hasWings: false,
+      hasFurOrHair: false,
+      isWarmBlooded:true,
+	    isGigantic: false,
+	    isAverageSized: true,
+	    isCarnivore: true,
+	    isOmnivore: false,
+	    isHerbivore: false,
+	    isFrugivore: false
+    }
+  },
+  {
+    src: "images/examplesMammals/23.jpeg",
+    thumbnail: "images/examplesMammals/23.jpeg",
+    itemType: "not a mammal",
+    valid: false,
+    shapeFeatures: {
+      isWild: true,
+      isDomisticated: false,
+      isABird: false,
+      isAFish: false,
+      isAReptile: true,
+      isAnAmphibian: false,
+      isInvertebrate: false,
+      isVertebrate: true,
+      isTerrestrial: true,
+      isAquatic: false,
+      layEggs: true,
+      giveBirth: false,
+      hasWings: false,
+      hasFurOrHair: false,
+      isWarmBlooded:true,
+	    isGigantic: false,
+	    iisAverageSized: true,
+	    isCarnivore: true,
+	    isOmnivore: false,
+	    isHerbivore: false,
+	    isFrugivore: false
     }
   },
 ].sort(() => 0.5 - Math.random())
