@@ -131,7 +131,7 @@ class Algorithm implements VirtualStudent {
             count++;// counting number of features that fall into the first half of the sorted array
         }
     });
-    if (count > Object.keys(shapeFeatures).length / 5){
+    if (count > Object.keys(shapeFeatures).length / 6){
         return true;// if the count is bigger than the 5th of the features then it is a mammal
     }
     return false;
