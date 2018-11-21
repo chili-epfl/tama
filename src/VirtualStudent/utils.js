@@ -2,11 +2,11 @@
 
 import { VirtualStudent } from "./types";
 // import MammalType from './mammalTypeAlgorithm'
-import Algorithm from "./newAlgorithm";
+// import Algorithm from "./newAlgorithm";
 // import DumbStudent from "./DumbStudent";
 // import NoMemory from "./NoMemory";
 // import WeightModel from "./WeightModel";
-// import FullMemory from "./FullMemory";
+import FullMemory from "./FullMemory";
 // import FixedMemory from "./FixedMemory";
 
 export const featureList = [
@@ -43,7 +43,7 @@ const getVirtualStudent = (name: string): VirtualStudent => {
   // }, Math.random());
 
   // return new RandModel(name);
-  return new Algorithm(name);
+  return new FullMemory(name);
 };
 
 export default getVirtualStudent;
