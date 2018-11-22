@@ -158,5 +158,11 @@
   "testShowQuestions.question":
     "Question {index} / {numberOfQuestions}: Is it a parallelogram?",
   "testShowQuestions.seeResult": "See result",
-  "testShowQuestions.skipToResult": "Skip to result"
+  "testShowQuestions.skipToResult": "Skip to result",
+  "test.arepara": "I think these ARE parallelograms",
+  "test.areMammal":"I think these ARE mammals", 
+  "test.areAdverbs":"I think these ARE adverbs", 
+  "test.arenotpara": "I think these ARE not parallelograms",
+  "test.arenotMammal": "I think these ARE not mammals",
+  "test.arenotAdverbs": "I think these ARE not adverbs"
 }
