@@ -30,6 +30,7 @@ import Leaderboard, { updateLeaderboard } from "./Leaderboard";
 import nameData from "./NameData";
 import Stats from "./Statistics";
 import NotEnoughPointsSnackbar from "./NotEnoughPointsSnackbar";
+import mammalsData from "./Activity/MammalsData";
 
 const theme = createMuiTheme({
   palette: {
@@ -86,7 +87,8 @@ type StateT = {
   test: Object,
   alreadyShownRules: boolean,
   openSnackbar: boolean,
-  displayResultTest: boolean
+  displayResultTest: boolean,
+  activityChosen: string
 };
 
 class App extends React.Component<PropsT, StateT> {
@@ -196,7 +198,10 @@ class App extends React.Component<PropsT, StateT> {
   }
 
   runTest = () => {
-    const questions = [...parallelogramData]
+    const questions = {
+      mammals: [...mammalsData],
+      parallelograms: [...parallelogramData]
+    }[this.state.activityChosen]
       .sort(() => 0.5 - Math.random())
       .slice(0, 10)
       .map(x => ({

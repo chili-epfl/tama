@@ -147,6 +147,7 @@ type PropsT = {
   test: Object,
   classes: Object,
   studentImg: string,
+  activityChosen: string
 };
 
 type StateT = {
@@ -177,6 +178,7 @@ class TestStudent extends React.Component<PropsT, StateT> {
   componentWillUnmount() {
     clearInterval(this.interval);
   }
+
 
   render() {
     const { classes, test, studentImg, activityScore } = this.props;
@@ -210,14 +212,14 @@ class TestStudent extends React.Component<PropsT, StateT> {
           </div>
         </Grid>
         <Grid item xs={9} className={classes.studentAnswers}>
-          <FormattedMessage
-            id="test.arepara"
-            defaultMessage="I think these ARE parallelograms:"
-          />
+        <FormattedMessage
+          id= {{ mammals: "test.areMammal", parallelograms: "test.arepara" }[this.props.activityChosen]}
+          defaultMessage="I think these ARE mammals:"
+        />
           <QuestionsList classes={classes} questions={qY} index={index} />
           <FormattedMessage
-            id="test.arenotpara"
-            defaultMessage="I think these ARE NOT parallelograms:"
+            id= {{ mammals: "test.arenotMammal", parallelograms: "test.arenotpara" }[this.props.activityChosen]}
+            defaultMessage="I think these ARE not mammals:"
           />
           <QuestionsList classes={classes} questions={qN} index={index} />
         </Grid>

@@ -26,7 +26,7 @@ const lesson = [
       giveBirth: true,
       layEggs: false
     }
-  }, 
+  },
   {
     title: (
       <FormattedMessage
