@@ -15,9 +15,9 @@ class TrainWithLesson extends React.Component {
     this.state = {
       index: -1,
       hasChosenLesson: false,
-      lesson:{
+      lesson: {
         mammals: lessonMammals,
-        parallelograms: lessonParallelograms, 
+        parallelograms: lessonParallelograms,
         adverbs: lessonAdverbs
       }[this.props.activityChosen]
     };
@@ -34,7 +34,11 @@ class TrainWithLesson extends React.Component {
     this.newActivityRef.child("knowledge").set(this.props.student.getState());
     this.newActivityRef
       .child("item")
-      .set(intl.formatMessage({ id: this.state.lesson[this.state.index].title.props.id }));
+      .set(
+        intl.formatMessage({
+          id: this.state.lesson[this.state.index].title.props.id
+        })
+      );
     this.newActivityRef.child("time").set(new Date().getTime());
     this.newActivityRef.child("student_already_know").set(studentAlreadyKnow);
   };
