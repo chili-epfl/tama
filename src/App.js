@@ -85,7 +85,8 @@ type StateT = {
   test: Object,
   alreadyShownRules: boolean,
   openSnackbar: boolean,
-  displayResultTest: boolean
+  displayResultTest: boolean,
+  activityChosen: string,
 };
 
 class App extends React.Component<PropsT, StateT> {
