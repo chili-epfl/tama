@@ -30,6 +30,7 @@ import nameData from "./NameData";
 import Stats from "./Statistics";
 import NotEnoughPointsSnackbar from "./NotEnoughPointsSnackbar";
 import mammalsData from "./Activity/MammalsData";
+import adverbsData from "./Activity/AdverbsData";
 
 const theme = createMuiTheme({
   palette: {
@@ -198,13 +199,14 @@ class App extends React.Component<PropsT, StateT> {
 
   runTest = () => {
     const questions = {
+      adverbs:[...adverbsData],
       mammals: [...mammalsData],
       parallelograms: [...parallelogramData]
     }[this.state.activityChosen]
       .sort(() => 0.5 - Math.random())
       .slice(0, 10)
       .map(x => ({
-        src: x.src,
+        src: x.src || x.adverb,
         shapeFeatures: x.shapeFeatures,
         valid: x.valid
       }));

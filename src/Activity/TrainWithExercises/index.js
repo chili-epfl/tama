@@ -24,10 +24,15 @@ class TrainWithExercise extends React.Component {
 
   recordExerciseActivity = (userAnswer, studentAnswer) => {
     const image = {
-      mammals: mammalsData[this.state.index].src,
-      parallelograms: parallelogramData[this.state.index].src,
-      adverbs: adverbsData[this.state.index].adverb 
+      mammals: mammalsData[this.state.index],
+      parallelograms: parallelogramData[this.state.index],
+      adverbs: adverbsData[this.state.index] 
     }[this.props.activityChosen]
+    if(this.props.activityChosen === "adverbs"){
+      this.newActivityRef.child("item").set(image.adverb);
+    }else{
+      this.newActivityRef.child("item").set(image.src);
+    }
     this.newActivityRef.child("item").set(image);
     this.newActivityRef.child("activity_type").set("exercise");
     
