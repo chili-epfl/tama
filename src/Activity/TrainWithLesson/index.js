@@ -5,14 +5,19 @@ import { injectIntl } from "react-intl";
 
 import ChooseLesson from "./ChooseLesson";
 import ShowLesson from "./ShowLesson";
-import lesson from "./LessonParallelograms";
+import lessonParallelograms from "./LessonParallelograms";
+import lessonMammals from "./LessonMammals";
 
 class TrainWithLesson extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       index: -1,
-      hasChosenLesson: false
+      hasChosenLesson: false,
+      lesson: {
+        mammals: lessonMammals,
+        parallelograms: lessonParallelograms
+      }[this.props.activityChosen]
     };
     this.newActivityRef = this.props.sessionRef.child("activities").push();
   }
@@ -27,7 +32,7 @@ class TrainWithLesson extends React.Component {
     this.newActivityRef.child("knowledge").set(this.props.student.getState());
     this.newActivityRef
       .child("item")
-      .set(intl.formatMessage({ id: lesson[this.state.index].title.props.id }));
+      .set(intl.formatMessage({ id: this.state.lesson[this.state.index].title.props.id }));
     this.newActivityRef.child("time").set(new Date().getTime());
     this.newActivityRef.child("student_already_know").set(studentAlreadyKnow);
   };
@@ -44,7 +49,7 @@ class TrainWithLesson extends React.Component {
     }
     return (
       <ShowLesson
-        lesson={lesson[this.state.index]}
+        lesson={this.state.lesson[this.state.index]}
         getBackToMenu={this.props.getBackToMenu}
         updateScore={this.props.updateScore}
         student={this.props.student}
