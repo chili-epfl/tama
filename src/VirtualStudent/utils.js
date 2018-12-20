@@ -42,6 +42,6 @@ const getVirtualStudent = (name: string): VirtualStudent =>
   // }, Math.random());
 
   // return new RandModel(name);
-  new FullMemory(name);
+  new DumbStudent(name);
 
 export default getVirtualStudent;

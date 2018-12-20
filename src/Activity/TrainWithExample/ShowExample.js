@@ -45,7 +45,8 @@ class ShowExample extends React.Component {
       student,
       data,
       studentImg,
-      genderTeacherMale
+      genderTeacherMale,
+      activityChosen
     } = this.props;
     const {
       studentThinking,
@@ -53,6 +54,7 @@ class ShowExample extends React.Component {
       bubbleImageLeft,
       bubbleImageRight
     } = this.state;
+
     const studentBubbleText = this.textActivity(studentThinking, student);
     const teacherBubbleTextPositive = (
       <FormattedMessage id="showExample.positiveAnswer" defaultMessage="Yes" />
@@ -64,6 +66,7 @@ class ShowExample extends React.Component {
       teacherAnswer === "left"
         ? teacherBubbleTextPositive
         : teacherBubbleTextNegative;
+
     return (
       <WithBlackboard
         studentBubble={studentBubbleText}
@@ -107,12 +110,18 @@ class ShowExample extends React.Component {
             justifyContent: "center"
           }}
         >
-          <img
-            className={classes.imagePara}
-            src={data.src}
-            alt="example"
-            style={{ height: "100%", width: "auto" }}
-          />
+          {activityChosen === "adverbs" ? (
+            console.log(data) || (
+              <p>{`${data.sentence1} ${data.adverb} ${data.sentence2}`}</p>
+            )
+          ) : (
+            <img
+              className={classes.imagePara}
+              src={data.src}
+              alt="example"
+              style={{ height: "100%", width: "auto" }}
+            />
+          )}
         </div>
       </WithBlackboard>
     );

@@ -265,10 +265,11 @@ class ChooseActivity extends React.Component<PropsT, StateT> {
   }
 
   handleButtonClick = key => {
-    const { onClickExample, onClickExercise } = this.props;
+    const { onClickExample, onClickExercise, onClickLesson } = this.props;
     [
       onClickExample,
       onClickExercise,
+      onClickLesson,
       () => this.setState({ openTestDialog: true })
     ][key]();
   };

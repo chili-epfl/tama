@@ -295,26 +295,10 @@ class App extends React.Component<PropsT, StateT> {
     } else if (view === "game_start") {
       displayed = (
         <GameStart
-          onClickStart={() => {
+          onClickStart={topic => {
             this.gameStartButtons(
               "chooseActivity",
-              "parallelograms",
-              isRegistered,
-              userId
-            );
-          }}
-          onClickStartMamiferes={() => {
-            this.gameStartButtons(
-              "chooseActivity",
-              "mammals",
-              isRegistered,
-              userId
-            );
-          }}
-          onClickStartAdverbs={() => {
-            this.gameStartButtons(
-              "chooseActivity",
-              "adverbs",
+              topic,
               isRegistered,
               userId
             );

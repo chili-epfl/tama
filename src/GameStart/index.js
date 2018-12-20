@@ -33,20 +33,14 @@ const styles = () => ({
 });
 
 const TopicButtons = withStyles(styles)(
-  ({
-    classes,
-    onClickStart,
-    onClickStartMamiferes,
-    onClickStartAdverbs,
-    studentName
-  }) => (
+  ({ classes, onClickStart, studentName }) => (
     <div className={classes.buttonContainer}>
       <Button
         className={classes.button}
         fullWidth
         variant="contained"
         color="primary"
-        onClick={onClickStart}
+        onClick={() => onClickStart("parallelograms")}
       >
         <FormattedMessage
           id="gameStart.startTeachinParalelograms"
@@ -59,7 +53,7 @@ const TopicButtons = withStyles(styles)(
         fullWidth
         variant="contained"
         color="primary"
-        onClick={onClickStartMamiferes}
+        onClick={() => onClickStart("mammals")}
       >
         <FormattedMessage
           id="gameStart.startTeachingMammals"
@@ -72,7 +66,7 @@ const TopicButtons = withStyles(styles)(
         fullWidth
         variant="contained"
         color="primary"
-        onClick={onClickStartAdverbs}
+        onClick={() => onClickStart("adverbs")}
       >
         <FormattedMessage
           id="gameStart.startTeachingAdverbs"
@@ -87,8 +81,6 @@ const TopicButtons = withStyles(styles)(
 type PropsT = {
   classes: Object,
   onClickStart: void => void,
-  onClickStartMamiferes: void => void,
-  onClickStartAdverbs: void => void,
   studentName: string,
   studentImg: string,
   genderTeacherMale: boolean
@@ -97,8 +89,6 @@ type PropsT = {
 const GameStart = ({
   classes,
   onClickStart,
-  onClickStartMamiferes,
-  onClickStartAdverbs,
   studentName,
   studentImg,
   genderTeacherMale
@@ -126,12 +116,7 @@ const GameStart = ({
         />
       }
     >
-      <TopicButtons
-        onClickStart={onClickStart}
-        onClickStartMamiferes={onClickStartMamiferes}
-        onClickStartAdverbs={onClickStartAdverbs}
-        studentName={studentName}
-      />
+      <TopicButtons onClickStart={onClickStart} studentName={studentName} />
     </WithBlackboard>
   </div>
 );
