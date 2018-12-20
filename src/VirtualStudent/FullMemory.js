@@ -130,8 +130,8 @@ class FullMemory implements VirtualStudent {
   }
 
   // All necessary features should correspond to identify the shape as a parallelogram
-  answer(shape: ShapeFeatures) {
-    return this.state.model(shape);
+  answer(shape: ShapeFeatures): boolean {
+    return !!this.state.model(shape);
   }
 
   learn(isParallelogram: boolean, shape: ShapeFeatures) {

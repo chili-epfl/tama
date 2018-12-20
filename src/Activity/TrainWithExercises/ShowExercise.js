@@ -22,6 +22,7 @@ class ShowExercise extends React.Component {
   constructor(props) {
     super(props);
     const { selected, student, data } = props;
+    console.log(student);
     this.state = {
       studentAnswers: selected.map(exampleIndex =>
         student.answer(data[exampleIndex].shapeFeatures)

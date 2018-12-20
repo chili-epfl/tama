@@ -30,6 +30,8 @@ class TrainWithExercise extends React.Component {
   };
 
   recordExerciseActivity = studentAnswers => {
+    console.log(studentAnswers);
+
     const { selected } = this.state;
     const images = exampleData[this.props.activityChosen]
       .filter((_, i) => selected.includes(i))
