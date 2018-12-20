@@ -26,6 +26,12 @@ class DumbStudent implements VirtualStudent {
       defaultMessage = "Is it a mammal ?"
     />
   );
+  questionExampleAdverb =(
+    <FormattedMessage
+      id="dumbStudent.questionExampleAdverb"
+      defaultMessage = "Is it an adverb ?"
+    />
+  );
   thinkingAboutExercice = (
     <FormattedMessage
       id="dumbStudent.thinkingAboutExercise"
@@ -83,6 +89,19 @@ class DumbStudent implements VirtualStudent {
       defaultMessage="I don't think this is a mammal"
     />
   );
+  givePositiveAnswerAdverb = (
+    <FormattedMessage
+      id="dumbStudent.givePositiveAnswerAdverb"
+      defaultMessage="Mmm I think this is a Adverb"
+    />
+  );
+  giveNegativeAnswerAdverb = (
+    <FormattedMessage
+      id="dumbStudent.giveNegativeAnswerAdverb"
+      defaultMessage="I don't think this is a Adverb"
+    />
+  );
+
 
   state = {};
 

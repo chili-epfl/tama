@@ -65,14 +65,20 @@ class ShowExample extends React.Component {
               alignItems="flex-start"
               className={classes.shape}
             >
-              <img
-                className={classes.imagePara}
-                src={data.src}
-                alt="data"
-                width="300"
-                height="300"
-                border="1px solid"
-              />
+              {
+                this.props.activityChosen ==="adverbs" ?
+                <h1> {data.adverb} </h1>
+                :
+                              
+                <img
+                  className={classes.imagePara}
+                  src={data.src}
+                  alt="data"
+                  width="300"
+                  height="300"
+                  border="1px solid"
+                />
+              }
             </Grid>
           </Grid>
           <Grid item xs={12} sm={4}>
@@ -107,9 +113,14 @@ class ShowExample extends React.Component {
   }
 
   textActivity(thinking, student) {
+    const question = {
+      mammals: student.questionExampleMammal,
+      parallelograms: student.questionExample,
+      adverbs: student.questionExampleAdverb
+    }[this.props.activityChosen];
     return thinking
       ? student.thinkingAboutExample
-      : this.props.activityChosen === "mammals" ? student.questionExampleMammal : student.questionExample;
+      : question;
   }
 }
 

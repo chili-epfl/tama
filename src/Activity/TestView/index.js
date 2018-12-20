@@ -112,25 +112,31 @@ const LeaderboardPeek = ({ show, classes }: any) => (
   </Paper>
 );
 
-const Answer = ({ src, isCorrect, show, classes }: any) => (
+const Answer = ({ src, isCorrect, show, classes, activityChosen }: any) => (
   <Grow in={show} timeout={400} direction="left" className={classes.answer}>
     <div>
-      <img src={src} alt="test question" className={classes.shape} />
+      {{
+        adverbs: <h4 style={{textAlign: 'center'}}>{src}</h4>,
+        mammals: <img src={src} alt="test question" className={classes.shape} />,
+        parallelograms: <img src={src} alt="test question" className={classes.shape} />
+      }[activityChosen]}
       {isCorrect ? (
         <CheckCircle color="primary" className={classes.statusIcon} />
       ) : (
         <Cancel color="error" className={classes.statusIcon} />
       )}
+
     </div>
   </Grow>
 );
 
-const QuestionsList = ({ questions, index, classes }: any) => (
+const QuestionsList = ({ questions, index, classes, activityChosen}: any) => (
   <div className={classes.questionList}>
     {questions
       .filter(q => q.index < index)
       .map(q => (
         <Answer
+          activityChosen={activityChosen}
           key={q.src}
           src={q.src}
           isCorrect={q.isCorrect}
@@ -181,7 +187,7 @@ class TestStudent extends React.Component<PropsT, StateT> {
 
 
   render() {
-    const { classes, test, studentImg, activityScore } = this.props;
+    const { classes, test, studentImg, activityScore, activityChosen} = this.props;
     const { index } = this.state;
     const qs = test.questions.map(({ src, valid }, i) => ({
       src,
@@ -213,15 +219,15 @@ class TestStudent extends React.Component<PropsT, StateT> {
         </Grid>
         <Grid item xs={9} className={classes.studentAnswers}>
         <FormattedMessage
-          id= {{ mammals: "test.areMammal", parallelograms: "test.arepara" }[this.props.activityChosen]}
+          id= {{adverbs: "test.areAdverbs",mammals: "test.areMammal", parallelograms: "test.arepara" }[activityChosen]}
           defaultMessage="I think these ARE mammals:"
         />
-          <QuestionsList classes={classes} questions={qY} index={index} />
+          <QuestionsList classes={classes} questions={qY} index={index} activityChosen={activityChosen} />
           <FormattedMessage
-            id= {{ mammals: "test.arenotMammal", parallelograms: "test.arenotpara" }[this.props.activityChosen]}
+            id= {{adverbs: "test.arenotAdverbs" ,mammals: "test.arenotMammal", parallelograms: "test.arenotpara" }[activityChosen]}
             defaultMessage="I think these ARE not mammals:"
           />
-          <QuestionsList classes={classes} questions={qN} index={index} />
+          <QuestionsList classes={classes} questions={qN} index={index} activityChosen={activityChosen}/>
         </Grid>
         <Grid item xs={6} className={classes.scoreBoard}>
           <ScoreBoard

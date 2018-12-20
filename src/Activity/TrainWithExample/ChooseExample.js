@@ -7,9 +7,12 @@ import PropTypes from "prop-types";
 import Gallery from "react-grid-gallery";
 import IconButton from "@material-ui/core/IconButton";
 import BackNavigation from "@material-ui/icons/ArrowBack";
+import AdverbsList from "../Utils/AdverbsList";
 
 import parallelogramData from "../ParallelogramData";
 import mammalsData from "../MammalsData";
+import adverbsData from "../AdverbsData";
+
 
 const styles = theme => ({
   root: {
@@ -39,6 +42,31 @@ const styles = theme => ({
   }
 });
 
+
+const topicData =  {
+    mammals: mammalsData,
+    parallelograms: parallelogramData,
+  };
+
+const formattedMessage = {
+    adverbs: 
+      <FormattedMessage
+        id="chooseExample.statementAdverb"
+        defaultMessage="Choose an adverb to show"
+      />,
+    mammals: 
+      <FormattedMessage
+        id="chooseExample.statementMammal"
+        defaultMessage="Choose a mammal to show"
+      />,
+    parallelograms: 
+      <FormattedMessage
+        id="chooseExample.statement"
+        defaultMessage="Choose a shape to show"
+      />
+    };
+
+
 const ChooseExample = ({
   activityChosen,
   onNavigationBackToMenu,
@@ -55,19 +83,23 @@ const ChooseExample = ({
         <BackNavigation />
       </IconButton>
       <Typography variant="headline" className={classes.title}>
-        <FormattedMessage
-          id="chooseExample.statement"
-          defaultMessage="Choose a shape to show"
-        />
+      {formattedMessage[activityChosen]}
       </Typography>
     </div>
     <div className={classes.gallery}>
+    {activityChosen === "adverbs" ? 
+      <AdverbsList
+        adverbs={adverbsData}
+        onSelect= {onSelectExample}
+      />
+      :
       <Gallery
-        images={activityChosen === "mammals" ? mammalsData : parallelogramData}
+        images={topicData[activityChosen]}
         onClickThumbnail={onSelectExample}
         enableImageSelection={false}
         margin={0}
       />
+    }
     </div>
   </div>
 );

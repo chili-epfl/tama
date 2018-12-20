@@ -62,7 +62,7 @@ class ShowExercise extends React.Component {
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes, data } = this.props;
     let bubbleText;
     if (this.state.thinking === true) {
       bubbleText = this.props.student.thinkingAboutExercice;
@@ -77,10 +77,16 @@ class ShowExercise extends React.Component {
       if (this.props.activityChosen === "mammals"){
         bubbleText = this.props.student.givePositiveAnswerMammal;
       }
+      if (this.props.activityChosen === "adverbs"){
+        bubbleText = this.props.student.givePositiveAnswerAdverb;
+      }
     } else {
       bubbleText = this.props.student.giveNegativeAnswer;
       if (this.props.activityChosen === "mammals"){
         bubbleText = this.props.student.giveNegativeAnswerMammal;
+      }
+      if (this.props.activityChosen === "adverbs"){
+        bubbleText = this.props.student.giveNegativeAnswerAdverb;
       }
     }
 
@@ -107,14 +113,20 @@ class ShowExercise extends React.Component {
               alignItems="flex-start"
               className={classes.shape}
             >
-              <img
-                className={classes.imagePara}
-                src={this.props.data.src}
-                alt="data"
-                width="300"
-                height="300"
-                border="1px solid"
-              />
+              {
+                this.props.activityChosen ==="adverbs" ?
+                <h1> {data.adverb} </h1>
+                :
+                              
+                <img
+                  className={classes.imagePara}
+                  src={data.src}
+                  alt="data"
+                  width="300"
+                  height="300"
+                  border="1px solid"
+                />
+              }
             </Grid>
           </Grid>
           <Grid item xs={12} sm={4}>

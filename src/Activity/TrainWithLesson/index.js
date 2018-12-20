@@ -7,6 +7,7 @@ import ChooseLesson from "./ChooseLesson";
 import ShowLesson from "./ShowLesson";
 import lessonParallelograms from "./LessonParallelograms";
 import lessonMammals from "./LessonMammals";
+import lessonAdverbs from "./LessonAdverbs";
 
 class TrainWithLesson extends React.Component {
   constructor(props) {
@@ -16,7 +17,8 @@ class TrainWithLesson extends React.Component {
       hasChosenLesson: false,
       lesson: {
         mammals: lessonMammals,
-        parallelograms: lessonParallelograms
+        parallelograms: lessonParallelograms,
+        adverbs: lessonAdverbs
       }[this.props.activityChosen]
     };
     this.newActivityRef = this.props.sessionRef.child("activities").push();
@@ -32,7 +34,11 @@ class TrainWithLesson extends React.Component {
     this.newActivityRef.child("knowledge").set(this.props.student.getState());
     this.newActivityRef
       .child("item")
-      .set(intl.formatMessage({ id: this.state.lesson[this.state.index].title.props.id }));
+      .set(
+        intl.formatMessage({
+          id: this.state.lesson[this.state.index].title.props.id
+        })
+      );
     this.newActivityRef.child("time").set(new Date().getTime());
     this.newActivityRef.child("student_already_know").set(studentAlreadyKnow);
   };

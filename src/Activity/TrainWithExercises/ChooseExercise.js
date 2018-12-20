@@ -7,9 +7,12 @@ import Gallery from "react-grid-gallery";
 import IconButton from "@material-ui/core/IconButton";
 import BackNavigation from "@material-ui/icons/ArrowBack";
 import Typography from "@material-ui/core/Typography";
+import AdverbsList from "../Utils/AdverbsList";
 
 import parallelogramData from "../ParallelogramData";
 import mammalsData from "../MammalsData";
+import adverbsData from "../AdverbsData";
+
 
 const styles = theme => ({
   root: {
@@ -39,6 +42,30 @@ const styles = theme => ({
   }
 });
 
+
+const topicData =  {
+  mammals: mammalsData,
+  parallelograms: parallelogramData,
+};
+
+const formattedMessage = {
+  adverbs: 
+    <FormattedMessage
+      id="chooseExample.statementAdverb"
+      defaultMessage="Choose an adverb to show"
+    />,
+  mammals: 
+    <FormattedMessage
+      id="chooseExample.statementMammal"
+      defaultMessage="Choose a mammal to show"
+    />,
+  parallelograms: 
+    <FormattedMessage
+      id="chooseExample.statement"
+      defaultMessage="Choose a shape to show"
+    />
+  };
+
 const ChooseExercise = ({
   onNavigationBackToMenu,
   onSelectExercise,
@@ -55,19 +82,23 @@ const ChooseExercise = ({
         <BackNavigation />
       </IconButton>
       <Typography variant="headline" className={classes.title}>
-        <FormattedMessage
-          id="chooseExercise.statement"
-          defaultMessage="Choose a shape for the exercise"
-        />
+        {formattedMessage[activityChosen]}
       </Typography>
     </div>
     <div className={classes.gallery}>
+    {activityChosen === "adverbs" ? 
+      <AdverbsList
+        adverbs={adverbsData}
+        onSelect = {onSelectExercise}
+      />
+      :
       <Gallery
-        images={activityChosen === "mammals" ? mammalsData : parallelogramData}
+        images={topicData[activityChosen]}
         onClickThumbnail={onSelectExercise}
         enableImageSelection={false}
         margin={0}
       />
+    }
     </div>
   </div>
 );
