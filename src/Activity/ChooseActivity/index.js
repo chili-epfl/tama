@@ -8,7 +8,6 @@ import ButtonBase from "@material-ui/core/ButtonBase";
 import Typography from "@material-ui/core/Typography";
 
 import TestConfirmationDialog from "./TestConfirmationDialog";
-import SessionTimeline from "./SessionTimeline";
 import RulesDialog from "../../SidePanel/RulesDialog";
 import WithBlackboard from "../../WithBlackboard";
 
@@ -136,22 +135,22 @@ const activities = [
       />
     )
   },
-  // {
-  //   url: "images/lesson_1536x512.png",
-  //   title: (
-  //     <FormattedMessage
-  //       id="chooseActivity.giveLesson"
-  //       defaultMessage="Give a lesson"
-  //     />
-  //   ),
-  //   learningCost: "50",
-  //   teacherText: (
-  //     <FormattedMessage
-  //       id="chooseActivity.giveLessonTeacherText"
-  //       defaultMessage="I'm going to give you a definition"
-  //     />
-  //   )
-  // },
+  {
+    url: "images/lesson_1536x512.png",
+    title: (
+      <FormattedMessage
+        id="chooseActivity.giveLesson"
+        defaultMessage="Give a lesson"
+      />
+    ),
+    learningCost: "50",
+    teacherText: (
+      <FormattedMessage
+        id="chooseActivity.giveLessonTeacherText"
+        defaultMessage="I'm going to give you a definition"
+      />
+    )
+  },
   {
     url: "images/medal_600x200.png",
     title: (
