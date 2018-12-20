@@ -18,19 +18,20 @@ import TrainWithLesson from "./Activity/TrainWithLesson";
 import TestView from "./Activity/TestView";
 import Home from "./Home";
 import GameStart from "./GameStart";
-import Adverbs from "./Adverbs";
 import getVirtualStudent from "./VirtualStudent/utils";
 import AppDrawer from "./AppDrawer";
 import SessionHistory from "./SessionHistory";
 import messagesFr from "./translations/fr.json";
 import messagesEn from "./translations/en.json";
 import type { VirtualStudent } from "./VirtualStudent/types";
-import parallelogramData from "./Activity/ParallelogramData";
 import Leaderboard, { updateLeaderboard } from "./Leaderboard";
 import nameData from "./NameData";
 import Stats from "./Statistics";
 import NotEnoughPointsSnackbar from "./NotEnoughPointsSnackbar";
+
+import parallelogramData from "./Activity/ParallelogramData";
 import mammalsData from "./Activity/MammalsData";
+import adverbsData from "./Activity/AdverbsData";
 
 const theme = createMuiTheme({
   palette: {
@@ -199,13 +200,14 @@ class App extends React.Component<PropsT, StateT> {
 
   runTest = () => {
     const questions = {
+      adverbs: [...adverbsData],
       mammals: [...mammalsData],
       parallelograms: [...parallelogramData]
     }[this.state.activityChosen]
       .sort(() => 0.5 - Math.random())
       .slice(0, 10)
       .map(x => ({
-        src: x.src,
+        src: x.src || x.adverb,
         shapeFeatures: x.shapeFeatures,
         valid: x.valid
       }));
@@ -305,15 +307,18 @@ class App extends React.Component<PropsT, StateT> {
             );
           }}
           onClickStartAdverbs={() => {
-            this.gameStartButtons("adverbs", isRegistered, userId);
+            this.gameStartButtons(
+              "chooseActivity",
+              "adverbs",
+              isRegistered,
+              userId
+            );
           }}
           studentName={this.studentName}
           studentImg={this.studentBackpackImg}
           genderTeacherMale={this.genderTeacherMale}
         />
       );
-    } else if (view === "adverbs") {
-      displayed = <Adverbs />;
     } else if (view === "leaderboard") {
       displayed = <Leaderboard />;
     } else if (view === "stats") {

@@ -6,10 +6,12 @@ import ChooseExample from "./ChooseExample";
 import ShowExample from "./ShowExample";
 import parallelogramData from "../ParallelogramData";
 import mammalsData from "../MammalsData";
+import adverbsData from "../AdverbsData";
 
 const exampleData = {
   mammals: mammalsData,
-  parallelograms: parallelogramData
+  parallelograms: parallelogramData,
+  adverbs: adverbsData
 };
 
 class TrainWithExample extends React.Component {
@@ -27,7 +29,8 @@ class TrainWithExample extends React.Component {
 
   recordExampleActivity = userAnswer => {
     const { activityChosen } = this.props;
-    const image = exampleData[activityChosen][this.state.index].src;
+    const example = exampleData[activityChosen][this.state.index];
+    const image = activityChosen === "adverbs" ? example.adverb : example.src;
 
     this.newActivityRef.child("activity_type").set("example");
     this.newActivityRef.child("item").set(image);

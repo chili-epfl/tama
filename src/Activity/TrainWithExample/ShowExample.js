@@ -2,7 +2,6 @@ import * as React from "react";
 
 import { FormattedMessage } from "react-intl";
 import { withStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
 import PropTypes from "prop-types";
 
 import WithBlackboard from "../../WithBlackboard";
@@ -120,11 +119,12 @@ class ShowExample extends React.Component {
   }
 
   textActivity(thinking, student) {
-    return thinking
-      ? student.thinkingAboutExample
-      : this.props.activityChosen === "mammals"
-        ? student.questionExampleMammal
-        : student.questionExample;
+    const question = {
+      mammals: student.questionExampleMammal,
+      parallelograms: student.questionExample,
+      adverbs: student.questionExampleAdverb
+    }[this.props.activityChosen];
+    return thinking ? student.thinkingAboutExample : question;
   }
 }
 

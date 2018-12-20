@@ -10,6 +10,7 @@ import Typography from "@material-ui/core/Typography";
 
 import parallelogramData from "../ParallelogramData";
 import mammalsData from "../MammalsData";
+import adverbsData from "../AdverbsData";
 
 const styles = theme => ({
   root: {
@@ -41,7 +42,8 @@ const styles = theme => ({
 
 const data = {
   mammals: mammalsData,
-  parallelograms: parallelogramData
+  parallelograms: parallelogramData,
+  adverbs: adverbsData
 };
 
 class ChooseExercise extends React.Component<*, *> {

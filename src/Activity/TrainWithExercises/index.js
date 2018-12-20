@@ -4,12 +4,15 @@ import PropTypes from "prop-types";
 
 import ChooseExercise from "./ChooseExercise";
 import ShowExercise from "./ShowExercise";
+
 import parallelogramData from "../ParallelogramData";
 import mammalsData from "../MammalsData";
+import adverbsData from "../AdverbsData";
 
 const exampleData = {
   mammals: mammalsData,
-  parallelograms: parallelogramData
+  parallelograms: parallelogramData,
+  adverbs: adverbsData
 };
 
 class TrainWithExercise extends React.Component {
@@ -30,7 +33,7 @@ class TrainWithExercise extends React.Component {
     const { selected } = this.state;
     const images = exampleData[this.props.activityChosen]
       .filter((_, i) => selected.includes(i))
-      .map(x => x.src);
+      .map(x => (this.props.activityChosen === "adverbs" ? x.adverb : x.src));
 
     this.newActivityRef.child("items").set(images);
     this.newActivityRef.child("activity_type").set("exercise");

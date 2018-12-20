@@ -54,36 +54,35 @@ const TopicButtons = withStyles(styles)(
           values={{ studentName: studentName.replace(/ .*/, "") }}
         />
       </Button>
+      <Button
+        className={classes.button}
+        fullWidth
+        variant="contained"
+        color="primary"
+        onClick={onClickStartMamiferes}
+      >
+        <FormattedMessage
+          id="gameStart.startTeachingMammals"
+          defaultMessage="Start teaching Mammiferes to {studentName}"
+          values={{ studentName: studentName.replace(/ .*/, "") }}
+        />
+      </Button>
+      <Button
+        className={classes.button}
+        fullWidth
+        variant="contained"
+        color="primary"
+        onClick={onClickStartAdverbs}
+      >
+        <FormattedMessage
+          id="gameStart.startTeachingAdverbs"
+          defaultMessage="Start teaching adverbs to {studentName}"
+          values={{ studentName: studentName.replace(/ .*/, "") }}
+        />
+      </Button>
     </div>
   )
 );
-
-// <Button
-// className={classes.button}
-// fullWidth
-// variant="contained"
-// color="primary"
-// onClick={onClickStartMamiferes}
-// >
-// <FormattedMessage
-//   id="gameStart.startTeachingMammals"
-//   defaultMessage="Start teaching Mammiferes to {studentName}"
-//   values={{ studentName: studentName.replace(/ .*/, "") }}
-// />
-// </Button>
-// <Button
-// className={classes.button}
-// fullWidth
-// variant="contained"
-// color="primary"
-// onClick={onClickStartAdverbs}
-// >
-// <FormattedMessage
-//   id="gameStart.startTeachingAdverbs"
-//   defaultMessage="Start teaching adverbs to {studentName}"
-//   values={{ studentName: studentName.replace(/ .*/, "") }}
-// />
-// </Button>
 
 type PropsT = {
   classes: Object,
