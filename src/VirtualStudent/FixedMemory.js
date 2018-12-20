@@ -41,10 +41,10 @@ class FixedMemory implements VirtualStudent {
       defaultMessage="Is it a parallelogram?"
     />
   );
-  questionExampleMammal =(
+  questionExampleMammal = (
     <FormattedMessage
       id="dumbStudent.questionExampleMammal"
-      defaultMessage = "Is it a mammal ?"
+      defaultMessage="Is it a mammal ?"
     />
   );
   thinkingAboutExercice = (
@@ -130,7 +130,7 @@ class FixedMemory implements VirtualStudent {
   }
 
   // All necessary features should correspond to identify the shape as a parallelogram
-  answerParallelogram(shape: ShapeFeatures) {
+  answer(shape: ShapeFeatures) {
     return this.state.model(shape);
   }
 

@@ -186,7 +186,12 @@ class App extends React.Component<PropsT, StateT> {
       this.setState({ scoreDisplayed: this.state.score.toString() });
     }, 2000);
   };
-  gameStartButtons = (view, activityChosen, isRegistered, userId) => {
+  gameStartButtons = (
+    view: string,
+    activityChosen: string,
+    isRegistered: boolean,
+    userId: string
+  ) => {
     this.setState({
       hasBeenWelcomed: true,
       view,
