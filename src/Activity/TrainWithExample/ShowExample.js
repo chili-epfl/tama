@@ -32,7 +32,12 @@ class ShowExample extends React.Component {
     recordExampleActivity(userAnswer);
     this.props.updateScore();
     this.setState({ thinking: true });
-    student.learn(userAnswer, data.shapeFeatures);
+    if(this.props.activityChosen === "mammals"){
+      student.learnMammal(userAnswer, data.shapeFeatures);
+    }else{
+      student.learn(userAnswer, data.shapeFeatures);
+
+    }
     setTimeout(() => {
       this.props.getBackToMenu();
     }, 2000);
