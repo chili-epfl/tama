@@ -1,14 +1,18 @@
 import getVirtualStudent from '../VirtualStudent/utils';
 import parallelogramData from '../Activity/ParallelogramData';
+import FixedMemory from "../VirtualStudent/FixedMemory";
+
+
+const STUDENT_MODEL = FixedMemory;
 
 
 let student = null;
 
 const numberOfTrials = 15;
 
-describe('Simple Testing', ()=>{
-    it('tests if it knows that it is not a parallelogram', ()=>{
-        student = getVirtualStudent('mahdi');
+describe('train the student on a set of shapes and test him on an invalid parallelogram', ()=>{
+    it('should guess that the parallelogram is invalid', ()=>{
+        student = new STUDENT_MODEL('test');
         for(let i = 0; i < numberOfTrials; i++){
             const parallelogram = parallelogramData[parseInt(Math.random() * (parallelogramData.length-1) + 1, 10)] ;
             student.learn(parallelogram.valid, parallelogram.shapeFeatures)
@@ -22,9 +26,9 @@ describe('Simple Testing', ()=>{
         expect(student.answerParallelogram(isParallelogram.shapeFeatures)).toBe(false)
     })
 })
-describe('Simple Testing', ()=>{
-    it('tests if it know that it is a parallelogram', ()=>{
-        student = getVirtualStudent('mahdi');
+describe('train the student on a set of shapes and test him on a valid parallelogram', ()=>{
+    it('should guess that the parallelogram is valid', ()=>{
+        student = new STUDENT_MODEL('test');
         for(let i = 0; i < numberOfTrials; i++){
             const parallelogram = parallelogramData[parseInt(Math.random() * (parallelogramData.length-1)+ 1, 10)] ;
             student.learn(parallelogram.valid, parallelogram.shapeFeatures)
@@ -39,21 +43,21 @@ describe('Simple Testing', ()=>{
     })
 })
 
-describe('training and testing on same Parallelogram', ()=>{
-    it('it should return the same thing as training', ()=>{
+describe('training the student on a set of parallelograms and ask him about one of them', ()=>{
+    it('should return the same thing as training', ()=>{
         student = getVirtualStudent('mahdi');
-        const trainingParallelogram = parallelogramData[parseInt(Math.random() * (parallelogramData.length-1) + 1, 10)];// select a random element from data and teach it to the student
+        const trainingParallelogram = parallelogramData[parseInt(Math.random() * (parallelogramData.length-1) + 1, 10)];
         student.learn(trainingParallelogram.valid, trainingParallelogram.shapeFeatures)
         for(let i = 0; i < numberOfTrials; i++){
             const parallelogram = parallelogramData[parseInt(Math.random() * (parallelogramData.length-1) + 1, 10)] ;
             student.learn(parallelogram.valid, parallelogram.shapeFeatures)
         }
-        expect(student.answerParallelogram(trainingParallelogram.shapeFeatures)).toBe(trainingParallelogram.valid)// expect the student to answer correctly he has already seen it
+        expect(student.answerParallelogram(trainingParallelogram.shapeFeatures)).toBe(trainingParallelogram.valid)
     })
 })
-describe('training and testing on color of parallelogram', ()=>{
-    it('it should return the same thing as testing', ()=>{
-        student = getVirtualStudent('mahdi');
+describe('training the student on a set of red parallelograms and asking him on a green one', ()=>{
+    it('it should return false', ()=>{
+        student = new STUDENT_MODEL('test');
         let testingParallelogram;
         for(let i = 0; i < parallelogramData.length; i++){
             if(parallelogramData[i].shapeFeatures.isRed){
@@ -62,20 +66,164 @@ describe('training and testing on color of parallelogram', ()=>{
                 testingParallelogram = parallelogramData[i];
             }
         }
-        expect(student.answerParallelogram(testingParallelogram.shapeFeatures)).toBe(testingParallelogram.valid)// expect the student to answer correctly he has already seen it
+        expect(student.answerParallelogram(testingParallelogram.shapeFeatures)).toBe(false)
     })
 })
-describe('training only on Squares', ()=>{
-    it('it should return if it is a parallelogram or not for testing data', ()=>{
-        student = getVirtualStudent('mahdi');
-        let testingParallelogram;
-        for(let i = 0; i < parallelogramData.length; i++){
-            if(parallelogramData[i].shapeFeatures.hasFourEdges && parallelogramData[i].shapeFeatures.hasSameLengthEdges){
-                student.learn(parallelogramData[i].valid, parallelogramData[i].shapeFeatures)
-            }else if(parallelogramData[i].valid && !parallelogramData[i].shapeFeatures.hasSameLengthEdges){
-                testingParallelogram = parallelogramData[i];
+describe('give only green parallelograms', ()=>{
+    it("it should return the same true if a shape is green", () => {
+        student = new STUDENT_MODEL("test");
+        parallelogramData.forEach(parallelogram => {
+          if(parallelogram.shapeFeatures.isGreen){
+            student.learn(true, parallelogram.shapeFeatures);
+          }
+        });
+        parallelogramData.forEach(parallelogram => {
+            if(parallelogram.shapeFeatures.isGreen){
+                expect(student.answerParallelogram(parallelogram.shapeFeatures)).toBe(true)
+            }else{
+                expect(student.answerParallelogram(parallelogram.shapeFeatures)).toBe(false)
             }
-        }
-        expect(student.answerParallelogram(testingParallelogram.shapeFeatures)).toBe(testingParallelogram.valid)// expect the student to answer correctly he has already seen it
-    })
+        });
+    });
+})
+describe('give only red parallelograms', ()=>{
+    it("it should return the same true if a shape is red", () => {
+        student = new STUDENT_MODEL("test");
+        parallelogramData.forEach(parallelogram => {
+          if(parallelogram.shapeFeatures.isRed){
+            student.learn(true, parallelogram.shapeFeatures);
+          }
+        });
+        parallelogramData.forEach(parallelogram => {
+            if(parallelogram.shapeFeatures.isRed){
+                expect(student.answerParallelogram(parallelogram.shapeFeatures)).toBe(true)
+            }else{
+                expect(student.answerParallelogram(parallelogram.shapeFeatures)).toBe(false)
+            }
+        });
+    });
+})
+describe('give only blue parallelograms', ()=>{
+    it("it should return the same true if a shape is blue", () => {
+        student = new STUDENT_MODEL("test");
+        parallelogramData.forEach(parallelogram => {
+          if(parallelogram.shapeFeatures.isBlue){
+            student.learn(true, parallelogram.shapeFeatures);
+          }
+        });
+        parallelogramData.forEach(parallelogram => {
+            if(parallelogram.shapeFeatures.isBlue){
+                expect(student.answerParallelogram(parallelogram.shapeFeatures)).toBe(true)
+            }else{
+                expect(student.answerParallelogram(parallelogram.shapeFeatures)).toBe(false)
+            }
+        });
+    });
+})
+describe('give only hasEveryRightAngles parallelograms', ()=>{
+    it("it should return the same true if a shape is hasEveryRightAngles", () => {
+        student = new STUDENT_MODEL("test");
+        parallelogramData.forEach(parallelogram => {
+          if(parallelogram.shapeFeatures.hasEveryRightAngles){
+            student.learn(true, parallelogram.shapeFeatures);
+          }
+        });
+        parallelogramData.forEach(parallelogram => {
+            if(parallelogram.shapeFeatures.hasEveryRightAngles){
+                expect(student.answerParallelogram(parallelogram.shapeFeatures)).toBe(true)
+            }else{
+                expect(student.answerParallelogram(parallelogram.shapeFeatures)).toBe(false)
+            }
+        });
+    });
+})
+describe('give only hasFourEdges parallelograms', ()=>{
+    it("it should return the same true if a shape is hasFourEdges", () => {
+        student = new STUDENT_MODEL("test");
+        parallelogramData.forEach(parallelogram => {
+          if(parallelogram.shapeFeatures.hasFourEdges){
+            student.learn(true, parallelogram.shapeFeatures);
+          }
+        });
+        parallelogramData.forEach(parallelogram => {
+            if(parallelogram.shapeFeatures.hasFourEdges){
+                expect(student.answerParallelogram(parallelogram.shapeFeatures)).toBe(true)
+            }else{
+                expect(student.answerParallelogram(parallelogram.shapeFeatures)).toBe(false)
+            }
+        });
+    });
+})
+describe('give only hasFourEdges and green parallelograms', ()=>{
+    it("it should return the same true if a shape is hasFourEdges and is green", () => {
+        student = new STUDENT_MODEL("test");
+        parallelogramData.forEach(parallelogram => {
+          if(parallelogram.shapeFeatures.hasFourEdges && parallelogram.shapeFeatures.isGreen){
+            student.learn(true, parallelogram.shapeFeatures);
+          }
+        });
+        parallelogramData.forEach(parallelogram => {
+            if(parallelogram.shapeFeatures.hasFourEdges && parallelogram.shapeFeatures.isGreen){
+                expect(student.answerParallelogram(parallelogram.shapeFeatures)).toBe(true)
+            }else{
+                expect(student.answerParallelogram(parallelogram.shapeFeatures)).toBe(false)
+            }
+        });
+    });
+})
+describe('give only hasEveryPairOppositeEdgesParallel and green parallelograms', ()=>{
+    it("it should return the same true if a shape is hasEveryPairOppositeEdgesParallel and is green", () => {
+        student = new STUDENT_MODEL("test");
+        parallelogramData.forEach(parallelogram => {
+          if(parallelogram.shapeFeatures.hasEveryPairOppositeEdgesParallel){
+            student.learn(true, parallelogram.shapeFeatures);
+          }
+        });
+        parallelogramData.forEach(parallelogram => {
+            if(parallelogram.shapeFeatures.hasEveryPairOppositeEdgesParallel){
+                expect(student.answerParallelogram(parallelogram.shapeFeatures)).toBe(true)
+            }else{
+                expect(student.answerParallelogram(parallelogram.shapeFeatures)).toBe(false)
+            }
+        });
+    });
+})
+describe('give only hasThreeEdges or hasFourEdges parallelograms', ()=>{
+    it("it should return the false if a shape is hasThreeEdges and true if a shape hasFourEdges", () => {
+        student = new STUDENT_MODEL("test");
+        parallelogramData.forEach(parallelogram => {
+          if(parallelogram.shapeFeatures.hasThreeEdges){
+            student.learn(false, parallelogram.shapeFeatures);
+          }else if(parallelogram.shapeFeatures.hasFourEdges){
+            student.learn(true, parallelogram.shapeFeatures);
+          }
+        });
+        parallelogramData.forEach(parallelogram => {
+            if(parallelogram.shapeFeatures.hasThreeEdges){
+                expect(student.answerParallelogram(parallelogram.shapeFeatures)).toBe(false)
+            }else if(parallelogram.shapeFeatures.hasFourEdges){
+                expect(student.answerParallelogram(parallelogram.shapeFeatures)).toBe(true)
+            }else{
+                expect(student.answerParallelogram(parallelogram.shapeFeatures)).toBe(false)
+
+            }
+        });
+    });
+})
+describe('give only hasSameLengthOnePairOppositeEdges parallelograms', ()=>{
+    it("it should return the true if a shape is hasSameLengthOnePairOppositeEdges ", () => {
+        student = new STUDENT_MODEL("test");
+        parallelogramData.forEach(parallelogram => {
+          if(parallelogram.shapeFeatures.hasSameLengthOnePairOppositeEdges){
+            student.learn(true, parallelogram.shapeFeatures);
+          }
+        });
+        parallelogramData.forEach(parallelogram => {
+            if(parallelogram.shapeFeatures.hasSameLengthOnePairOppositeEdges){
+                expect(student.answerParallelogram(parallelogram.shapeFeatures)).toBe(true)
+            }else{
+                expect(student.answerParallelogram(parallelogram.shapeFeatures)).toBe(false)
+            }
+        });
+    });
 })

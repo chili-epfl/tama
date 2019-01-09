@@ -1,10 +1,9 @@
-import getVirtualStudent from "../VirtualStudent/utils";
 import mammalsData from "../Activity/MammalsData";
-import DumbStudent from "../VirtualStudent/DumbStudent";
+import MammalType from "../VirtualStudent/mammalTypeAlgorithm";
 
 const numberOfTrials = 30;
 
-const STUDENT_MODEL = DumbStudent;
+const STUDENT_MODEL = MammalType;
 
 let student = null;
 
@@ -48,6 +47,22 @@ describe("training and testing on same mammal", () => {
       student = new STUDENT_MODEL("test");
       student.learn(true, mammal.shapeFeatures);
       expect(student.answer(mammal.shapeFeatures)).toBe(true);
+    });
+  });
+});
+describe("trainig the student and then adding one mammal that is not valid", () => {
+  it("it should figure out that it was not a mammal and try not to learn it", () => {
+    student = new STUDENT_MODEL("test")
+    mammalsData.forEach(mammal => {
+      if(mammal.valid){
+        student.learn(true, mammal.shapeFeatures)
+      }
+    });
+    mammalsData.forEach(mammal => {
+      if(!mammal.valid){
+        student.learn(true, mammal.shapeFeatures)
+      }
+      expect(student.answer(mammal.shapeFeatures)).toBe(false)
     });
   });
 });

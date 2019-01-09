@@ -6,8 +6,9 @@ import { VirtualStudent } from "./types";
 // import DumbStudent from "./DumbStudent";
 // import NoMemory from "./NoMemory";
 // import WeightModel from "./WeightModel";
-import FullMemory from "./FullMemory";
+// import FullMemory from "./FullMemory";
 // import FixedMemory from "./FixedMemory";
+import ImprovedMammalAlgorithm from "./improvedMammalAlgorithm"
 
 export const featureList = [
   "hasThreeEdges",
@@ -43,7 +44,7 @@ const getVirtualStudent = (name: string): VirtualStudent => {
   // }, Math.random());
 
   // return new RandModel(name);
-  return new FullMemory(name);
+  return new ImprovedMammalAlgorithm(name);
 };
 
 export default getVirtualStudent;
