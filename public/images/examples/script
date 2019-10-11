@@ -1,5 +1,0 @@
-#!/bin/bash
-
-for i in *.png; do
-    convert "$i" -transparent white "$i"
-done
