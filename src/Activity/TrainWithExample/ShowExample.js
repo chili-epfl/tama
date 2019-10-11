@@ -5,6 +5,7 @@ import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 
 import WithBlackboard from "../../WithBlackboard";
+import { AdverbDisplay } from "../Utils/AdverbsList";
 
 const styles = {
   root: {
@@ -107,13 +108,14 @@ class ShowExample extends React.Component {
             display: "flex",
             height: "100%",
             width: "100%",
-            justifyContent: "center"
+            justifyContent: "center",
+            alignItems: "center",
+            fontSize: "150%",
+            color: "#e5e5e5"
           }}
         >
           {activityChosen === "adverbs" ? (
-            console.log(data) || (
-              <p>{`${data.sentence1} ${data.adverb} ${data.sentence2}`}</p>
-            )
+            console.log(data) || <AdverbDisplay data={data} />
           ) : (
             <img
               className={classes.imagePara}
@@ -133,7 +135,8 @@ class ShowExample extends React.Component {
       parallelograms: student.questionExample,
       adverbs: student.questionExampleAdverb
     }[this.props.activityChosen];
-    return thinking ? student.thinkingAboutExample : question;
+    return question;
+    // return thinking ? student.thinkingAboutExample : question;
   }
 }
 

@@ -4,6 +4,8 @@ import * as React from "react";
 
 import { withStyles } from "@material-ui/core/styles";
 
+import "./speechBubble.css";
+
 const styles = () => ({
   root: {
     width: "100%",
@@ -38,8 +40,8 @@ const styles = () => ({
     height: "auto"
   },
   studentImage: {
-    marginLeft: "20%",
-    width: "35%",
+    marginLeft: "32%",
+    width: "36%",
     height: "auto"
   },
   blackboardContainer: {
@@ -101,13 +103,8 @@ const styles = () => ({
 
 const Student = withStyles(styles)(({ classes, bubbleText, studentImg }) => (
   <div className={classes.studentContainer}>
-    <div className={classes.studentBubble}>
-      <img
-        src="images/student/bubble.png"
-        alt="bubble"
-        className={classes.studentBubbleImage}
-      />
-      <div className={classes.studentBubbleText}>{bubbleText}</div>
+    <div className="bubbles">
+      <div className="bubble bubble-center">{bubbleText}</div>
     </div>
     <img
       src={studentImg}
@@ -126,8 +123,6 @@ const Teacher = withStyles(styles)(
     onTeacherBubbleClick,
     onTeacherBubbleMouseEnter,
     onTeacherBubbleMouseLeave,
-    bubbleImageLeft,
-    bubbleImageRight,
     styleMouseCursor
   }) => {
     const teacherImage = genderTeacherMale
@@ -135,38 +130,31 @@ const Teacher = withStyles(styles)(
       : "images/teacher/teacher_female.png";
     return (
       <div className={classes.teacherContainer}>
-        <div style={{ display: "flex", flexDirection: "row" }}>
+        <div className="bubbles">
           {bubbleTextLeft && (
             <div
-              className={classes.teacherBubbleLeft}
+              className={
+                bubbleTextRight
+                  ? "bubble bubble-left bubble-clickable"
+                  : "bubble bubble-center"
+              }
               onClick={() => onTeacherBubbleClick("left")}
               onMouseEnter={() => onTeacherBubbleMouseEnter("left")}
               onMouseLeave={() => onTeacherBubbleMouseLeave("left")}
               style={styleMouseCursor ? { cursor: "pointer" } : {}}
             >
-              <img
-                src={bubbleImageLeft || "images/teacher/bubble-answer.png"}
-                alt="bubble"
-                className={classes.teacherBubbleImage}
-              />
-              <div className={classes.teacherBubbleText}>{bubbleTextLeft}</div>
+              {bubbleTextLeft}
             </div>
           )}
           {bubbleTextRight && (
             <div
-              className={classes.teacherBubbleRight}
+              className="bubble bubble-right bubble-clickable"
               onClick={() => onTeacherBubbleClick("right")}
               onMouseEnter={() => onTeacherBubbleMouseEnter("right")}
               onMouseLeave={() => onTeacherBubbleMouseLeave("right")}
               style={styleMouseCursor ? { cursor: "pointer" } : {}}
             >
-              <img
-                src={bubbleImageRight || "images/teacher/bubble-answer.png"}
-                alt="bubble"
-                className={classes.teacherBubbleImage}
-                style={{ transform: "scaleX(-1)" }}
-              />
-              <div className={classes.teacherBubbleText}>{bubbleTextRight}</div>
+              {bubbleTextRight}
             </div>
           )}
         </div>
