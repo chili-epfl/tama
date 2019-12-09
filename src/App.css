@@ -6,12 +6,49 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: auto;
+}
+
+.Guidelines {
+  margin-top: 32px;
+  max-width: 500px;
+  box-shadow: 2px 2px 4px 2px #222;
+  border-radius: 8px;
+  background: #008;
+  color: white;
+  text-align: left;
+  padding: 16px;
+}
+
+.Guidelines h1 {
+  padding: 0px;
+  font-size: 120%;
+}
+
+.Guidelines .button {
+  float: right;
+  margin-top: 12px;
+  padding: 6px;
+  border-radius: 4px;
+  border: solid 4px white;
+  background: white;
+  color: #008;
+  cursor: pointer;
+  box-shadow: 0px 0px 1px 1px #999;
+}
+.Guidelines .button:hover {
+  box-shadow: 0px 0px 4px 2px #999;
+}
+.Guidelines .button:active {
+  background: white;
+  color: #008;
+  box-shadow: 0px 0px 0px 0px #999;
 }
 
 .Examples {
-  width: 500px;
-  height: 500px;
-  background: white;
+  width: 600px;
+  height: 600px;
+  background: transparent;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-evenly;
@@ -19,8 +56,8 @@
 }
 
 .Example {
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
   border: solid transparent 6px;
   border-radius: 4px;
   background: #666;
@@ -30,4 +67,12 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  box-shadow: 0px 2px 4px 2px #222;
+}
+
+img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
 }
