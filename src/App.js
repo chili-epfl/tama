@@ -22,25 +22,35 @@ const Example = ({
   show,
   submitted
 }) => {
-  const color = concept(features) ? "#090" : "#900";
-  const x = 0;
+  const colors = ["#770000", "#000077", "#007700"];
+  const trueCategory = concept(features) ? 1 : -1;
   return (
     <div
       className="Example"
-      onClick={initial ? () => {} : select}
-      style={
-        initial
-          ? {
-              border: `solid ${initial ? color : "#fff0"} 6px`
-            }
-          : selected
-          ? {
-              background: `${show || selected ? "#090" : "#222"}3`
-            }
-          : {}
-      }
+      style={{
+        background: `${colors[1 + selected]}${initial ? "" : "44"}`
+      }}
     >
       <img src={"images/animals/" + img} />
+      {!initial && (
+        <div className="category-buttons">
+          {[-1, 0, 1].map(x => {
+            if (selected !== x)
+              return (
+                <span
+                  key={x}
+                  onClick={() => select(x)}
+                  style={{ background: colors[x + 1] }}
+                ></span>
+              );
+          })}
+        </div>
+      )}
+      {show && !initial && (
+        <span className="example-feedback">
+          {selected === trueCategory ? "" : "X"}
+        </span>
+      )}
     </div>
   );
 };
@@ -72,45 +82,43 @@ const Examples = () => {
     .map(([_, i]) => i);
 
   const [selected, setSelected] = useState(
-    _examples.map((_, i) => toSelect.includes(i))
+    _examples.map((_, i) => (toSelect.includes(i) ? 1 : 0))
   );
 
   const [intialSelection, _] = useState([...selected]);
+  const [show, setShow] = useState(false);
 
-  const toggleSelect = i => {
-    if (selected[i]) {
-      selected[i] = false;
-    } else {
-      selected[i] = true;
-    }
+  const toggleSelect = i => x => {
+    if (selected[i] === x) selected[i] = 0;
+    else selected[i] = x;
     setSelected([...selected]);
   };
 
   return (
-    <div>
+    <>
       <div className="Examples">
         {_examples.map((ex, i) => (
           <Example
             key={i}
             {...ex}
-            show={false}
+            show={show}
             selected={selected[i]}
             initial={intialSelection[i]}
-            select={() => toggleSelect(i)}
+            select={toggleSelect(i)}
           />
         ))}
       </div>
       <div className="Guidelines" style={{ width: "600px" }}>
         <span>Select all positive examples then click "submit"</span>
-        <span className="button" onClick={() => {}}>
+        <span className="button" onClick={() => setShow(!show)}>
           submit
         </span>
       </div>
-    </div>
+    </>
   );
 };
 
-function App() {
+const App = () => {
   const [step, setStep] = useState(1);
 
   return (
@@ -121,6 +129,6 @@ function App() {
       {/*  */}
     </div>
   );
-}
+};
 
 export default App;
