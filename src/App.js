@@ -8,16 +8,20 @@ import Guideline from "./Guideline";
 
 const conceptNumber = Math.floor(concepts.length * Math.random());
 const [concept, filter] = concepts[conceptNumber];
-console.log(`Concept number ${1 + conceptNumber}`);
 
 const _examples = examples
   .filter(x => filter(x.features))
   .sort(_ => 0.5 - Math.random())
-  .filter((_, i) => i < 12);
+  .filter((_, i) => i < 16);
 
 const App = () => {
   const [step, setStep] = useState(1);
+  const [status, setStatus] = useState("answering");
   const [showFeedback, setShowFeedback] = useState(false);
+  const [selected, setSelected] = useState(_examples.map((x, i) => 0));
+  const [initialSelection, setInitialSelection] = useState(
+    _examples.map(_ => Math.random() > 0.3)
+  );
 
   return (
     <div className="App">
@@ -29,14 +33,17 @@ const App = () => {
             showFeedback={showFeedback}
             concept={concept}
             examples={_examples}
-            initialSelection={[1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1]}
+            setReady={x => setStatus(x ? "ready" : "answering")}
+            initialSelection={initialSelection}
+            selected={selected}
+            setSelected={setSelected}
           />
           <Guideline
-            title="Hello World!"
-            text="Click the button... Click the button... Click the button... Click the button... Click the button... Click the button... Click the button... Click the button..."
-            buttonText="Click Me!"
+            title="Guess the category!"
+            text="Based off the examples already given, guess the category and assign the color GREEN to the correct examples. Also select which examples do not belong to the category by giving them the color RED."
+            buttonText="Submit"
             onClick={() => setShowFeedback(!showFeedback)}
-            buttonDisabled={showFeedback}
+            buttonDisabled={status === "answering"}
           />
         </>
       )}

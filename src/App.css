@@ -63,7 +63,7 @@
 
 .Examples {
   width: 612px;
-  max-width: calc(100% - 8px);
+  max-width: calc(100% - 2px);
   background: transparent;
   display: flex;
   flex-flow: row wrap;
@@ -74,13 +74,13 @@
 .Example {
   position: relative;
 
-  max-width: calc(33% - 24px);
+  max-width: calc(33% - 18px);
   width: 120px;
   height: 120px;
 
   border: solid transparent 8px;
   border-radius: 4px;
-  margin: 2px;
+  margin: 1px;
   margin-bottom: 8px;
 
   flex: 0 0 auto;
