@@ -25,7 +25,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <h1>Inductive Teaching Experiment</h1>
+      {/* <h1>Inductive Teaching Experiment</h1> */}
       {step < 1 && <Guideline onClick={() => setStep(1)} />}
       {step === 1 && (
         <>
@@ -38,13 +38,25 @@ const App = () => {
             selected={selected}
             setSelected={setSelected}
           />
-          <Guideline
-            title="Guess the category!"
-            text="Based off the examples already given, guess the category and assign the color GREEN to the correct examples. Also select which examples do not belong to the category by giving them the color RED."
-            buttonText="Submit"
-            onClick={() => setShowFeedback(!showFeedback)}
-            buttonDisabled={status === "answering"}
-          />
+          {(status === "answering" || status === "ready") && (
+            <Guideline
+              title="Guess the category!"
+              text="Based off the examples already given, guess the category and assign the color GREEN to the correct examples. Also select which examples do not belong to the category by giving them the color RED."
+              buttonText="Submit"
+              onClick={() =>
+                setShowFeedback(!showFeedback) || setStatus("submitted")
+              }
+              buttonDisabled={status === "answering"}
+            />
+          )}
+          {status === "submitted" && (
+            <Guideline
+              title="Success!"
+              text="The category was: 'Les Poissons'"
+              buttonText="Next"
+              onClick={() => {}}
+            />
+          )}
         </>
       )}
       {/*  */}

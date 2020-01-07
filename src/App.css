@@ -11,8 +11,8 @@
 .Guidelines {
   max-width: calc(100% - 32px);
   width: 512px;
-  margin-top: 32px;
-  margin-bottom: 32px;
+  margin-top: 24px;
+  margin-bottom: 24px;
 
   box-shadow: 0px 1px 3px 1px #333;
   border-radius: 8px;
@@ -62,6 +62,7 @@
 }
 
 .Examples {
+  margin-top: 24px;
   width: 612px;
   max-width: calc(100% - 2px);
   background: transparent;
