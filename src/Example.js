@@ -20,7 +20,7 @@ export default ({
 
   return (
     <div className="Example" style={{ background }}>
-      <img src={"images/animals/" + img} alt="example" />
+      <img src={img} alt="example" />
       {!showFeedback && !initial && (
         <div className="category-buttons">
           {[-1, 0, 1].map(x => {

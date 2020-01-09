@@ -1,38 +1,57 @@
 import React, { useState } from "react";
 import "./App.css";
 
-import { examples, concepts } from "./animals.js";
+import animalsData from "./cardsData";
 import { Math } from "core-js";
 import ExampleGrid from "./ExampleGrid";
 import Guideline from "./Guideline";
 
-const conceptNumber = Math.floor(concepts.length * Math.random());
-const [concept, filter] = concepts[conceptNumber];
-
-const _examples = examples
-  .filter(x => filter(x.features))
-  .sort(_ => 0.5 - Math.random())
-  .filter((_, i) => i < 16);
-
 const App = () => {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState("intro");
   const [status, setStatus] = useState("answering");
-  const [showFeedback, setShowFeedback] = useState(false);
-  const [selected, setSelected] = useState(_examples.map((x, i) => 0));
-  const [initialSelection, setInitialSelection] = useState(
-    _examples.map(_ => Math.random() > 0.3)
-  );
+
+  const [examples, setExamples] = useState(null);
+  const [concept, setConcept] = useState(() => () => true);
+  const [name, setName] = useState(() => () => true);
+  const [selected, setSelected] = useState(null);
+  const [initialSelection, setInitialSelection] = useState(null);
+
+  const nextQuestion = () => {
+    const conceptNumber = Math.floor(
+      animalsData.concepts.length * Math.random()
+    );
+    const [c, filter, name] = animalsData.concepts[conceptNumber];
+    const e = animalsData.examples
+      .filter(x => filter(x.features))
+      .sort(_ => 0.5 - Math.random())
+      .filter((_, i) => i < 16);
+
+    setConcept(() => c);
+    setExamples(e);
+    setName(name);
+    setSelected(e.map((x, i) => 0));
+    setInitialSelection(e.map((_, i) => i < 4));
+    setStep("questions");
+    setStatus("answering");
+  };
 
   return (
     <div className="App">
       {/* <h1>Inductive Teaching Experiment</h1> */}
-      {step < 1 && <Guideline onClick={() => setStep(1)} />}
-      {step === 1 && (
+      {step === "intro" && (
+        <Guideline
+          title="Welcome to this cool experiment"
+          text="You are a great person :)"
+          buttonText="Start!"
+          onClick={nextQuestion}
+        />
+      )}
+      {step === "questions" && (
         <>
           <ExampleGrid
-            showFeedback={showFeedback}
+            showFeedback={status === "submitted"}
             concept={concept}
-            examples={_examples}
+            examples={examples}
             setReady={x => setStatus(x ? "ready" : "answering")}
             initialSelection={initialSelection}
             selected={selected}
@@ -41,25 +60,22 @@ const App = () => {
           {(status === "answering" || status === "ready") && (
             <Guideline
               title="Guess the category!"
-              text="Based off the examples already given, guess the category and assign the color GREEN to the correct examples. Also select which examples do not belong to the category by giving them the color RED."
+              text="Based off the examples already given, guess the GREEN category and assign the color GREEN to the correct examples. Also select which examples do not belong to the category by giving them the color RED."
               buttonText="Submit"
-              onClick={() =>
-                setShowFeedback(!showFeedback) || setStatus("submitted")
-              }
+              onClick={() => setStatus("submitted")}
               buttonDisabled={status === "answering"}
             />
           )}
           {status === "submitted" && (
             <Guideline
               title="Success!"
-              text="The category was: 'Les Poissons'"
+              text={`The category was: ${name}`}
               buttonText="Next"
-              onClick={() => {}}
+              onClick={nextQuestion}
             />
           )}
         </>
       )}
-      {/*  */}
     </div>
   );
 };

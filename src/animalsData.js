@@ -1,4 +1,4 @@
-export const examples = [
+const examples = [
   "Bird_._Big_NotMammal_NoMeat_4.jpg",
   "Bird_Left_._Small_NoMeat_NotMammal_2.jpg",
   "Bird_Left_11.jpg",
@@ -36,13 +36,18 @@ export const examples = [
   "Reptile_._Grey_Right_Small_NotMammal_Carnivorous_44.jpg",
   "Reptile_Left_45.jpg",
   "Reptile_Right_36.jpg"
-].map(x => ({ img: x, features: x.split("_") }));
+].map(x => ({ img: "images/animals/" + x, features: x.split("_") }));
 
-export const concepts = [
-  [x => x[0] === "Bird", x => x[0] !== "."],
-  [x => x[0] === "Fish", x => x[0] !== "."],
-  [x => x[0] === "Reptile", x => x[0] !== "."],
-  [x => x[0] === "Mammal", x => x[0] !== "."],
-  [x => x[1] === "Right", x => x[1] !== "."],
-  [x => x[1] === "Left", x => x[1] !== "."]
+const concepts = [
+  [x => x[0] === "Bird", x => x[0] !== ".", "The birds"],
+  [x => x[0] === "Fish", x => x[0] !== ".", "The fishes"],
+  [x => x[0] === "Reptile", x => x[0] !== ".", "The Reptiles"],
+  [x => x[0] === "Mammal", x => x[0] !== ".", "The mammals"],
+  [x => x[1] === "Right", x => x[1] !== ".", "The animals facing right"],
+  [x => x[1] === "Left", x => x[1] !== ".", "The animals facing left"]
 ];
+
+export default {
+  concepts,
+  examples
+};
