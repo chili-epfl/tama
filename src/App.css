@@ -11,8 +11,8 @@
 .Guidelines {
   max-width: calc(100% - 32px);
   width: 512px;
-  margin-top: 24px;
-  margin-bottom: 24px;
+  margin-top: 8px;
+  margin-bottom: 8px;
 
   box-shadow: 0px 1px 3px 1px #333;
   border-radius: 8px;

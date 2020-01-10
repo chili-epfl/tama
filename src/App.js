@@ -6,8 +6,14 @@ import { Math } from "core-js";
 import ExampleGrid from "./ExampleGrid";
 import Guideline from "./Guideline";
 
+const teachingStrategy = (examples, concept) => {
+  // Stupid teaching strategy. Only returns the 4 first examples
+  return examples.map((_, i) => i < 4);
+};
+
 const App = () => {
-  const [step, setStep] = useState("intro");
+  const [game, setGame] = useState("intro");
+  const [step, setStep] = useState(0);
   const [status, setStatus] = useState("answering");
 
   const [examples, setExamples] = useState(null);
@@ -24,21 +30,22 @@ const App = () => {
     const e = animalsData.examples
       .filter(x => filter(x.features))
       .sort(_ => 0.5 - Math.random())
-      .filter((_, i) => i < 16);
+      .filter((_, i) => i < 12);
 
     setConcept(() => c);
     setExamples(e);
     setName(name);
     setSelected(e.map((x, i) => 0));
-    setInitialSelection(e.map((_, i) => i < 4));
-    setStep("questions");
+    setInitialSelection(teachingStrategy(e, c));
+    setGame("questions");
+    setStep(step + 1);
     setStatus("answering");
   };
 
   return (
     <div className="App">
       {/* <h1>Inductive Teaching Experiment</h1> */}
-      {step === "intro" && (
+      {game === "intro" && (
         <Guideline
           title="Welcome to this cool experiment"
           text="You are a great person :)"
@@ -46,7 +53,7 @@ const App = () => {
           onClick={nextQuestion}
         />
       )}
-      {step === "questions" && (
+      {game === "questions" && (
         <>
           <ExampleGrid
             showFeedback={status === "submitted"}
@@ -59,8 +66,15 @@ const App = () => {
           />
           {(status === "answering" || status === "ready") && (
             <Guideline
-              title="Guess the category!"
-              text="Based off the examples already given, guess the GREEN category and assign the color GREEN to the correct examples. Also select which examples do not belong to the category by giving them the color RED."
+              title="Guess what is the GREEN category!"
+              text={
+                <>
+                  Based off the examples already given, guess the category and
+                  assign the color GREEN to the correct examples. Also select
+                  which examples do not belong to the category by giving them
+                  the color RED.
+                </>
+              }
               buttonText="Submit"
               onClick={() => setStatus("submitted")}
               buttonDisabled={status === "answering"}
@@ -69,22 +83,22 @@ const App = () => {
           {status === "submitted" && (
             <Guideline
               title="Success!"
-              text={`The category was: ${name}`}
+              text={
+                <>
+                  The category was: <b>{name}</b>
+                </>
+              }
               buttonText="Next"
               onClick={nextQuestion}
             />
           )}
+          <Guideline buttonText="Play as a Student" onClick={nextQuestion} />
+          <Guideline buttonText="Play as a Teacher" onClick={() => {}} />
+          <Guideline buttonText="Home" onClick={() => setGame("intro")} />
         </>
       )}
     </div>
   );
 };
-
-// const toSelect = examples
-// .map((x, i) => [x, i])
-// //.filter(x => concept(x[0].features))
-// .sort(_ => 0.5 - Math.random())
-// .filter((_, i) => i < 4)
-// .map(([_, i]) => i);
 
 export default App;
