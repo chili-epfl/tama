@@ -9,7 +9,7 @@
 }
 
 .Guidelines {
-  max-width: calc(100% - 32px);
+  max-width: calc(100% - 20px);
   width: 512px;
   margin-top: 8px;
   margin-bottom: 8px;
@@ -151,7 +151,7 @@ img {
   left: 50%;
   transform: translate(-50%, -50%);
 
-  background-color: #ddd;
+  background-color: transparent;
   border-radius: 8px;
 }
 

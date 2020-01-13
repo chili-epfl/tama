@@ -42,9 +42,9 @@ const concepts = [
   [x => x[0] === "Bird", x => x[0] !== ".", "The birds"],
   [x => x[0] === "Fish", x => x[0] !== ".", "The fishes"],
   [x => x[0] === "Reptile", x => x[0] !== ".", "The Reptiles"],
-  [x => x[0] === "Mammal", x => x[0] !== ".", "The mammals"],
-  [x => x[1] === "Right", x => x[1] !== ".", "The animals facing right"],
-  [x => x[1] === "Left", x => x[1] !== ".", "The animals facing left"]
+  [x => x[0] === "Mammal", x => x[0] !== ".", "The mammals"]
+  // [x => x[1] === "Right", x => x[1] !== ".", "The animals facing right"],
+  // [x => x[1] === "Left", x => x[1] !== ".", "The animals facing left"]
 ];
 
 export default {

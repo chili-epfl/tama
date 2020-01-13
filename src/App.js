@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
 
-import animalsData from "./cardsData";
+import animalsData from "./animalsData";
 import { Math } from "core-js";
 import ExampleGrid from "./ExampleGrid";
 import Guideline from "./Guideline";
