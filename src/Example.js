@@ -10,7 +10,8 @@ export default ({
   select,
   showFeedback,
   submitted,
-  concept
+  concept,
+  gameType
 }) => {
   const trueCategory = concept(features) ? 1 : -1;
 
@@ -21,7 +22,7 @@ export default ({
   return (
     <div className="Example" style={{ background }}>
       <img src={img} alt="example" />
-      {!showFeedback && !initial && (
+      {gameType === "student" && !showFeedback && !initial && (
         <div className="category-buttons">
           {[-1, 0, 1].map(x => {
             return selected !== x ? (
@@ -38,6 +39,14 @@ export default ({
         <span className="example-feedback">
           {selected === trueCategory ? "" : "X"}
         </span>
+      )}
+      {gameType === "teacher" && (
+        <div className="category-buttons">
+          <span
+            onClick={select}
+            style={{ background: colors[(initial ? 0 : trueCategory) + 1] }}
+          ></span>
+        </div>
       )}
     </div>
   );
