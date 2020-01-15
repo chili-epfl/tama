@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import "./App.css";
 
-import animalsData from "./geometryData";
+import geometryData from "./geometryData";
+import cardsData from "./cardsData";
+import animalsData from "./animalsData";
 import { Math } from "core-js";
 import ExampleGrid from "./ExampleGrid";
 import Guideline from "./Guideline";
@@ -27,11 +29,14 @@ const App = () => {
   const [initialSelection, setInitialSelection] = useState(null);
 
   const nextQuestion = gameType => {
+    const questionData = [animalsData, geometryData, cardsData][
+      Math.floor(3 * Math.random())
+    ];
     const conceptNumber = Math.floor(
-      animalsData.concepts.length * Math.random()
+      questionData.concepts.length * Math.random()
     );
-    const [c, filter, name] = animalsData.concepts[conceptNumber];
-    const e = animalsData.examples
+    const [c, filter, name] = questionData.concepts[conceptNumber];
+    const e = questionData.examples
       .filter(x => filter(x.features))
       .sort(_ => 0.5 - Math.random())
       .filter((_, i) => i < 12);
@@ -44,6 +49,13 @@ const App = () => {
     setGame(gameType);
     setStep(step + 1);
     setStatus("answering");
+  };
+
+  const checkCorrectness = () => {
+    return !selected.some((x, i) => {
+      if (initialSelection[i]) return false;
+      return x * (concept(examples[i].features) ? 1 : -1) < 0;
+    });
   };
 
   const StudentGame = () => (
@@ -63,10 +75,14 @@ const App = () => {
           title="Guess what is the GREEN category!"
           text={
             <>
-              Based off the examples already given, guess the category and
-              assign the color GREEN to the correct examples. Also select which
-              examples do not belong to the category by giving them the color
-              RED.
+              Based off the examples already given, guess the category.
+              <li>
+                Examples that belong to the category are shown in <b>GREEN</b>
+              </li>
+              <li>
+                Counter-examples that do not belong to the category are showm in{" "}
+                <b>RED</b>
+              </li>
             </>
           }
           buttonText="Submit"
@@ -76,7 +92,7 @@ const App = () => {
       )}
       {status === "submitted" && (
         <Guideline
-          title="Success!"
+          title={checkCorrectness() ? "Success !!" : "You have Errors..."}
           text={
             <>
               The category was: <b>{name}</b>
@@ -107,8 +123,8 @@ const App = () => {
           title="Teach JOHN DOE!"
           text={
             <>
-              Select examples to help JOHN DOE guess the concept: <b>{name}</b>.
-              Select between 3 and 6 examples.
+              Select examples to help JOHN DOE guess the category: <b>{name}</b>
+              . Select between 3 and 6 examples.
             </>
           }
           buttonText="Submit"
@@ -124,7 +140,7 @@ const App = () => {
           title="Success!"
           text="Your students made many mistakes !!! :( :( :( :("
           buttonText="Next"
-          onClick={() => nextQuestion("student")}
+          onClick={() => nextQuestion("teacher")}
         />
       )}
     </>
@@ -136,9 +152,29 @@ const App = () => {
       {game === "intro" && (
         <Guideline
           title="Welcome to this cool experiment"
-          text="You are a great person :)"
-          buttonText="Start!"
-          onClick={() => nextQuestion("student")}
+          text={
+            <>
+              <span>
+                This experiment is about inductively discovering a secret rule
+                forming a category, based on seeing examples.
+                <ul>
+                  <li>
+                    Examples that belong to the category will be shown in{" "}
+                    <b>GREEN</b>
+                  </li>
+                  <li>
+                    Counter-examples that do not belong to the category will be
+                    showm in <b>RED</b>
+                  </li>
+                </ul>
+                When you play as a student you will see already selected
+                examples and you must assign other examples to the category or
+                not. When you play as a teacher, you are told the secret
+                category and you must select examples to help a student guess
+                the category correctly
+              </span>
+            </>
+          }
         />
       )}
       {game === "student" && <StudentGame />}
