@@ -8,6 +8,20 @@ import { Math } from "core-js";
 import ExampleGrid from "./ExampleGrid";
 import Guideline from "./Guideline";
 
+const createNewQuestion = () => {
+  const qData = [animalsData, geometryData, cardsData][
+    Math.floor(3 * Math.random())
+  ];
+  const conceptNumber = Math.floor(qData.concepts.length * Math.random());
+  const [c, filter, name] = qData.concepts[conceptNumber];
+  const e = qData.examples
+    .filter(x => filter(x.features))
+    .sort(_ => 0.5 - Math.random())
+    .filter((_, i) => i < 12);
+
+  return [qData, c, e, name];
+};
+
 const teachingStrategy = (examples, concept) => {
   // Stupid teaching strategy. Only returns the 4 first examples
   return examples.map((_, i) => i < 4);
@@ -39,15 +53,7 @@ const App = () => {
   const [initialSelection, setInitialSelection] = useState(null);
 
   const nextQuestion = gameType => {
-    const qData = [animalsData, geometryData, cardsData][
-      Math.floor(3 * Math.random())
-    ];
-    const conceptNumber = Math.floor(qData.concepts.length * Math.random());
-    const [c, filter, name] = qData.concepts[conceptNumber];
-    const e = qData.examples
-      .filter(x => filter(x.features))
-      .sort(_ => 0.5 - Math.random())
-      .filter((_, i) => i < 12);
+    const [qData, c, e, name] = createNewQuestion();
 
     setQuestionData(qData);
     setConcept(() => c);
