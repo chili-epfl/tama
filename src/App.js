@@ -13,15 +13,25 @@ const teachingStrategy = (examples, concept) => {
   return examples.map((_, i) => i < 4);
 };
 
-const learningStrategy = (examples, initial) => {
-  return examples.map(() => (Math.random() > 0.5 ? 1 : -1));
+const learningStrategy = (questionData, examples, initial, concept) => {
+  const cons = questionData.concepts.filter(
+    c =>
+      !examples.some(
+        (x, i) => initial[i] && c[0](x.features) !== concept(x.features)
+      )
+  );
+
+  const con = cons[Math.floor(Math.random() * cons.length)];
+  return [examples.map(x => (con[0](x.features) ? 1 : -1)), con[2]];
 };
 
 const App = () => {
   const [game, setGame] = useState("intro");
   const [step, setStep] = useState(0);
   const [status, setStatus] = useState("answering");
+  const [feedback, setFeedback] = useState("");
 
+  const [questionData, setQuestionData] = useState(null);
   const [examples, setExamples] = useState(null);
   const [concept, setConcept] = useState(() => () => true);
   const [name, setName] = useState(() => () => true);
@@ -29,18 +39,17 @@ const App = () => {
   const [initialSelection, setInitialSelection] = useState(null);
 
   const nextQuestion = gameType => {
-    const questionData = [animalsData, geometryData, cardsData][
+    const qData = [animalsData, geometryData, cardsData][
       Math.floor(3 * Math.random())
     ];
-    const conceptNumber = Math.floor(
-      questionData.concepts.length * Math.random()
-    );
-    const [c, filter, name] = questionData.concepts[conceptNumber];
-    const e = questionData.examples
+    const conceptNumber = Math.floor(qData.concepts.length * Math.random());
+    const [c, filter, name] = qData.concepts[conceptNumber];
+    const e = qData.examples
       .filter(x => filter(x.features))
       .sort(_ => 0.5 - Math.random())
       .filter((_, i) => i < 12);
 
+    setQuestionData(qData);
     setConcept(() => c);
     setExamples(e);
     setName(name);
@@ -128,17 +137,25 @@ const App = () => {
             </>
           }
           buttonText="Submit"
-          onClick={() =>
-            setStatus("submitted") ||
-            setSelected(learningStrategy(examples, initialSelection))
-          }
+          onClick={() => {
+            const [newSelected, feedback] = learningStrategy(
+              questionData,
+              examples,
+              initialSelection,
+              concept
+            );
+
+            setStatus("submitted");
+            setSelected(newSelected);
+            setFeedback(feedback);
+          }}
           buttonDisabled={status === "answering"}
         />
       )}
       {status === "submitted" && (
         <Guideline
-          title="Success!"
-          text="Your students made many mistakes !!! :( :( :( :("
+          title="Placeholder feedback title"
+          text={`The student understood the concept: ${feedback}`}
           buttonText="Next"
           onClick={() => nextQuestion("teacher")}
         />
