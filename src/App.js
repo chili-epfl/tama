@@ -8,23 +8,43 @@ import { Math } from "core-js";
 import ExampleGrid from "./ExampleGrid";
 import Guideline from "./Guideline";
 
+import { pick, subset } from "./utils";
+
 const createNewQuestion = () => {
   const qData = [animalsData, geometryData, cardsData][
     Math.floor(3 * Math.random())
   ];
+
+  // const qData = animalsData;
+
   const conceptNumber = Math.floor(qData.concepts.length * Math.random());
   const [c, filter, name] = qData.concepts[conceptNumber];
-  const e = qData.examples
-    .filter(x => filter(x.features))
-    .sort(_ => 0.5 - Math.random())
-    .filter((_, i) => i < 12);
+
+  // Picks 12 examples out of 9 positive and 9 negative examples
+  const ex = qData.examples.filter(x => filter(x.features));
+  const positiveExamples = subset(
+    ex.filter(x => c(x.features)),
+    8
+  );
+  const negativeExamples = subset(
+    ex.filter(x => !c(x.features)),
+    10
+  );
+  const e = subset([...positiveExamples, ...negativeExamples], 12);
 
   return [qData, c, e, name];
 };
 
 const teachingStrategy = (examples, concept) => {
   // Stupid teaching strategy. Only returns the 4 first examples
-  return examples.map((_, i) => i < 4);
+
+  const z = [
+    Math.floor(Math.random() * 12),
+    Math.floor(Math.random() * 12),
+    Math.floor(Math.random() * 12)
+  ];
+
+  return examples.map((_, i) => z.includes(i));
 };
 
 const learningStrategy = (questionData, examples, initial, concept) => {
