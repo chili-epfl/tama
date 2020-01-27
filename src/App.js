@@ -18,19 +18,19 @@ const createNewQuestion = () => {
   // const qData = animalsData;
 
   const conceptNumber = Math.floor(qData.concepts.length * Math.random());
-  const [c, filter, name] = qData.concepts[conceptNumber];
+  const [c, f, name] = qData.concepts[conceptNumber];
 
   // Picks 12 examples out of 9 positive and 9 negative examples
-  const ex = qData.examples.filter(x => filter(x.features));
+  const ex = qData.examples.filter(x => f(x.features));
   const positiveExamples = subset(
     ex.filter(x => c(x.features)),
-    8
+    12
   );
   const negativeExamples = subset(
     ex.filter(x => !c(x.features)),
-    10
+    4
   );
-  const e = subset([...positiveExamples, ...negativeExamples], 12);
+  const e = subset([...positiveExamples, ...negativeExamples], 16);
 
   return [qData, c, e, name];
 };

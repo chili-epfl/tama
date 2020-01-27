@@ -31,15 +31,20 @@ const examples = [
   "Mammal_None_._1.jpg",
   "Mammal_None_._2.jpg",
   "Mammal_None_._3.jpg",
+  "Mammal_None_._4.jpg",
+  "Mammal_None_._5.jpg",
+  "Mammal_None_._6.jpg",
   "Mammal_None_._7.jpg",
+  "Mammal_None_._8.jpg",
   "Mammal_None_Grey_1.jpg",
   "Mammal_None_Grey_5.jpg",
   "Mammal_None_Grey_6.jpg",
   "Mammal_None_Grey_8.jpg",
+  "Mammal_None_Grey_9.jpg",
   "Mammal_None_Orange_1.jpg",
   "Mammal_None_Orange_2.jpg",
   "Mammal_None_Orange_3.jpg",
-  "Mammals_None_Grey_1.jpg",
+  "Mammal_None_Orange_4.jpg",
   "Mammal_Swim_._1.jpg",
   "Mammal_Swim_Grey_1.jpg",
   "Mammal_Swim_Grey_2.jpg",
@@ -51,17 +56,19 @@ const examples = [
   "Reptile_None_Orange_1.jpg",
   "Reptile_Swim_._2.jpg",
   "Reptile_Swim_._3.jpg",
-  "Reptile_Swim_._4.jpg"
+  "Reptile_Swim_._4.jpg",
+  "Reptile_Swim_Orange_4.jpg"
 ].map(x => ({ img: "images/animals/" + x, features: x.split("_") }));
 
 const concepts = [
   [x => x[0] === "Bird", x => x[0] !== ".", "The Birds"],
   [x => x[0] === "Fish", x => x[0] !== ".", "The Fishes"],
   [x => x[0] === "Reptile", x => x[0] !== ".", "The Reptiles"],
-  [x => x[0] === "Mammal", x => x[0] !== ".", "The Mammals"][
-    (x => x[1] === "Swim",
+  [x => x[0] === "Mammal", x => x[0] !== ".", "The Mammals"],
+  [
+    x => x[1] === "Swim",
     x => x[1] !== ".",
-    "The animals who can swim under water")
+    "The animals who can swim under water"
   ],
   [x => x[1] === "Fly", x => x[1] !== ".", "The animals fly in the sky"]
 ];
