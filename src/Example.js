@@ -37,7 +37,11 @@ export default ({
       )}
       {showFeedback && !initial && (
         <span className="example-feedback">
-          {selected === trueCategory ? "" : "X"}
+          {selected === trueCategory ? (
+            <i className="fas fa-check"></i>
+          ) : (
+            <i className="fas fa-times"></i>
+          )}
         </span>
       )}
       {gameType === "teacher" && (

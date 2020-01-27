@@ -1,4 +1,4 @@
-const examples = [
+const _examples = [
   "Blue_._Acute_Parallel_Equal_5.png",
   "Blue_._Acute_Parallel_Unequal_1.png",
   "Blue_._Acute_Parallel_Unequal_2.png",
@@ -31,6 +31,8 @@ const examples = [
   "Red_Vertical_Right_Parallel_Unequal_1.png"
 ].map(x => ({ img: "images/geometry/" + x, features: x.split("_") }));
 
+const examples = [..._examples, ..._examples];
+
 const concepts = [
   [x => x[0] === "Red", x => true, "The red shapes"],
   [x => x[0] === "Green", x => true, "The green shapes"],
@@ -48,14 +50,7 @@ const concepts = [
   [x => x[2] === "Acute", x => true, "The shapes with no right angle"],
 
   [x => x[4] === "Equal", x => true, "The shapes 4 equal length sides"],
-  [x => x[4] === "Unequal", x => true, "The shapes with unequal length sides"],
-
-  [x => x[4] === "Equal", x => x[1] !== ".", "The shapes 4 equal length sides"],
-  [
-    x => x[4] === "Unequal",
-    x => x[1] !== ".",
-    "The shapes with unequal length sides"
-  ]
+  [x => x[4] === "Unequal", x => true, "The shapes with unequal length sides"]
 ];
 
 export default {

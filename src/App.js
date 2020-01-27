@@ -11,24 +11,22 @@ import Guideline from "./Guideline";
 import { pick, subset } from "./utils";
 
 const createNewQuestion = () => {
-  const qData = [animalsData, geometryData, cardsData][
-    Math.floor(3 * Math.random())
-  ];
-
-  // const qData = animalsData;
-
+  const qData = pick([animalsData, geometryData, cardsData]);
   const conceptNumber = Math.floor(qData.concepts.length * Math.random());
   const [c, f, name] = qData.concepts[conceptNumber];
 
+  console.log(name);
+
   // Picks 12 examples out of 9 positive and 9 negative examples
+  const nPositive = pick([5, 5, 6, 6, 7, 8, 9]);
   const ex = qData.examples.filter(x => f(x.features));
   const positiveExamples = subset(
     ex.filter(x => c(x.features)),
-    12
+    nPositive
   );
   const negativeExamples = subset(
     ex.filter(x => !c(x.features)),
-    4
+    16 - nPositive
   );
   const e = subset([...positiveExamples, ...negativeExamples], 16);
 
@@ -36,13 +34,14 @@ const createNewQuestion = () => {
 };
 
 const teachingStrategy = (examples, concept) => {
-  // Stupid teaching strategy. Only returns the 4 first examples
-
-  const z = [
-    Math.floor(Math.random() * 12),
-    Math.floor(Math.random() * 12),
-    Math.floor(Math.random() * 12)
-  ];
+  // Stupid teaching strategy. Only returns the 3 random examples
+  const z = subset(
+    examples
+      .map((x, i) => [x, i])
+      .filter(x => concept(x[0].features))
+      .map(x => x[1]),
+    3
+  );
 
   return examples.map((_, i) => z.includes(i));
 };
@@ -93,6 +92,11 @@ const App = () => {
     });
   };
 
+  const redify = () => {
+    setSelected(selected.map(x => (x === 0 ? -1 : x)));
+    setStatus("ready");
+  };
+
   const StudentGame = () => (
     <>
       <ExampleGrid
@@ -105,9 +109,9 @@ const App = () => {
         selected={selected}
         setSelected={setSelected}
       />
-      {(status === "answering" || status === "ready") && (
+      {status === "answering" && (
         <Guideline
-          title="Guess what is the GREEN category!"
+          title="Guess what is the category!"
           text={
             <>
               Based off the examples already given, guess the category.
@@ -115,14 +119,32 @@ const App = () => {
                 Examples that belong to the category are shown in <b>GREEN</b>
               </li>
               <li>
-                Counter-examples that do not belong to the category are showm in{" "}
+                Examples that do not belong to the category are showm in{" "}
+                <b>RED</b>
+              </li>
+            </>
+          }
+          buttonText="Mark unselected examples in RED"
+          onClick={redify}
+        />
+      )}
+      {status === "ready" && (
+        <Guideline
+          title="Guess what is the category!"
+          text={
+            <>
+              Based off the examples already given, guess the category.
+              <li>
+                Examples that belong to the category are shown in <b>GREEN</b>
+              </li>
+              <li>
+                Examples that do not belong to the category are showm in{" "}
                 <b>RED</b>
               </li>
             </>
           }
           buttonText="Submit"
           onClick={() => setStatus("submitted")}
-          buttonDisabled={status === "answering"}
         />
       )}
       {status === "submitted" && (
@@ -133,7 +155,7 @@ const App = () => {
               The category was: <b>{name}</b>
             </>
           }
-          buttonText="Next"
+          buttonText="Next Question"
           onClick={() => nextQuestion("student")}
         />
       )}
@@ -158,8 +180,7 @@ const App = () => {
           title="Teach JOHN DOE!"
           text={
             <>
-              Select examples to help JOHN DOE guess the category: <b>{name}</b>
-              . Select between 3 and 6 examples.
+              Select 3 examples to help TAMA guess the category: <b>{name}</b>.
             </>
           }
           buttonText="Submit"

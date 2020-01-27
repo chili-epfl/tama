@@ -22,7 +22,7 @@ export default ({
   const toggleInitial = i => () => {
     initialSelection[i] = !initialSelection[i];
     const count = initialSelection.reduce((acc, val) => acc + (val ? 1 : 0), 0);
-    setReady(count > 2 && count < 7);
+    setReady(count === 3);
     setInitialSelection([...initialSelection]);
   };
 

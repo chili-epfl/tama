@@ -157,11 +157,10 @@ img {
 
 .example-feedback {
   position: absolute;
-  font-size: 128px;
-  top: 50%;
-  left: 50%;
+  font-size: 64px;
+  top: 25%;
+  left: 25%;
   transform: translate(-50%, -50%);
   color: #0000bb;
   text-shadow: 0px 0px 4px #9999ff;
-  font-weight: 300;
 }

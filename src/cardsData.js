@@ -1,24 +1,4 @@
-const examples = [
-  // "Figure_._C_Black_Horizontal_Jack_1.png",
-  // "Figure_._C_Black_Horizontal_King_3.png",
-  // "Figure_._H_Red_Horizontal_Jack_4.png",
-  // "Figure_._H_Red_Horizontal_King_3.png",
-  // "Figure_._S_Black_Horizontal_King_3.png",
-  // "Figure_._S_Black_Horizontal_Queen_1.png",
-  // "Number_Even_C_Black_Horizontal_._4.png",
-  // "Number_Even_H_Red_Horizontal_._4.png",
-  // "Number_Even_H_Red_Horizontal_._6.png",
-  // "Number_Even_S_Black_Horizontal_._4.png",
-  // "Number_Even_S_Black_Horizontal_._8.png",
-  // "Number_Odd_C_Black_Horizontal_._9.png",
-  // "Number_Odd_D_Red_Horizontal_._3.png",
-  // "Number_Odd_D_Red_Horizontal_._5.png",
-  // "Number_Odd_D_Red_Horizontal_._7.png",
-  // "Number_Odd_S_Black_Horizontal_._3.png",
-  // "Number_Odd_S_Black_Horizontal_._7.png",
-  // "Number_Odd_H_Red_Horizontal_._3.png",
-  // "Number_Odd_H_Red_Horizontal_._5.png",
-  // "Number_Even_D_Red_Horizontal_._4.png",
+const _examples = [
   "Figure_._C_Black_Vertical_Jack_1.png",
   "Figure_._C_Black_Vertical_Queen_2.png",
   "Figure_._C_Club_Vertical_King_3.png",
@@ -64,6 +44,8 @@ const examples = [
   "A_._S_Black_Vertical_As_2.png"
 ].map(x => ({ img: "images/cards/" + x, features: x.split("_") }));
 
+const examples = [..._examples, ..._examples];
+
 const concepts = [
   [x => x[0] === "Number", x => x[0] !== "A", "The cards with numbers"],
   [x => x[0] === "Figure", x => x[0] !== "A", "The cards with figures"],
@@ -84,10 +66,6 @@ const concepts = [
   [x => x[3] === "Black", x => x[0] !== "Figure", "The black cards"],
   [x => x[3] === "Red", x => x[0] !== "Figure", "The red cards"],
 
-  [x => x[2] === "S", x => x[0] !== "Number", "The Spades"],
-  [x => x[2] === "H", x => x[0] !== "Number", "The Hearts"],
-  [x => x[2] === "D", x => x[0] !== "Number", "The Diamonds"],
-  [x => x[2] === "C", x => x[0] !== "Number", "The Clubs"],
   [x => x[3] === "Black", x => x[0] !== "Number", "The black cards"],
   [x => x[3] === "Red", x => x[0] !== "Number", "The red cards"],
 
